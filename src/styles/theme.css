@@ -1,0 +1,112 @@
+:root {
+  --font-body: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Segoe UI", sans-serif;
+  --font-display: "Courier New", "Consolas", monospace;
+
+  --color-text: #16253e;
+  --color-border-strong: #1b2a41;
+  --color-border-soft: #7f8fa3;
+  --color-surface-top: #fffdf2;
+  --color-surface-base: #f8f1d1;
+  --color-secondary: #d9e5f2;
+  --color-accent: #1f8f5f;
+  --color-accent-dark: #0f5f40;
+  --color-focus: #ffb703;
+  --color-page-top: #20355f;
+  --color-page-bottom: #101a34;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --border-width-medium: 3px;
+  --border-width-strong: 4px;
+  --radius-panel: 6px;
+  --radius-button: 4px;
+
+  --shadow-card: 6px 6px 0 #1b2a41;
+  --shadow-button: 3px 3px 0 #1b2a41;
+}
+
+body {
+  color: var(--color-text);
+  font-family: var(--font-body);
+  background-color: var(--color-page-bottom);
+  background-image:
+    linear-gradient(180deg, var(--color-page-top), var(--color-page-bottom)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 2px,
+      transparent 2px,
+      transparent 16px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 2px,
+      transparent 2px,
+      transparent 16px
+    );
+}
+
+button {
+  min-width: 44px;
+  min-height: 44px;
+  border: var(--border-width-medium) solid var(--color-border-strong);
+  border-radius: var(--radius-button);
+  background: var(--color-surface-top);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition:
+    transform 80ms steps(2, end),
+    box-shadow 80ms steps(2, end),
+    background-color 80ms steps(2, end);
+}
+
+button:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--color-border-strong);
+}
+
+button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--color-border-strong);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.primary-button {
+  background: var(--color-accent);
+  border-color: var(--color-accent-dark);
+  color: #f7fff9;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #25a06c;
+}
+
+.secondary-button {
+  background: var(--color-secondary);
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #e6eef8;
+}

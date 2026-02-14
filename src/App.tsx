@@ -5,6 +5,8 @@ import { QuizScreen, type QuizSessionResult } from "./features/quiz/ui/QuizScree
 import { ResultScreen } from "./features/result/ui/ResultScreen";
 import { initialScreen, screenIds, type ScreenId } from "./shared/navigation/screenState";
 import { type QuestionCountMode } from "./shared/storage/highScoreStorage";
+import "./styles/reset.css";
+import "./styles/theme.css";
 import "./styles/app.css";
 
 type ResultSnapshot = QuizSessionResult & {
