@@ -1,13 +1,20 @@
+import { useEffect, useRef } from "react";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
 
-type QuizScreenProps = {
-  questionCount: number;
-  onExit: () => void;
+export type QuizSessionResult = {
+  correctCount: number;
+  totalQuestions: number;
+  score: number;
 };
 
-export function QuizScreen({ questionCount, onExit }: QuizScreenProps) {
+type QuizScreenProps = {
+  questionCount: number;
+  onComplete: (result: QuizSessionResult) => void;
+};
+
+export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
   const {
     totalQuestions,
     currentQuestionNumber,
@@ -22,8 +29,26 @@ export function QuizScreen({ questionCount, onExit }: QuizScreenProps) {
     backspaceInput,
     submitAnswer,
     proceedAfterIncorrectAnswer,
-    restartSession,
   } = useQuizSession({ questionCount });
+  const hasReportedComplete = useRef(false);
+
+  useEffect(() => {
+    if (!isComplete) {
+      hasReportedComplete.current = false;
+      return;
+    }
+
+    if (hasReportedComplete.current) {
+      return;
+    }
+
+    hasReportedComplete.current = true;
+    onComplete({
+      correctCount,
+      totalQuestions,
+      score,
+    });
+  }, [correctCount, isComplete, onComplete, score, totalQuestions]);
 
   const hasInput = inputValue.length > 0;
   const isOverlayVisible = incorrectAnswerReveal !== null;
@@ -53,24 +78,6 @@ export function QuizScreen({ questionCount, onExit }: QuizScreenProps) {
         onBackspace={backspaceInput}
         onSubmit={submitAnswer}
       />
-
-      {isComplete ? (
-        <section className="quiz-complete" aria-live="polite">
-          <h3>Session Complete</h3>
-          <p>
-            Correct answers: {correctCount} / {totalQuestions}
-          </p>
-          <p>Final score: {score}</p>
-          <div className="button-row">
-            <button type="button" className="primary-button" onClick={restartSession}>
-              Play Again
-            </button>
-            <button type="button" className="secondary-button" onClick={onExit}>
-              Back to Title
-            </button>
-          </div>
-        </section>
-      ) : null}
 
       {incorrectAnswerReveal ? (
         <IncorrectAnswerOverlay

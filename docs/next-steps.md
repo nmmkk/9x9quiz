@@ -2,9 +2,8 @@
 
 ## Immediate
 
-1. Execute M1-05 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - implement result flow and high score persistence.
-2. Execute M1-06 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - apply pixel-art responsive UI polish.
-3. Execute M1-07 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - run QA pass and sync status docs.
+1. Execute M1-06 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - apply pixel-art responsive UI polish.
+2. Execute M1-07 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - run QA pass and sync status docs.
 
 ## Documentation Follow-Through
 

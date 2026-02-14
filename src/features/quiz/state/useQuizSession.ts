@@ -40,7 +40,6 @@ type UseQuizSessionResult = {
   backspaceInput: () => void;
   submitAnswer: () => void;
   proceedAfterIncorrectAnswer: () => void;
-  restartSession: () => void;
 };
 
 function createInitialState(
@@ -221,10 +220,6 @@ export function useQuizSession({ questionCount, random = Math.random }: UseQuizS
     });
   };
 
-  const restartSession = () => {
-    setState(createInitialState(totalQuestions, factPool, random));
-  };
-
   return {
     totalQuestions: state.totalQuestions,
     answeredQuestions: state.answeredQuestions,
@@ -240,6 +235,5 @@ export function useQuizSession({ questionCount, random = Math.random }: UseQuizS
     backspaceInput,
     submitAnswer,
     proceedAfterIncorrectAnswer,
-    restartSession,
   };
 }
