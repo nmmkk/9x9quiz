@@ -4,7 +4,7 @@
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
-| M1-01 | Initialize web app foundation | Planned | None. | - |
+| M1-01 | Initialize web app foundation | Completed | None. | `npm run test` (pass, no test files), `npm run build` (pass) |
 | M1-02 | Implement quiz domain engine and weighted draw | Planned | M1-01 | - |
 | M1-03 | Build quiz play screen and numeric input pad | Planned | M1-02 | - |
 | M1-04 | Build title and mode select flow | Planned | M1-01 | - |

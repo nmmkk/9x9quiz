@@ -6,7 +6,7 @@ Last updated: 2026-02-14
 
 | Milestone | State | Evidence | Notes |
 | --- | --- | --- | --- |
-| M1 | Planned next | `docs/roadmap/implementation/m01-web-mvp-core.md` | Product requirements confirmed with fixed modes (10/20/30), score (+10), incorrect answer reveal, and local high score. |
+| M1 | In progress | `npm run test` (pass, no test files); `npm run build` (pass) | M1-01 is complete: React + TypeScript + Vite baseline and app shell routing are now in place. |
 
 ## Current Canonical Sources
 
