@@ -2,8 +2,8 @@
 
 ## Immediate
 
-1. Complete remaining manual browser QA in M1-07 (`docs/qa/reports/2026-02-14-m01-qa.md`) - verify mobile portrait and desktop layouts.
-2. Close release checklist quality gates in `docs/release/checklist.md` and finalize M1-07 status to Completed.
+1. M1 is complete. Define the next milestone and add a new ticket set under `docs/roadmap/implementation/`.
+2. If preparing release, execute deployment/runbook tasks that are outside M1 roadmap scope.
 
 ## Documentation Follow-Through
 

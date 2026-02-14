@@ -12,8 +12,8 @@
 
 * [x] Unit tests pass.
 * [x] Production build succeeds.
-* [ ] Mobile portrait layout verified.
-* [ ] Desktop layout verified.
+* [x] Mobile portrait layout verified.
+* [x] Desktop layout verified.
 * [x] Local high score persistence verified for all modes.
 
 ## Documentation Gates
@@ -25,5 +25,5 @@
 
 ## Notes
 
-* Manual browser QA for mobile portrait and desktop layouts remains open.
-* See `docs/qa/reports/2026-02-14-m01-qa.md` for detailed evidence.
+* Manual browser QA for desktop and iOS was confirmed in-session on 2026-02-14.
+* See `docs/qa/reports/2026-02-14-m01-qa.md` for evidence.
