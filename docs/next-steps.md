@@ -2,9 +2,9 @@
 
 ## Immediate
 
-1. Execute M1-03 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - build quiz screen, numeric pad, and incorrect-answer overlay.
-2. Execute M1-04 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - build title and mode select flow.
-3. Execute M1-05 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - implement result flow and high score persistence.
+1. Execute M1-04 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - build title and mode select flow.
+2. Execute M1-05 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - implement result flow and high score persistence.
+3. Execute M1-06 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - apply pixel-art responsive UI polish.
 
 ## Documentation Follow-Through
 

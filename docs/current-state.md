@@ -6,7 +6,7 @@ Last updated: 2026-02-14
 
 | Milestone | State | Evidence | Notes |
 | --- | --- | --- | --- |
-| M1 | In progress | `npm run test` (pass, 6 tests); `npm run build` (pass) | M1-01 and M1-02 are complete: app foundation plus quiz-domain fact generation, weighted draw, and scoring utilities with tests. |
+| M1 | In progress | `npm run test` (pass, 6 tests); `npm run build` (pass); `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort` (booted) | M1-01, M1-02, and M1-03 are complete: app foundation, domain logic, and an on-screen quiz loop with numeric pad and incorrect-answer overlay flow. |
 
 ## Current Canonical Sources
 

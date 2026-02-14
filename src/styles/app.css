@@ -69,6 +69,12 @@ button:active {
   transform: translateY(1px);
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
 .primary-button {
   background: #1a936f;
   border-color: #0f5f47;
@@ -77,4 +83,88 @@ button:active {
 
 .secondary-button {
   background: #e8eef7;
+}
+
+.button-row {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-panel {
+  position: relative;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quiz-header p {
+  margin-bottom: 10px;
+}
+
+.quiz-expression {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.answer-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  padding: 6px 10px;
+  border: 2px solid #101820;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.numeric-pad {
+  display: grid;
+  gap: 8px;
+}
+
+.numeric-pad-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.numeric-button,
+.numeric-action-button,
+.submit-button {
+  width: 100%;
+}
+
+.numeric-action-button {
+  background: #e8eef7;
+}
+
+.quiz-complete {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px dashed #c6d2e1;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 24, 32, 0.6);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.overlay-panel {
+  width: min(100%, 320px);
+  background: #ffffff;
+  border: 2px solid #101820;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.overlay-panel h3 {
+  margin: 0 0 12px;
 }
