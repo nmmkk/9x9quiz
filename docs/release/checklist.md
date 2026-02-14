@@ -2,23 +2,28 @@
 
 ## Product Scope
 
-* [ ] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
-* [ ] Mode options are exactly 10, 20, and 30 questions.
-* [ ] Score rule is exactly +10 per correct answer.
-* [ ] Incorrect answer always reveals the correct answer before continuing.
-* [ ] Missed facts in-session are weighted at +30% draw weight.
+* [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
+* [x] Mode options are exactly 10, 20, and 30 questions.
+* [x] Score rule is exactly +10 per correct answer.
+* [x] Incorrect answer always reveals the correct answer before continuing.
+* [x] Missed facts in-session are weighted at +30% draw weight.
 
 ## Quality Gates
 
-* [ ] Unit tests pass.
-* [ ] Production build succeeds.
+* [x] Unit tests pass.
+* [x] Production build succeeds.
 * [ ] Mobile portrait layout verified.
 * [ ] Desktop layout verified.
-* [ ] Local high score persistence verified for all modes.
+* [x] Local high score persistence verified for all modes.
 
 ## Documentation Gates
 
-* [ ] `docs/current-state.md` reflects current milestone status.
-* [ ] `docs/next-steps.md` reflects actionable next tickets.
-* [ ] `docs/roadmap/milestones.md` status aligns with ticket status.
-* [ ] QA report added under `docs/qa/reports/`.
+* [x] `docs/current-state.md` reflects current milestone status.
+* [x] `docs/next-steps.md` reflects actionable next tickets.
+* [x] `docs/roadmap/milestones.md` status aligns with ticket status.
+* [x] QA report added under `docs/qa/reports/`.
+
+## Notes
+
+* Manual browser QA for mobile portrait and desktop layouts remains open.
+* See `docs/qa/reports/2026-02-14-m01-qa.md` for detailed evidence.

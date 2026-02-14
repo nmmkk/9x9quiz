@@ -2,7 +2,8 @@
 
 ## Immediate
 
-1. Execute M1-07 (`docs/roadmap/implementation/m01-web-mvp-core.md`) - run QA pass and sync status docs.
+1. Complete remaining manual browser QA in M1-07 (`docs/qa/reports/2026-02-14-m01-qa.md`) - verify mobile portrait and desktop layouts.
+2. Close release checklist quality gates in `docs/release/checklist.md` and finalize M1-07 status to Completed.
 
 ## Documentation Follow-Through
 

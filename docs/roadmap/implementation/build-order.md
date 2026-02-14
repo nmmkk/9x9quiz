@@ -6,4 +6,4 @@
 4. M1-04 (Completed)
 5. M1-05 (Completed)
 6. M1-06 (Completed)
-7. M1-07 (Next)
+7. M1-07 (Partial - manual browser QA pending)

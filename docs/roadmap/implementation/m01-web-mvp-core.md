@@ -10,7 +10,7 @@
 | M1-04 | Build title and mode select flow | Completed | M1-01 | `npm run test` (pass, 6 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort` (booted) |
 | M1-05 | Implement result flow and high score persistence | Completed | M1-03, M1-04 | `npm run test` (pass, 9 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4175 --strictPort` (booted) |
 | M1-06 | Apply pixel-art responsive UI polish | Completed | M1-03, M1-04, M1-05 | `npm run test` (pass, 9 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4176 --strictPort` (booted) |
-| M1-07 | Run QA pass and sync status docs | Planned | M1-01, M1-02, M1-03, M1-04, M1-05, M1-06 | - |
+| M1-07 | Run QA pass and sync status docs | Partial | M1-01, M1-02, M1-03, M1-04, M1-05, M1-06 | `npm run test` (pass, 9 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4177 --strictPort` (booted), `docs/qa/reports/2026-02-14-m01-qa.md` (manual browser layout checks pending) |
 
 ## Scope
 
