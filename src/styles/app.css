@@ -90,6 +90,28 @@ button:disabled {
   gap: 10px;
 }
 
+.mode-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mode-card {
+  border: 2px solid #c6d2e1;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f8fbff;
+}
+
+.mode-start-button {
+  width: 100%;
+}
+
+.mode-high-score {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+}
+
 .quiz-panel {
   position: relative;
 }

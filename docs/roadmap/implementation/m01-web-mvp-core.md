@@ -7,7 +7,7 @@
 | M1-01 | Initialize web app foundation | Completed | None. | `npm run test` (pass, no test files), `npm run build` (pass) |
 | M1-02 | Implement quiz domain engine and weighted draw | Completed | M1-01 | `npm run test` (pass, 6 tests), `npm run build` (pass) |
 | M1-03 | Build quiz play screen and numeric input pad | Completed | M1-02 | `npm run test` (pass, 6 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort` (booted) |
-| M1-04 | Build title and mode select flow | Planned | M1-01 | - |
+| M1-04 | Build title and mode select flow | Completed | M1-01 | `npm run test` (pass, 6 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4173 --strictPort` (booted) |
 | M1-05 | Implement result flow and high score persistence | Planned | M1-03, M1-04 | - |
 | M1-06 | Apply pixel-art responsive UI polish | Planned | M1-03, M1-04, M1-05 | - |
 | M1-07 | Run QA pass and sync status docs | Planned | M1-01, M1-02, M1-03, M1-04, M1-05, M1-06 | - |
