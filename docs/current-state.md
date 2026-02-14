@@ -6,7 +6,7 @@ Last updated: 2026-02-14
 
 | Milestone | State | Evidence | Notes |
 | --- | --- | --- | --- |
-| M1 | In progress | `npm run test` (pass, no test files); `npm run build` (pass) | M1-01 is complete: React + TypeScript + Vite baseline and app shell routing are now in place. |
+| M1 | In progress | `npm run test` (pass, 6 tests); `npm run build` (pass) | M1-01 and M1-02 are complete: app foundation plus quiz-domain fact generation, weighted draw, and scoring utilities with tests. |
 
 ## Current Canonical Sources
 
