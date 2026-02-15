@@ -4,7 +4,7 @@
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
-| M2-01 | Add localization foundation and locale state | Planned | M1-07 | `npm run test`, `npm run build` |
+| M2-01 | Add localization foundation and locale state | Completed | M1-07 | `npm run test` (pass, 9 tests), `npm run build` (pass) |
 | M2-02 | Externalize user-facing copy across core screens | Planned | M2-01 | `npm run test`, `npm run build`, `npm run dev` |
 | M2-03 | Finalize ja-JP learner-friendly copy set | Planned | M2-01, M2-02 | `npm run dev` |
 | M2-04 | Apply localization-aware UI adjustments | Planned | M2-02, M2-03 | `npm run build`, `npm run dev` |
