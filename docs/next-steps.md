@@ -2,10 +2,9 @@
 
 ## Immediate
 
-1. Start `M3-03` to add lightweight feedback effects with reduced-motion guardrails.
-2. Execute `M3-04` test/regression coverage for engagement behavior.
-3. Complete `M3-05` QA/reporting and status-doc synchronization.
-4. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
+1. Execute `M3-04` test/regression coverage for engagement behavior.
+2. Complete `M3-05` QA/reporting and status-doc synchronization.
+3. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 

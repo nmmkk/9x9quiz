@@ -46,7 +46,7 @@ export function ResultScreen({
   );
 
   return (
-    <section className="panel result-panel" aria-labelledby="result-heading">
+    <section className="panel result-panel result-panel--entry" aria-labelledby="result-heading">
       <p className="eyebrow">{t("result.eyebrow")}</p>
       <h2 id="result-heading">{t("result.heading")}</h2>
 
