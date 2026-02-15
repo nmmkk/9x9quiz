@@ -50,6 +50,32 @@ h3 {
   text-transform: uppercase;
 }
 
+html:lang(ja-JP) .eyebrow,
+html:lang(ja-JP) h1,
+html:lang(ja-JP) h2,
+html:lang(ja-JP) h3 {
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+html:lang(ja-JP) .eyebrow {
+  font-size: 0.78rem;
+}
+
+html:lang(ja-JP) p {
+  line-height: 1.6;
+}
+
+html:lang(ja-JP) button {
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
+}
+
+html:lang(ja-JP) .numeric-button {
+  font-family: var(--font-display);
+}
+
 p {
   margin: 0 0 var(--space-3);
   line-height: 1.45;
@@ -88,6 +114,7 @@ p {
 
 .quiz-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-2);
@@ -95,6 +122,10 @@ p {
 
 .quiz-header p {
   margin-bottom: var(--space-2);
+}
+
+.quiz-header p:last-child {
+  margin-left: auto;
 }
 
 .quiz-expression {
@@ -135,6 +166,7 @@ p {
 
 .numeric-action-button {
   background: #e7eef7;
+  font-size: clamp(0.74rem, 2.8vw, 0.9rem);
 }
 
 .numeric-button {
@@ -162,6 +194,12 @@ p {
   background: rgba(248, 251, 255, 0.9);
   padding: var(--space-3);
   margin-top: var(--space-3);
+}
+
+.mode-high-score,
+.result-status,
+.overlay-panel p {
+  overflow-wrap: anywhere;
 }
 
 .overlay-backdrop {

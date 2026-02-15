@@ -10,6 +10,6 @@
 8. M2-01 (Completed)
 9. M2-02 (Completed)
 10. M2-03 (Completed)
-11. M2-04 (Planned)
+11. M2-04 (Completed)
 12. M2-05 (Planned)
 13. M2-06 (Planned)
