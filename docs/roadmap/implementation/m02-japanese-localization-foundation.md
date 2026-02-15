@@ -6,7 +6,7 @@
 | --- | --- | --- | --- | --- |
 | M2-01 | Add localization foundation and locale state | Completed | M1-07 | `npm run test` (pass, 9 tests), `npm run build` (pass) |
 | M2-02 | Externalize user-facing copy across core screens | Completed | M2-01 | `npm run test` (pass, 9 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4178 --strictPort` (booted) |
-| M2-03 | Finalize ja-JP learner-friendly copy set | Planned | M2-01, M2-02 | `npm run dev` |
+| M2-03 | Finalize ja-JP learner-friendly copy set | Completed | M2-01, M2-02 | `npm run test` (pass, 9 tests), `npm run build` (pass), `npm run dev -- --host 127.0.0.1 --port 4179 --strictPort` (booted), `docs/reference/copy-ja-jp.md` |
 | M2-04 | Apply localization-aware UI adjustments | Planned | M2-02, M2-03 | `npm run build`, `npm run dev` |
 | M2-05 | Add i18n coverage tests and run regression | Planned | M2-01, M2-02, M2-03, M2-04 | `npm run test`, `npm run build` |
 | M2-06 | Execute QA pass and sync status docs | Planned | M2-01, M2-02, M2-03, M2-04, M2-05 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/YYYY-MM-DD-m02-qa.md` |
