@@ -2,9 +2,8 @@
 
 ## Immediate
 
-1. Execute `M3-04` test/regression coverage for engagement behavior.
-2. Complete `M3-05` QA/reporting and status-doc synchronization.
-3. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
+1. Complete `M3-05` QA/reporting and status-doc synchronization.
+2. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 
