@@ -10,6 +10,7 @@ import {
   readLastPlayedMode,
   writeLastPlayedMode,
 } from "./shared/storage/lastPlayedModeStorage";
+import { applyMasterySessionStats, readMasterySnapshot } from "./shared/storage/masteryStorage";
 import { readPracticeScope, writePracticeScope } from "./shared/storage/practiceScopeStorage";
 import "./styles/reset.css";
 import "./styles/theme.css";
@@ -30,6 +31,7 @@ function App() {
   const [practiceScope, setPracticeScope] = useState<PracticeScope>(
     () => readPracticeScope() ?? defaultPracticeScope,
   );
+  const [masterySnapshot, setMasterySnapshot] = useState(() => readMasterySnapshot());
   const [reviewFactKeys, setReviewFactKeys] = useState<readonly string[] | null>(null);
   const [latestResult, setLatestResult] = useState<ResultSnapshot | null>(null);
 
@@ -69,6 +71,8 @@ function App() {
   };
 
   const finishQuiz = (result: QuizSessionResult) => {
+    setMasterySnapshot(applyMasterySessionStats(result.tableStats));
+
     if (reviewFactKeys) {
       setReviewFactKeys(null);
       setScreen(screenIds.title);
@@ -87,6 +91,7 @@ function App() {
       <main className="app-shell">
         <TitleScreen
           lastPlayedMode={lastPlayedMode}
+          masterySnapshot={masterySnapshot}
           onStart={startFromTitle}
           onOpenModeSelect={openModeSelect}
         />
@@ -100,6 +105,7 @@ function App() {
         <ModeSelectScreen
           onBack={() => setScreen(screenIds.title)}
           initialPracticeScope={practiceScope}
+          masterySnapshot={masterySnapshot}
           onStartQuiz={startQuiz}
         />
       </main>

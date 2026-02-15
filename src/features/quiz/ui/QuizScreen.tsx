@@ -9,6 +9,11 @@ export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
   score: number;
+  tableStats: readonly {
+    table: number;
+    answered: number;
+    correct: number;
+  }[];
   missedFactKeys: readonly string[];
 };
 
@@ -34,6 +39,7 @@ export function QuizScreen({
     score,
     correctCount,
     isComplete,
+    tableStats,
     missedFactKeys,
     incorrectAnswerReveal,
     appendDigit,
@@ -79,9 +85,10 @@ export function QuizScreen({
       correctCount,
       totalQuestions,
       score,
+      tableStats,
       missedFactKeys,
     });
-  }, [correctCount, isComplete, missedFactKeys, onComplete, score, totalQuestions]);
+  }, [correctCount, isComplete, missedFactKeys, onComplete, score, tableStats, totalQuestions]);
 
   const hasInput = inputValue.length > 0;
   const isOverlayVisible = incorrectAnswerReveal !== null;

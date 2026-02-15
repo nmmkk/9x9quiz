@@ -8,7 +8,7 @@
 6. M4-01 (Completed)
 7. M4-02 (Completed)
 8. M4-03 (Completed)
-9. M4-04 (Planned)
+9. M4-04 (Completed)
 10. M4-05 (Planned)
 11. M4-06 (Planned)
 12. M5-01 (Planned)

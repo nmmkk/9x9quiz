@@ -9,6 +9,17 @@ type IncorrectAnswerReveal = {
   correctAnswer: number;
 };
 
+type TableProgress = {
+  answered: number;
+  correct: number;
+};
+
+type SessionTableStat = {
+  table: number;
+  answered: number;
+  correct: number;
+};
+
 type SessionState = {
   totalQuestions: number;
   answeredQuestions: number;
@@ -16,6 +27,7 @@ type SessionState = {
   inputValue: string;
   correctCount: number;
   score: number;
+  tableProgressByTable: Map<number, TableProgress>;
   missedFactKeys: Set<string>;
   incorrectAnswerReveal: IncorrectAnswerReveal | null;
   isComplete: boolean;
@@ -37,6 +49,7 @@ type UseQuizSessionResult = {
   correctCount: number;
   score: number;
   isComplete: boolean;
+  tableStats: readonly SessionTableStat[];
   missedFactKeys: readonly string[];
   incorrectAnswerReveal: IncorrectAnswerReveal | null;
   appendDigit: (digit: string) => void;
@@ -62,6 +75,35 @@ function createSessionFactPool(
   return reviewFactPool.length > 0 ? reviewFactPool : scopedFactPool;
 }
 
+function recordTableOutcome(
+  currentProgressByTable: ReadonlyMap<number, TableProgress>,
+  table: number,
+  isCorrect: boolean,
+): Map<number, TableProgress> {
+  const nextProgressByTable = new Map(currentProgressByTable);
+  const currentProgress = nextProgressByTable.get(table) ?? {
+    answered: 0,
+    correct: 0,
+  };
+
+  nextProgressByTable.set(table, {
+    answered: currentProgress.answered + 1,
+    correct: currentProgress.correct + (isCorrect ? 1 : 0),
+  });
+
+  return nextProgressByTable;
+}
+
+function toSortedTableStats(tableProgressByTable: ReadonlyMap<number, TableProgress>): SessionTableStat[] {
+  return Array.from(tableProgressByTable.entries())
+    .sort(([leftTable], [rightTable]) => leftTable - rightTable)
+    .map(([table, progress]) => ({
+      table,
+      answered: progress.answered,
+      correct: progress.correct,
+    }));
+}
+
 function createInitialState(
   totalQuestions: number,
   factPool: readonly QuizFact[],
@@ -74,6 +116,7 @@ function createInitialState(
     inputValue: "",
     correctCount: 0,
     score: 0,
+    tableProgressByTable: new Map(),
     missedFactKeys: new Set(),
     incorrectAnswerReveal: null,
     isComplete: false,
@@ -176,12 +219,18 @@ export function useQuizSession({
         const answeredQuestions = currentState.answeredQuestions + 1;
         const score = applyAnswerScore(currentState.score, true);
         const correctCount = currentState.correctCount + 1;
+        const tableProgressByTable = recordTableOutcome(
+          currentState.tableProgressByTable,
+          currentState.currentFact.left,
+          true,
+        );
         if (answeredQuestions >= currentState.totalQuestions) {
           return {
             ...currentState,
             answeredQuestions,
             score,
             correctCount,
+            tableProgressByTable,
             inputValue: "",
             isComplete: true,
           };
@@ -201,6 +250,7 @@ export function useQuizSession({
           inputValue: "",
           correctCount,
           score,
+          tableProgressByTable,
         };
       }
 
@@ -226,10 +276,16 @@ export function useQuizSession({
       }
 
       const answeredQuestions = currentState.answeredQuestions + 1;
+      const tableProgressByTable = recordTableOutcome(
+        currentState.tableProgressByTable,
+        currentState.currentFact.left,
+        false,
+      );
       if (answeredQuestions >= currentState.totalQuestions) {
         return {
           ...currentState,
           answeredQuestions,
+          tableProgressByTable,
           incorrectAnswerReveal: null,
           isComplete: true,
         };
@@ -246,6 +302,7 @@ export function useQuizSession({
         ...currentState,
         answeredQuestions,
         currentFact: nextFact,
+        tableProgressByTable,
         incorrectAnswerReveal: null,
       };
     });
@@ -260,6 +317,7 @@ export function useQuizSession({
     correctCount: state.correctCount,
     score: state.score,
     isComplete: state.isComplete,
+    tableStats: toSortedTableStats(state.tableProgressByTable),
     missedFactKeys: Array.from(state.missedFactKeys).sort((left, right) => left.localeCompare(right)),
     incorrectAnswerReveal: state.incorrectAnswerReveal,
     appendDigit,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MasteryPanel } from "../../progress/ui/MasteryPanel";
 import { defaultPracticeScope, type PracticeScope } from "../../quiz/domain/practiceScope";
 import {
   questionCountModes,
@@ -6,11 +7,13 @@ import {
   type QuestionCountMode,
 } from "../../../shared/storage/highScoreStorage";
 import { useI18n } from "../../../shared/i18n/useI18n";
+import { type MasterySnapshot } from "../../../shared/storage/masteryStorage";
 import { PracticeScopeSelector } from "./PracticeScopeSelector";
 
 type ModeSelectScreenProps = {
   onBack: () => void;
   initialPracticeScope: PracticeScope;
+  masterySnapshot: MasterySnapshot;
   onStartQuiz: (mode: QuestionCountMode, scope: PracticeScope) => void;
 };
 
@@ -25,6 +28,7 @@ function toSelectableScope(scope: PracticeScope): PracticeScope {
 export function ModeSelectScreen({
   onBack,
   initialPracticeScope,
+  masterySnapshot,
   onStartQuiz,
 }: ModeSelectScreenProps) {
   const { t, tf } = useI18n();
@@ -41,6 +45,8 @@ export function ModeSelectScreen({
         selectedScope={selectedPracticeScope}
         onSelectScope={setSelectedPracticeScope}
       />
+
+      <MasteryPanel masterySnapshot={masterySnapshot} />
 
       <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {
