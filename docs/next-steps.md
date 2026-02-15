@@ -2,11 +2,10 @@
 
 ## Immediate
 
-1. Implement `M4-05` to add adaptive-practice regression tests.
-2. Implement `M4-06` to execute QA pass and sync status docs.
-3. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
-4. During M4 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
-5. Keep release-checklist assumptions aligned as M4 moves toward QA completion.
+1. Implement `M4-06` to execute QA pass and sync status docs.
+2. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
+3. During M4 QA planning, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
+4. Keep release-checklist assumptions aligned as M4 moves toward completion.
 
 ## Documentation Follow-Through
 

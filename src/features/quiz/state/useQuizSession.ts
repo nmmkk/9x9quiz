@@ -59,7 +59,7 @@ type UseQuizSessionResult = {
   proceedAfterIncorrectAnswer: () => void;
 };
 
-function createSessionFactPool(
+export function createSessionFactPool(
   practiceScope: PracticeScope | undefined,
   reviewFactKeys: readonly string[] | undefined,
 ): QuizFact[] {
@@ -73,6 +73,19 @@ function createSessionFactPool(
   const reviewFactPool = scopedFactPool.filter((fact) => reviewKeySet.has(fact.key));
 
   return reviewFactPool.length > 0 ? reviewFactPool : scopedFactPool;
+}
+
+export function resolveSessionQuestionCount(
+  questionCount: number,
+  factPoolLength: number,
+  hasReviewFactKeys: boolean,
+): number {
+  const requestedQuestionCount = Math.max(1, questionCount);
+  if (!hasReviewFactKeys) {
+    return requestedQuestionCount;
+  }
+
+  return Math.min(requestedQuestionCount, factPoolLength);
 }
 
 function recordTableOutcome(
@@ -147,10 +160,7 @@ export function useQuizSession({
     () => createSessionFactPool(practiceScope, reviewFactKeys),
     [practiceScope, reviewFactKeys],
   );
-  const requestedQuestionCount = Math.max(1, questionCount);
-  const totalQuestions = reviewFactKeys
-    ? Math.min(requestedQuestionCount, factPool.length)
-    : requestedQuestionCount;
+  const totalQuestions = resolveSessionQuestionCount(questionCount, factPool.length, Boolean(reviewFactKeys));
   const [state, setState] = useState<SessionState>(() => createInitialState(totalQuestions, factPool, random));
 
   useEffect(() => {
