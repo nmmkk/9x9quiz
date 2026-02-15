@@ -12,4 +12,4 @@
 10. M2-03 (Completed)
 11. M2-04 (Completed)
 12. M2-05 (Completed)
-13. M2-06 (Planned)
+13. M2-06 (Partial)

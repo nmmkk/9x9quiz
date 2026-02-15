@@ -2,7 +2,8 @@
 
 ## Immediate
 
-1. Start M2-06 with manual QA evidence and status-document synchronization.
+1. Complete pending manual browser verification for M2-06 (localized full flow and viewport checks), then mark M2 as completed.
+2. After M2 closure, define the next milestone priorities (for example language toggle rollout or post-MVP gameplay expansion).
 
 ## Documentation Follow-Through
 
