@@ -16,7 +16,7 @@ type QuizScreenProps = {
 };
 
 export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
-  const { t, tf } = useI18n();
+  const { tf } = useI18n();
   const {
     totalQuestions,
     currentQuestionNumber,
@@ -58,13 +58,9 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
 
   return (
     <section className="panel quiz-panel" aria-labelledby="quiz-heading">
-      <p className="eyebrow">{t("quiz.eyebrow")}</p>
-      <h2 id="quiz-heading">{t("quiz.heading")}</h2>
+      <h2 id="quiz-heading">{tf("quiz.currentQuestionLabel", { current: currentQuestionNumber })}</h2>
 
       <div className="quiz-header">
-        <p>
-          {currentQuestionNumber} / {totalQuestions}
-        </p>
         <p>{tf("quiz.scoreLabel", { score })}</p>
       </div>
 

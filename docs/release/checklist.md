@@ -3,7 +3,7 @@
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
-* [x] Mode options are exactly 10, 20, and 30 questions.
+* [x] Mode options are exactly 10 and 20 questions.
 * [x] Score rule is exactly +10 per correct answer.
 * [x] Incorrect answer always reveals the correct answer before continuing.
 * [x] Missed facts in-session are weighted at +30% draw weight.

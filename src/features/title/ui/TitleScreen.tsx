@@ -10,7 +10,6 @@ export function TitleScreen({ onStart, onOpenHighScores }: TitleScreenProps) {
 
   return (
     <section className="panel" aria-labelledby="title-heading">
-      <p className="eyebrow">{t("title.eyebrow")}</p>
       <h1 id="title-heading">{t("app.title")}</h1>
       <p>{t("title.description")}</p>
       <div className="button-row">

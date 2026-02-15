@@ -15,14 +15,12 @@ export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps)
 
   return (
     <section className="panel" aria-labelledby="mode-heading">
-      <p className="eyebrow">{t("mode.eyebrow")}</p>
       <h2 id="mode-heading">{t("mode.heading")}</h2>
       <p>{t("mode.description")}</p>
 
       <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {
           const highScore = readHighScore(mode);
-          const scoreText = highScore === null ? t("mode.noRecord") : highScore;
 
           return (
             <div key={mode} className="mode-card" role="listitem">
@@ -34,7 +32,12 @@ export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps)
                 {tf("mode.optionLabel", { count: mode })}
               </button>
               <p className="mode-high-score">
-                {tf("mode.highScoreLabel", { score: scoreText })}
+                {t("mode.highScoreLabel")}: {" "}
+                {highScore === null ? (
+                  t("mode.noRecord")
+                ) : (
+                  <strong className="mode-high-score-value">{highScore}</strong>
+                )}
               </p>
             </div>
           );

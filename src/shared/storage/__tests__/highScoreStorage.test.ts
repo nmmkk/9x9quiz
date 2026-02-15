@@ -71,6 +71,5 @@ describe("highScoreStorage", () => {
 
     expect(readHighScore(10)).toBe(60);
     expect(readHighScore(20)).toBe(140);
-    expect(readHighScore(30)).toBeNull();
   });
 });

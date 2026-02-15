@@ -108,6 +108,10 @@ p {
   font-size: 0.92rem;
 }
 
+.mode-high-score-value {
+  font-weight: 700;
+}
+
 .quiz-panel {
   position: relative;
 }

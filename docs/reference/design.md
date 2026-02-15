@@ -19,14 +19,14 @@ Last updated: 2026-02-14
 ### In Scope (V1)
 
 * Title screen.
-* Mode select screen with 3 session lengths: 10, 20, and 30 questions.
+* Mode select screen with 2 session lengths: 10 and 20 questions.
 * Quiz loop with one multiplication problem shown at a time.
 * On-screen numeric input pad (no native keypad dependency).
 * Incorrect answer flow that shows the correct answer before moving to the next question.
 * Wrong-answer reinforcement: facts answered incorrectly in the current session get +30% selection weight.
 * Score system: +10 points per correct answer, no wrong-answer penalty.
 * Result screen with final score and correct answer count.
-* Local high score persistence per mode (10, 20, 30), no login.
+* Local high score persistence per mode (10, 20), no login.
 * Japanese-first UI copy with wording suitable for grade-2 learners.
 
 ### Out of Scope (V1)
@@ -53,7 +53,7 @@ Last updated: 2026-02-14
 
 ### Session Lifecycle
 
-* User selects mode: `10`, `20`, or `30` questions.
+* User selects mode: `10` or `20` questions.
 * Session ends when answered question count reaches selected mode count.
 * After session end, app navigates to Result screen.
 
@@ -94,7 +94,6 @@ Last updated: 2026-02-14
 * Persist per mode in localStorage:
   * `9x9quiz.v1.highScore.10`
   * `9x9quiz.v1.highScore.20`
-  * `9x9quiz.v1.highScore.30`
 * Update high score only if `finalScore > storedHighScore`.
 * Keep one value per mode (single best score only).
 
@@ -134,7 +133,7 @@ Last updated: 2026-02-14
 ```text
 [Title]
 +--------------------------------------+
-|              9x9 QUIZ                |
+|              くくクイズ               |
 |         pixel logo / mascot          |
 |                                      |
 |           [ Start Game ]             |
@@ -146,7 +145,7 @@ Last updated: 2026-02-14
 
 * Purpose: choose question count before quiz starts.
 * Required elements:
-  * Mode buttons: `10`, `20`, `30`.
+  * Mode buttons: `10`, `20`.
   * High score preview per mode.
   * `Play` and `Back` actions.
 
@@ -155,11 +154,10 @@ Last updated: 2026-02-14
 +--------------------------------------+
 |          Choose Question Count       |
 |                                      |
-|          [10] [20] [30]              |
+|             [10] [20]                |
 |                                      |
 |      High Score 10: 100              |
 |      High Score 20: 180              |
-|      High Score 30: 250              |
 |                                      |
 |          [ Play ]   [ Back ]         |
 +--------------------------------------+
@@ -230,7 +228,7 @@ Last updated: 2026-02-14
 ## 9) State and Data Model (Reference)
 
 ```ts
-type QuestionCountMode = 10 | 20 | 30
+type QuestionCountMode = 10 | 20
 
 type FactId = `${number}x${number}`
 
@@ -255,7 +253,7 @@ type SessionState = {
 
 ## 10) Acceptance Criteria for V1
 
-* User can complete a full session in each mode (`10`, `20`, `30`) without page reload.
+* User can complete a full session in each mode (`10`, `20`) without page reload.
 * Score increments by exactly 10 for each correct answer.
 * Incorrect flow always reveals the correct answer before continuing.
 * Facts missed earlier in the same session are selected more often via +30% weight.

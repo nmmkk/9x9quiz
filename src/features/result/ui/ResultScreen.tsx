@@ -35,9 +35,11 @@ export function ResultScreen({
       <p className="result-score">{tf("result.scoreLabel", { score })}</p>
       <p>{tf("result.modeHighScoreLabel", { mode, score: highScoreResult.highScore })}</p>
 
-      <p className="result-status" aria-live="polite">
-        {highScoreResult.isNewHighScore ? t("result.newHighScore") : t("result.highScoreUnchanged")}
-      </p>
+      {highScoreResult.isNewHighScore ? (
+        <p className="result-status" aria-live="polite">
+          {t("result.newHighScore")}
+        </p>
+      ) : null}
 
       <div className="button-row">
         <button type="button" className="primary-button" onClick={onPlayAgain}>

@@ -1,6 +1,6 @@
-export type QuestionCountMode = 10 | 20 | 30;
+export type QuestionCountMode = 10 | 20;
 
-export const questionCountModes: readonly QuestionCountMode[] = [10, 20, 30];
+export const questionCountModes: readonly QuestionCountMode[] = [10, 20];
 
 function getHighScoreStorageKey(mode: QuestionCountMode): string {
   return `9x9quiz.v1.highScore.${mode}`;
