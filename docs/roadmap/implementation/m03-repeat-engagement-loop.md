@@ -8,7 +8,7 @@
 | M3-02 | Add positive feedback message variation framework | Completed | M3-01 | `npm run test`, `npm run build` |
 | M3-03 | Add lightweight feedback effects with accessibility guardrails | Completed | M3-02 | `npm run build`, `npm run dev` |
 | M3-04 | Add engagement-related regression tests | Completed | M3-01, M3-02, M3-03 | `npm run test`, `npm run build` |
-| M3-05 | Execute QA pass and sync status docs | Planned | M3-01, M3-02, M3-03, M3-04 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
+| M3-05 | Execute QA pass and sync status docs | Completed | M3-01, M3-02, M3-03, M3-04 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
 ## Scope
 

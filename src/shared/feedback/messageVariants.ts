@@ -1,9 +1,4 @@
-export const messageVariantGroups = [
-  "result.newHighScore",
-  "result.replayEncouragement",
-] as const;
-
-export type MessageVariantGroup = (typeof messageVariantGroups)[number];
+export type MessageVariantGroup = "result.newHighScore" | "result.replayEncouragement";
 
 const lastVariantIndexByGroup = new Map<MessageVariantGroup, number>();
 

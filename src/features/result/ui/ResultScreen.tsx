@@ -47,8 +47,7 @@ export function ResultScreen({
 
   return (
     <section className="panel result-panel result-panel--entry" aria-labelledby="result-heading">
-      <p className="eyebrow">{t("result.eyebrow")}</p>
-      <h2 id="result-heading">{t("result.heading")}</h2>
+      <h2 id="result-heading">{t("result.eyebrow")}</h2>
 
       <p>{tf("result.correctLabel", { correct: correctCount, total: totalQuestions })}</p>
       <p className="result-score">{tf("result.scoreLabel", { score })}</p>

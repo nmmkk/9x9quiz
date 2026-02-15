@@ -3,7 +3,7 @@
 ## 1) Purpose
 
 * This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
-* Current active target: M3 repeat engagement loop aligned with `docs/reference/core-value.md`.
+* Current active target: M4 adaptive practice depth aligned with `docs/reference/core-value.md`.
 
 ## 2) Milestone Files
 
