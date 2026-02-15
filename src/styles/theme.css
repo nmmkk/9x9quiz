@@ -10,6 +10,8 @@
   --color-secondary: #d9e5f2;
   --color-accent: #1f8f5f;
   --color-accent-dark: #0f5f40;
+  --color-feedback-glow: rgba(31, 143, 95, 0.45);
+  --color-feedback-spark: rgba(255, 183, 3, 0.4);
   --color-focus: #ffb703;
   --color-page-top: #20355f;
   --color-page-bottom: #101a34;
@@ -109,4 +111,10 @@ button:disabled {
 
 .secondary-button:hover:not(:disabled) {
   background: #e6eef8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
 }

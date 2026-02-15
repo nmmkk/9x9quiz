@@ -27,6 +27,7 @@ Last updated: 2026-02-14
 | N-03 | 段ごとの習熟見える化 | High | Medium-High | 成長実感が出るため継続しやすく、復習対象も明確になる。 |
 | N-04 | 正解/不正解の短い演出 | Medium-High | Medium | ドーパミン設計に有効だが、過剰演出は逆効果なので制御が必要。 |
 | N-05 | ほめ言葉ローテーション | Medium | Medium | 文言の単調さを防ぎ、長期利用時の飽きを減らせる。 |
+| N-09 | 正解進捗の可視化ゲージ/アイコン | Medium-High | Medium-High | 正解の積み上がりを視覚化し、残り量と達成感を同時に伝える。画面上部横ゲージか右端縦ゲージを候補に、色変化は段階的で控えめにする。 |
 | N-06 | 一度ロード後のオフライン動作 | High | Medium-High | 自宅/学校での通信不安定時にも続けられ、利用継続性が上がる。 |
 | N-07 | インストール可能なPWA | Medium-High | Medium | 起動導線と再訪率を改善できるが、運用設計 (更新通知) が必要。 |
 | N-08 | ネイティブアプリ化 (iOS/Android) | Medium | Medium-Low | 配布面で有利だが、開発/運用コストが大きいため段階導入が前提。 |
@@ -36,7 +37,7 @@ Last updated: 2026-02-14
 | Milestone | Primary Focus | Mapped Ideas |
 | --- | --- | --- |
 | M3 | Repeat engagement loop | N-01, N-04, N-05, E-03 |
-| M4 | Adaptive practice depth | N-02, N-03, E-02 |
+| M4 | Adaptive practice depth | N-02, N-03, N-09, E-02 |
 | M5 | Offline-ready PWA foundation | N-06, N-07 |
 | M6 | Native packaging pilot | N-08 |
 

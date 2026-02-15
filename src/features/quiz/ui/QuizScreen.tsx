@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../../../shared/i18n/useI18n";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
@@ -33,6 +33,26 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
     proceedAfterIncorrectAnswer,
   } = useQuizSession({ questionCount });
   const hasReportedComplete = useRef(false);
+  const previousCorrectCount = useRef(correctCount);
+  const [isCorrectFeedbackActive, setIsCorrectFeedbackActive] = useState(false);
+
+  useEffect(() => {
+    const hasNewCorrectAnswer = correctCount > previousCorrectCount.current;
+    previousCorrectCount.current = correctCount;
+
+    if (!hasNewCorrectAnswer) {
+      return;
+    }
+
+    setIsCorrectFeedbackActive(true);
+    const timeoutId = globalThis.setTimeout(() => {
+      setIsCorrectFeedbackActive(false);
+    }, 220);
+
+    return () => {
+      globalThis.clearTimeout(timeoutId);
+    };
+  }, [correctCount]);
 
   useEffect(() => {
     if (!isComplete) {
@@ -57,7 +77,14 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
   const answerDisplay = hasInput ? inputValue : "__";
 
   return (
-    <section className="panel quiz-panel" aria-labelledby="quiz-heading">
+    <section
+      className={`panel quiz-panel${isCorrectFeedbackActive ? " quiz-panel--correct-feedback" : ""}`}
+      aria-labelledby="quiz-heading"
+    >
+      <div
+        className={`correct-feedback-burst${isCorrectFeedbackActive ? " is-active" : ""}`}
+        aria-hidden="true"
+      />
       <h2 id="quiz-heading">{tf("quiz.currentQuestionLabel", { current: currentQuestionNumber })}</h2>
 
       <div className="quiz-header">
