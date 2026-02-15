@@ -5,6 +5,10 @@ import { QuizScreen, type QuizSessionResult } from "./features/quiz/ui/QuizScree
 import { ResultScreen } from "./features/result/ui/ResultScreen";
 import { initialScreen, screenIds, type ScreenId } from "./shared/navigation/screenState";
 import { type QuestionCountMode } from "./shared/storage/highScoreStorage";
+import {
+  readLastPlayedMode,
+  writeLastPlayedMode,
+} from "./shared/storage/lastPlayedModeStorage";
 import "./styles/reset.css";
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -16,6 +20,9 @@ type ResultSnapshot = QuizSessionResult & {
 function App() {
   const [screen, setScreen] = useState<ScreenId>(initialScreen);
   const [questionCount, setQuestionCount] = useState<QuestionCountMode>(10);
+  const [lastPlayedMode, setLastPlayedMode] = useState<QuestionCountMode | null>(() =>
+    readLastPlayedMode(),
+  );
   const [latestResult, setLatestResult] = useState<ResultSnapshot | null>(null);
 
   const openModeSelect = () => {
@@ -24,7 +31,18 @@ function App() {
 
   const startQuiz = (selectedMode: QuestionCountMode) => {
     setQuestionCount(selectedMode);
+    setLastPlayedMode(selectedMode);
+    writeLastPlayedMode(selectedMode);
     setScreen(screenIds.quiz);
+  };
+
+  const startFromTitle = () => {
+    if (lastPlayedMode !== null) {
+      startQuiz(lastPlayedMode);
+      return;
+    }
+
+    openModeSelect();
   };
 
   const finishQuiz = (result: QuizSessionResult) => {
@@ -38,7 +56,11 @@ function App() {
   if (screen === screenIds.title) {
     return (
       <main className="app-shell">
-        <TitleScreen onStart={openModeSelect} onOpenHighScores={openModeSelect} />
+        <TitleScreen
+          lastPlayedMode={lastPlayedMode}
+          onStart={startFromTitle}
+          onOpenModeSelect={openModeSelect}
+        />
       </main>
     );
   }
@@ -59,7 +81,7 @@ function App() {
           correctCount={latestResult.correctCount}
           totalQuestions={latestResult.totalQuestions}
           score={latestResult.score}
-          onPlayAgain={() => setScreen(screenIds.quiz)}
+          onPlayAgain={() => startQuiz(latestResult.mode)}
           onBackToTitle={() => setScreen(screenIds.title)}
         />
       </main>

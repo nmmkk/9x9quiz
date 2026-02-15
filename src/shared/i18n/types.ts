@@ -34,6 +34,8 @@ export const messageKeys = [
   "result.titleButton",
   "title.description",
   "title.highScoresButton",
+  "title.modeSelectButton",
+  "title.quickStartButton",
   "title.startButton",
 ] as const;
 

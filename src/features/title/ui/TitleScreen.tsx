@@ -1,12 +1,14 @@
 import { useI18n } from "../../../shared/i18n/useI18n";
+import { type QuestionCountMode } from "../../../shared/storage/highScoreStorage";
 
 type TitleScreenProps = {
+  lastPlayedMode: QuestionCountMode | null;
   onStart: () => void;
-  onOpenHighScores: () => void;
+  onOpenModeSelect: () => void;
 };
 
-export function TitleScreen({ onStart, onOpenHighScores }: TitleScreenProps) {
-  const { t } = useI18n();
+export function TitleScreen({ lastPlayedMode, onStart, onOpenModeSelect }: TitleScreenProps) {
+  const { t, tf } = useI18n();
 
   return (
     <section className="panel" aria-labelledby="title-heading">
@@ -14,10 +16,12 @@ export function TitleScreen({ onStart, onOpenHighScores }: TitleScreenProps) {
       <p>{t("title.description")}</p>
       <div className="button-row">
         <button type="button" className="primary-button" onClick={onStart}>
-          {t("title.startButton")}
+          {lastPlayedMode === null
+            ? t("title.startButton")
+            : tf("title.quickStartButton", { count: lastPlayedMode })}
         </button>
-        <button type="button" className="secondary-button" onClick={onOpenHighScores}>
-          {t("title.highScoresButton")}
+        <button type="button" className="secondary-button" onClick={onOpenModeSelect}>
+          {lastPlayedMode === null ? t("title.highScoresButton") : t("title.modeSelectButton")}
         </button>
       </div>
     </section>

@@ -37,6 +37,8 @@ const jaJPCatalog = {
   "result.titleButton": "タイトルへ",
   "title.description": "九九をみじかいクイズで、くりかえしれんしゅうしよう。",
   "title.highScoresButton": "さいこうとくてん",
+  "title.modeSelectButton": "もんだいすうをえらぶ",
+  "title.quickStartButton": "{count}もんで すぐにはじめる",
   "title.startButton": "はじめる",
 } satisfies MessageCatalog;
 
@@ -69,6 +71,8 @@ const enCatalog = {
   "result.titleButton": "Title",
   "title.description": "Practice multiplication facts with short, focused quiz rounds.",
   "title.highScoresButton": "Best Score",
+  "title.modeSelectButton": "Choose Mode",
+  "title.quickStartButton": "Quick Start ({count} Questions)",
   "title.startButton": "Start",
 } satisfies MessageCatalog;
 
