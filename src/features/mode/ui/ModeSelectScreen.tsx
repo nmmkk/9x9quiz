@@ -3,6 +3,7 @@ import {
   readHighScore,
   type QuestionCountMode,
 } from "../../../shared/storage/highScoreStorage";
+import { useI18n } from "../../../shared/i18n/useI18n";
 
 type ModeSelectScreenProps = {
   onBack: () => void;
@@ -10,15 +11,18 @@ type ModeSelectScreenProps = {
 };
 
 export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps) {
+  const { t, tf } = useI18n();
+
   return (
     <section className="panel" aria-labelledby="mode-heading">
-      <p className="eyebrow">Mode Select</p>
-      <h2 id="mode-heading">Choose Question Count</h2>
-      <p>Pick a mode to start immediately. High scores are shown when available.</p>
+      <p className="eyebrow">{t("mode.eyebrow")}</p>
+      <h2 id="mode-heading">{t("mode.heading")}</h2>
+      <p>{t("mode.description")}</p>
 
-      <div className="mode-grid" role="list" aria-label="Question count modes">
+      <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {
           const highScore = readHighScore(mode);
+          const scoreText = highScore === null ? t("mode.noRecord") : highScore;
 
           return (
             <div key={mode} className="mode-card" role="listitem">
@@ -27,10 +31,10 @@ export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps)
                 className="primary-button mode-start-button"
                 onClick={() => onStartQuiz(mode)}
               >
-                {mode} Questions
+                {tf("mode.optionLabel", { count: mode })}
               </button>
               <p className="mode-high-score">
-                High Score: {highScore === null ? "No record" : highScore}
+                {tf("mode.highScoreLabel", { score: scoreText })}
               </p>
             </div>
           );
@@ -38,7 +42,7 @@ export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps)
       </div>
 
       <button type="button" className="secondary-button" onClick={onBack}>
-        Back to Title
+        {t("mode.backToTitleButton")}
       </button>
     </section>
   );

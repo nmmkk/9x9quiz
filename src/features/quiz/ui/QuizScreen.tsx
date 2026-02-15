@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useI18n } from "../../../shared/i18n/useI18n";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
@@ -15,6 +16,7 @@ type QuizScreenProps = {
 };
 
 export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
+  const { t, tf } = useI18n();
   const {
     totalQuestions,
     currentQuestionNumber,
@@ -56,14 +58,14 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
 
   return (
     <section className="panel quiz-panel" aria-labelledby="quiz-heading">
-      <p className="eyebrow">Quiz</p>
-      <h2 id="quiz-heading">Solve Each Fact</h2>
+      <p className="eyebrow">{t("quiz.eyebrow")}</p>
+      <h2 id="quiz-heading">{t("quiz.heading")}</h2>
 
       <div className="quiz-header">
         <p>
           {currentQuestionNumber} / {totalQuestions}
         </p>
-        <p>Score: {score}</p>
+        <p>{tf("quiz.scoreLabel", { score })}</p>
       </div>
 
       <p className="quiz-expression">

@@ -1,3 +1,5 @@
+import { useI18n } from "../../../shared/i18n/useI18n";
+
 type NumericPadProps = {
   disabled?: boolean;
   submitDisabled: boolean;
@@ -21,8 +23,10 @@ export function NumericPad({
   onBackspace,
   onSubmit,
 }: NumericPadProps) {
+  const { t } = useI18n();
+
   return (
-    <div className="numeric-pad" aria-label="On-screen number pad">
+    <div className="numeric-pad" aria-label={t("quiz.numberPadAriaLabel")}>
       {digitRows.map((row) => (
         <div key={row.join("-")} className="numeric-pad-row">
           {row.map((digit) => (
@@ -41,7 +45,7 @@ export function NumericPad({
 
       <div className="numeric-pad-row">
         <button type="button" className="numeric-action-button" disabled={disabled} onClick={onClear}>
-          Clear
+          {t("quiz.clearButton")}
         </button>
         <button type="button" className="numeric-button" disabled={disabled} onClick={() => onDigit("0")}>
           0
@@ -52,7 +56,7 @@ export function NumericPad({
           disabled={disabled}
           onClick={onBackspace}
         >
-          Backspace
+          {t("quiz.backspaceButton")}
         </button>
       </div>
 
@@ -62,7 +66,7 @@ export function NumericPad({
         disabled={disabled || submitDisabled}
         onClick={onSubmit}
       >
-        Submit
+        {t("quiz.submitButton")}
       </button>
     </div>
   );

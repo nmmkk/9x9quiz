@@ -1,3 +1,5 @@
+import { useI18n } from "../../../shared/i18n/useI18n";
+
 type IncorrectAnswerOverlayProps = {
   submittedAnswer: number;
   correctAnswer: number;
@@ -9,14 +11,16 @@ export function IncorrectAnswerOverlay({
   correctAnswer,
   onNext,
 }: IncorrectAnswerOverlayProps) {
+  const { t, tf } = useI18n();
+
   return (
     <div className="overlay-backdrop" role="presentation">
       <section className="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="incorrect-title">
-        <h3 id="incorrect-title">Not Correct</h3>
-        <p>You entered: {submittedAnswer}</p>
-        <p>Correct answer: {correctAnswer}</p>
+        <h3 id="incorrect-title">{t("quiz.incorrect.title")}</h3>
+        <p>{tf("quiz.incorrect.enteredLabel", { answer: submittedAnswer })}</p>
+        <p>{tf("quiz.incorrect.correctAnswerLabel", { answer: correctAnswer })}</p>
         <button type="button" className="primary-button" onClick={onNext}>
-          Next
+          {t("quiz.incorrect.nextButton")}
         </button>
       </section>
     </div>

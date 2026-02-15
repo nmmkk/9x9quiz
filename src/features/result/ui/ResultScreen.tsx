@@ -4,6 +4,7 @@ import {
   type HighScoreUpdateResult,
   type QuestionCountMode,
 } from "../../../shared/storage/highScoreStorage";
+import { useI18n } from "../../../shared/i18n/useI18n";
 
 type ResultScreenProps = {
   mode: QuestionCountMode;
@@ -22,29 +23,28 @@ export function ResultScreen({
   onPlayAgain,
   onBackToTitle,
 }: ResultScreenProps) {
+  const { t, tf } = useI18n();
   const [highScoreResult] = useState<HighScoreUpdateResult>(() => updateHighScore(mode, score));
 
   return (
     <section className="panel result-panel" aria-labelledby="result-heading">
-      <p className="eyebrow">Result</p>
-      <h2 id="result-heading">Session End</h2>
+      <p className="eyebrow">{t("result.eyebrow")}</p>
+      <h2 id="result-heading">{t("result.heading")}</h2>
 
-      <p>
-        Correct: {correctCount} / {totalQuestions}
-      </p>
-      <p className="result-score">Score: {score}</p>
-      <p>Mode {mode} high score: {highScoreResult.highScore}</p>
+      <p>{tf("result.correctLabel", { correct: correctCount, total: totalQuestions })}</p>
+      <p className="result-score">{tf("result.scoreLabel", { score })}</p>
+      <p>{tf("result.modeHighScoreLabel", { mode, score: highScoreResult.highScore })}</p>
 
       <p className="result-status" aria-live="polite">
-        {highScoreResult.isNewHighScore ? "New High Score!" : "High score unchanged."}
+        {highScoreResult.isNewHighScore ? t("result.newHighScore") : t("result.highScoreUnchanged")}
       </p>
 
       <div className="button-row">
         <button type="button" className="primary-button" onClick={onPlayAgain}>
-          Play Again
+          {t("result.playAgainButton")}
         </button>
         <button type="button" className="secondary-button" onClick={onBackToTitle}>
-          Title
+          {t("result.titleButton")}
         </button>
       </div>
     </section>
