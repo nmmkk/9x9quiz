@@ -7,6 +7,7 @@ Last updated: 2026-02-14
 * Build a browser quiz app that helps grade-2 students in Japan memorize multiplication tables (kuku).
 * Keep V1 simple and reliable with fixed-length sessions, clear scoring, and immediate correction feedback.
 * Add game-like 8-bit visual flavor, while avoiding advanced game mechanics in V1.
+* Keep feature decisions aligned with `docs/reference/core-value.md`.
 
 ## 2) Users and Context
 
@@ -267,3 +268,4 @@ type SessionState = {
 * Additional game modes (timed or challenge).
 * English UI rollout.
 * PWA/offline support.
+* Native app wrapper pilot for iOS/Android distribution.

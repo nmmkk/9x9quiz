@@ -3,12 +3,16 @@
 ## 1) Purpose
 
 * This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
-* Current active target: M2 Japanese-first localization foundation and related QA/documentation sync.
+* Current active target: M3 repeat engagement loop aligned with `docs/reference/core-value.md`.
 
 ## 2) Milestone Files
 
 * `docs/roadmap/implementation/m01-web-mvp-core.md`
 * `docs/roadmap/implementation/m02-japanese-localization-foundation.md`
+* `docs/roadmap/implementation/m03-repeat-engagement-loop.md`
+* `docs/roadmap/implementation/m04-adaptive-practice-depth.md`
+* `docs/roadmap/implementation/m05-offline-ready-pwa-foundation.md`
+* `docs/roadmap/implementation/m06-native-packaging-pilot.md`
 
 ## 3) Supporting Plans
 
@@ -32,7 +36,9 @@
 ## 5) Source References
 
 * `README.md`
+* `docs/reference/core-value.md`
 * `docs/reference/design.md`
+* `docs/roadmap/improvement-ideas.md`
 
 ## 6) Update Rules
 
