@@ -2,8 +2,10 @@
 
 ## Immediate
 
-1. M1 is complete. Define the next milestone and add a new ticket set under `docs/roadmap/implementation/`.
-2. If preparing release, execute deployment/runbook tasks that are outside M1 roadmap scope.
+1. Start M2-01 and establish the localization foundation (`src/shared/i18n/*`, locale persistence, `<html lang>` sync).
+2. Execute M2-02 and M2-03 to externalize all core-screen copy and finalize learner-friendly `ja-JP` text.
+3. Execute M2-04 and M2-05 to apply localization-aware UI adjustments and complete i18n test coverage.
+4. Complete M2-06 with manual QA evidence and status-document synchronization.
 
 ## Documentation Follow-Through
 

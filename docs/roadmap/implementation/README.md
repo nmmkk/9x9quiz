@@ -2,12 +2,13 @@
 
 ## 1) Purpose
 
-* This roadmap defines implementation tickets for the first browser-playable release of 9x9quiz.
-* Release target: Web MVP V1 with fixed-session quiz flow, score/high score, and local-only persistence.
+* This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
+* Current active target: M2 Japanese-first localization foundation and related QA/documentation sync.
 
 ## 2) Milestone Files
 
 * `docs/roadmap/implementation/m01-web-mvp-core.md`
+* `docs/roadmap/implementation/m02-japanese-localization-foundation.md`
 
 ## 3) Supporting Plans
 
