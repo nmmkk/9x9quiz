@@ -9,15 +9,22 @@ export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
   score: number;
+  missedFactKeys: readonly string[];
 };
 
 type QuizScreenProps = {
   questionCount: number;
   practiceScope: PracticeScope;
+  reviewFactKeys?: readonly string[];
   onComplete: (result: QuizSessionResult) => void;
 };
 
-export function QuizScreen({ questionCount, practiceScope, onComplete }: QuizScreenProps) {
+export function QuizScreen({
+  questionCount,
+  practiceScope,
+  reviewFactKeys,
+  onComplete,
+}: QuizScreenProps) {
   const { tf } = useI18n();
   const {
     totalQuestions,
@@ -27,13 +34,14 @@ export function QuizScreen({ questionCount, practiceScope, onComplete }: QuizScr
     score,
     correctCount,
     isComplete,
+    missedFactKeys,
     incorrectAnswerReveal,
     appendDigit,
     clearInput,
     backspaceInput,
     submitAnswer,
     proceedAfterIncorrectAnswer,
-  } = useQuizSession({ questionCount, practiceScope });
+  } = useQuizSession({ questionCount, practiceScope, reviewFactKeys });
   const hasReportedComplete = useRef(false);
   const previousCorrectCount = useRef(correctCount);
   const [isCorrectFeedbackActive, setIsCorrectFeedbackActive] = useState(false);
@@ -71,8 +79,9 @@ export function QuizScreen({ questionCount, practiceScope, onComplete }: QuizScr
       correctCount,
       totalQuestions,
       score,
+      missedFactKeys,
     });
-  }, [correctCount, isComplete, onComplete, score, totalQuestions]);
+  }, [correctCount, isComplete, missedFactKeys, onComplete, score, totalQuestions]);
 
   const hasInput = inputValue.length > 0;
   const isOverlayVisible = incorrectAnswerReveal !== null;

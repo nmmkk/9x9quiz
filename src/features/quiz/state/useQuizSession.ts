@@ -24,6 +24,7 @@ type SessionState = {
 type UseQuizSessionOptions = {
   questionCount: number;
   practiceScope?: PracticeScope;
+  reviewFactKeys?: readonly string[];
   random?: () => number;
 };
 
@@ -36,6 +37,7 @@ type UseQuizSessionResult = {
   correctCount: number;
   score: number;
   isComplete: boolean;
+  missedFactKeys: readonly string[];
   incorrectAnswerReveal: IncorrectAnswerReveal | null;
   appendDigit: (digit: string) => void;
   clearInput: () => void;
@@ -43,6 +45,22 @@ type UseQuizSessionResult = {
   submitAnswer: () => void;
   proceedAfterIncorrectAnswer: () => void;
 };
+
+function createSessionFactPool(
+  practiceScope: PracticeScope | undefined,
+  reviewFactKeys: readonly string[] | undefined,
+): QuizFact[] {
+  const scopedFactPool = createFactPool({ practiceScope });
+
+  if (!reviewFactKeys) {
+    return scopedFactPool;
+  }
+
+  const reviewKeySet = new Set(reviewFactKeys);
+  const reviewFactPool = scopedFactPool.filter((fact) => reviewKeySet.has(fact.key));
+
+  return reviewFactPool.length > 0 ? reviewFactPool : scopedFactPool;
+}
 
 function createInitialState(
   totalQuestions: number,
@@ -79,10 +97,17 @@ function drawFollowingFact(
 export function useQuizSession({
   questionCount,
   practiceScope,
+  reviewFactKeys,
   random = Math.random,
 }: UseQuizSessionOptions): UseQuizSessionResult {
-  const totalQuestions = Math.max(1, questionCount);
-  const factPool = useMemo(() => createFactPool({ practiceScope }), [practiceScope]);
+  const factPool = useMemo(
+    () => createSessionFactPool(practiceScope, reviewFactKeys),
+    [practiceScope, reviewFactKeys],
+  );
+  const requestedQuestionCount = Math.max(1, questionCount);
+  const totalQuestions = reviewFactKeys
+    ? Math.min(requestedQuestionCount, factPool.length)
+    : requestedQuestionCount;
   const [state, setState] = useState<SessionState>(() => createInitialState(totalQuestions, factPool, random));
 
   useEffect(() => {
@@ -235,6 +260,7 @@ export function useQuizSession({
     correctCount: state.correctCount,
     score: state.score,
     isComplete: state.isComplete,
+    missedFactKeys: Array.from(state.missedFactKeys).sort((left, right) => left.localeCompare(right)),
     incorrectAnswerReveal: state.incorrectAnswerReveal,
     appendDigit,
     clearInput,

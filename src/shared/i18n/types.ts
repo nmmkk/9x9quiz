@@ -32,6 +32,7 @@ export const messageKeys = [
   "quiz.submitButton",
   "result.correctLabel",
   "result.eyebrow",
+  "result.missedFactReviewButton",
   "result.modeHighScoreLabel",
   "result.newHighScoreVariant1",
   "result.newHighScoreVariant2",

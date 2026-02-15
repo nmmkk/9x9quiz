@@ -15,6 +15,8 @@ import "./styles/reset.css";
 import "./styles/theme.css";
 import "./styles/app.css";
 
+const MINI_REVIEW_QUESTION_COUNT = 3;
+
 type ResultSnapshot = QuizSessionResult & {
   mode: QuestionCountMode;
 };
@@ -28,6 +30,7 @@ function App() {
   const [practiceScope, setPracticeScope] = useState<PracticeScope>(
     () => readPracticeScope() ?? defaultPracticeScope,
   );
+  const [reviewFactKeys, setReviewFactKeys] = useState<readonly string[] | null>(null);
   const [latestResult, setLatestResult] = useState<ResultSnapshot | null>(null);
 
   const openModeSelect = () => {
@@ -38,11 +41,21 @@ function App() {
     selectedMode: QuestionCountMode,
     selectedPracticeScope: PracticeScope = practiceScope,
   ) => {
+    setReviewFactKeys(null);
     setQuestionCount(selectedMode);
     setLastPlayedMode(selectedMode);
     writeLastPlayedMode(selectedMode);
     setPracticeScope(selectedPracticeScope);
     writePracticeScope(selectedPracticeScope);
+    setScreen(screenIds.quiz);
+  };
+
+  const startMissedFactReview = (missedFactKeys: readonly string[]) => {
+    if (missedFactKeys.length === 0) {
+      return;
+    }
+
+    setReviewFactKeys(missedFactKeys);
     setScreen(screenIds.quiz);
   };
 
@@ -56,6 +69,12 @@ function App() {
   };
 
   const finishQuiz = (result: QuizSessionResult) => {
+    if (reviewFactKeys) {
+      setReviewFactKeys(null);
+      setScreen(screenIds.title);
+      return;
+    }
+
     setLatestResult({
       ...result,
       mode: questionCount,
@@ -95,6 +114,8 @@ function App() {
           correctCount={latestResult.correctCount}
           totalQuestions={latestResult.totalQuestions}
           score={latestResult.score}
+          hasMissedFacts={latestResult.missedFactKeys.length > 0}
+          onStartMissedFactReview={() => startMissedFactReview(latestResult.missedFactKeys)}
           onPlayAgain={() => startQuiz(latestResult.mode)}
           onBackToTitle={() => setScreen(screenIds.title)}
         />
@@ -104,7 +125,12 @@ function App() {
 
   return (
     <main className="app-shell">
-      <QuizScreen questionCount={questionCount} practiceScope={practiceScope} onComplete={finishQuiz} />
+      <QuizScreen
+        questionCount={reviewFactKeys ? MINI_REVIEW_QUESTION_COUNT : questionCount}
+        practiceScope={practiceScope}
+        reviewFactKeys={reviewFactKeys ?? undefined}
+        onComplete={finishQuiz}
+      />
     </main>
   );
 }
