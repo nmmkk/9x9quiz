@@ -1,7 +1,7 @@
 # Recommended Build Order
 
 1. M3-01 (Completed)
-2. M3-02 (Planned)
+2. M3-02 (Completed)
 3. M3-03 (Planned)
 4. M3-04 (Planned)
 5. M3-05 (Planned)
