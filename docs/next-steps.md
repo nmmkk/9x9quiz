@@ -2,8 +2,7 @@
 
 ## Immediate
 
-1. Start M2-05 to complete i18n test coverage and regression validation.
-2. Complete M2-06 with manual QA evidence and status-document synchronization.
+1. Start M2-06 with manual QA evidence and status-document synchronization.
 
 ## Documentation Follow-Through
 
