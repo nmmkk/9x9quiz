@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { drawNextFact } from "../domain/draw";
 import { createFactPool, isAnswerCorrect, type QuizFact } from "../domain/facts";
+import { type PracticeScope } from "../domain/practiceScope";
 import { applyAnswerScore } from "../domain/scoring";
 
 type IncorrectAnswerReveal = {
@@ -22,6 +23,7 @@ type SessionState = {
 
 type UseQuizSessionOptions = {
   questionCount: number;
+  practiceScope?: PracticeScope;
   random?: () => number;
 };
 
@@ -74,9 +76,13 @@ function drawFollowingFact(
   });
 }
 
-export function useQuizSession({ questionCount, random = Math.random }: UseQuizSessionOptions): UseQuizSessionResult {
+export function useQuizSession({
+  questionCount,
+  practiceScope,
+  random = Math.random,
+}: UseQuizSessionOptions): UseQuizSessionResult {
   const totalQuestions = Math.max(1, questionCount);
-  const factPool = useMemo(() => createFactPool(), []);
+  const factPool = useMemo(() => createFactPool({ practiceScope }), [practiceScope]);
   const [state, setState] = useState<SessionState>(() => createInitialState(totalQuestions, factPool, random));
 
   useEffect(() => {

@@ -12,6 +12,25 @@ describe("createFactPool", () => {
     expect(facts[8]).toMatchObject({ left: 1, right: 9, key: "1x9" });
     expect(facts[9]).toMatchObject({ left: 2, right: 1, key: "2x1" });
   });
+
+  it("filters facts to lower-range tables", () => {
+    const facts = createFactPool({ practiceScope: { kind: "lowerRange" } });
+
+    expect(facts).toHaveLength(45);
+    expect(facts.every((fact) => fact.left <= 5)).toBe(true);
+  });
+
+  it("filters facts to selected custom tables", () => {
+    const facts = createFactPool({
+      practiceScope: { kind: "custom", tables: [9, 7] },
+    });
+
+    expect(facts).toHaveLength(18);
+    expect(Array.from(new Set(facts.map((fact) => fact.left))).sort((left, right) => left - right)).toEqual([
+      7,
+      9,
+    ]);
+  });
 });
 
 describe("drawNextFact", () => {

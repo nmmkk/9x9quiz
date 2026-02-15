@@ -4,7 +4,7 @@
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
-| M4-01 | Add practice scope model and persistence | Planned | M3-05 | `npm run test`, `npm run build` |
+| M4-01 | Add practice scope model and persistence | Completed | M3-05 | `npm run test`, `npm run build` |
 | M4-02 | Build table-range options in mode selection | Planned | M4-01 | `npm run test`, `npm run build`, `npm run dev` |
 | M4-03 | Implement missed-fact mini-review (3 questions) | Planned | M4-01, M4-02 | `npm run test`, `npm run build`, `npm run dev` |
 | M4-04 | Add table mastery visibility panel | Planned | M4-01, M4-03 | `npm run test`, `npm run build` |

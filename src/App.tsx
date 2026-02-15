@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ModeSelectScreen } from "./features/mode/ui/ModeSelectScreen";
 import { TitleScreen } from "./features/title/ui/TitleScreen";
+import { defaultPracticeScope, type PracticeScope } from "./features/quiz/domain/practiceScope";
 import { QuizScreen, type QuizSessionResult } from "./features/quiz/ui/QuizScreen";
 import { ResultScreen } from "./features/result/ui/ResultScreen";
 import { initialScreen, screenIds, type ScreenId } from "./shared/navigation/screenState";
@@ -9,6 +10,7 @@ import {
   readLastPlayedMode,
   writeLastPlayedMode,
 } from "./shared/storage/lastPlayedModeStorage";
+import { readPracticeScope, writePracticeScope } from "./shared/storage/practiceScopeStorage";
 import "./styles/reset.css";
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -23,16 +25,24 @@ function App() {
   const [lastPlayedMode, setLastPlayedMode] = useState<QuestionCountMode | null>(() =>
     readLastPlayedMode(),
   );
+  const [practiceScope, setPracticeScope] = useState<PracticeScope>(
+    () => readPracticeScope() ?? defaultPracticeScope,
+  );
   const [latestResult, setLatestResult] = useState<ResultSnapshot | null>(null);
 
   const openModeSelect = () => {
     setScreen(screenIds.modeSelect);
   };
 
-  const startQuiz = (selectedMode: QuestionCountMode) => {
+  const startQuiz = (
+    selectedMode: QuestionCountMode,
+    selectedPracticeScope: PracticeScope = practiceScope,
+  ) => {
     setQuestionCount(selectedMode);
     setLastPlayedMode(selectedMode);
     writeLastPlayedMode(selectedMode);
+    setPracticeScope(selectedPracticeScope);
+    writePracticeScope(selectedPracticeScope);
     setScreen(screenIds.quiz);
   };
 
@@ -90,7 +100,7 @@ function App() {
 
   return (
     <main className="app-shell">
-      <QuizScreen questionCount={questionCount} onComplete={finishQuiz} />
+      <QuizScreen questionCount={questionCount} practiceScope={practiceScope} onComplete={finishQuiz} />
     </main>
   );
 }

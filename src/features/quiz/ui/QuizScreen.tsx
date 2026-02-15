@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../../../shared/i18n/useI18n";
+import { type PracticeScope } from "../domain/practiceScope";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
@@ -12,10 +13,11 @@ export type QuizSessionResult = {
 
 type QuizScreenProps = {
   questionCount: number;
+  practiceScope: PracticeScope;
   onComplete: (result: QuizSessionResult) => void;
 };
 
-export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
+export function QuizScreen({ questionCount, practiceScope, onComplete }: QuizScreenProps) {
   const { tf } = useI18n();
   const {
     totalQuestions,
@@ -31,7 +33,7 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
     backspaceInput,
     submitAnswer,
     proceedAfterIncorrectAnswer,
-  } = useQuizSession({ questionCount });
+  } = useQuizSession({ questionCount, practiceScope });
   const hasReportedComplete = useRef(false);
   const previousCorrectCount = useRef(correctCount);
   const [isCorrectFeedbackActive, setIsCorrectFeedbackActive] = useState(false);
