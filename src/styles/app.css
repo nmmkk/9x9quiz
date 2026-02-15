@@ -86,10 +86,37 @@ p {
   gap: var(--space-2);
 }
 
+.practice-scope-selector {
+  margin-top: var(--space-2);
+}
+
+.practice-scope-description {
+  margin-bottom: var(--space-2);
+}
+
+.practice-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.practice-scope-button {
+  min-height: 60px;
+  font-size: clamp(0.7rem, 2.6vw, 0.84rem);
+  line-height: 1.2;
+  padding-inline: var(--space-2);
+  overflow-wrap: anywhere;
+}
+
+.practice-scope-button.is-selected {
+  background: #d8e9fb;
+  border-color: var(--color-border-strong);
+}
+
 .mode-grid {
   display: grid;
   gap: var(--space-3);
-  margin-block: var(--space-2) var(--space-4);
+  margin-block: var(--space-3) var(--space-4);
 }
 
 .mode-card {
@@ -323,6 +350,10 @@ p {
 
   .mode-card {
     padding: var(--space-2);
+  }
+
+  .practice-scope-grid {
+    grid-template-columns: 1fr;
   }
 
   .numeric-button,

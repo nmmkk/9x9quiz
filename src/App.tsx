@@ -78,7 +78,11 @@ function App() {
   if (screen === screenIds.modeSelect) {
     return (
       <main className="app-shell">
-        <ModeSelectScreen onBack={() => setScreen(screenIds.title)} onStartQuiz={startQuiz} />
+        <ModeSelectScreen
+          onBack={() => setScreen(screenIds.title)}
+          initialPracticeScope={practiceScope}
+          onStartQuiz={startQuiz}
+        />
       </main>
     );
   }
