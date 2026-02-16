@@ -2,11 +2,11 @@
 
 ## Immediate
 
-1. Start `M4-01` to add practice scope model and persistence.
-2. Implement `M4-02` to build table-range options in mode selection.
-3. Implement `M4-03` to add missed-fact mini-review (3 questions).
-4. During M4 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
-5. Before `M5-01`, confirm offline cache scope and update strategy constraints documented in `docs/roadmap/improvement-ideas.md`.
+1. Implement `M5-01` to add service worker app-shell caching for offline-after-first-load.
+2. Implement `M5-02` to add update strategy and cache version management.
+3. Implement `M5-03` to add installable PWA metadata and install UX baseline.
+4. Implement `M5-04` to execute offline/PWA QA pass and sync status docs.
+5. During M5 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 

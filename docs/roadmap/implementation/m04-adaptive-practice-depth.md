@@ -4,12 +4,12 @@
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
-| M4-01 | Add practice scope model and persistence | Planned | M3-05 | `npm run test`, `npm run build` |
-| M4-02 | Build table-range options in mode selection | Planned | M4-01 | `npm run test`, `npm run build`, `npm run dev` |
-| M4-03 | Implement missed-fact mini-review (3 questions) | Planned | M4-01, M4-02 | `npm run test`, `npm run build`, `npm run dev` |
-| M4-04 | Add table mastery visibility panel | Planned | M4-01, M4-03 | `npm run test`, `npm run build` |
-| M4-05 | Add adaptive-practice regression tests | Planned | M4-01, M4-02, M4-03, M4-04 | `npm run test`, `npm run build` |
-| M4-06 | Execute QA pass and sync status docs | Planned | M4-01, M4-02, M4-03, M4-04, M4-05 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
+| M4-01 | Add practice scope model and persistence | Completed | M3-05 | `npm run test`, `npm run build` |
+| M4-02 | Build table-range options in mode selection | Completed | M4-01 | `npm run test`, `npm run build`, `npm run dev` |
+| M4-03 | Implement missed-fact mini-review (3 questions) | Completed | M4-01, M4-02 | `npm run test`, `npm run build`, `npm run dev` |
+| M4-04 | Add table mastery visibility panel | Completed | M4-01, M4-03 | `npm run test`, `npm run build` |
+| M4-05 | Add adaptive-practice regression tests | Completed | M4-01, M4-02, M4-03, M4-04 | `npm run test`, `npm run build` |
+| M4-06 | Execute QA pass and sync status docs | Completed | M4-01, M4-02, M4-03, M4-04, M4-05 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
 ## Scope
 

@@ -1,22 +1,52 @@
+import { useState } from "react";
+import { MasteryPanel } from "../../progress/ui/MasteryPanel";
+import { defaultPracticeScope, type PracticeScope } from "../../quiz/domain/practiceScope";
 import {
   questionCountModes,
   readHighScore,
   type QuestionCountMode,
 } from "../../../shared/storage/highScoreStorage";
 import { useI18n } from "../../../shared/i18n/useI18n";
+import { type MasterySnapshot } from "../../../shared/storage/masteryStorage";
+import { PracticeScopeSelector } from "./PracticeScopeSelector";
 
 type ModeSelectScreenProps = {
   onBack: () => void;
-  onStartQuiz: (mode: QuestionCountMode) => void;
+  initialPracticeScope: PracticeScope;
+  masterySnapshot: MasterySnapshot;
+  onStartQuiz: (mode: QuestionCountMode, scope: PracticeScope) => void;
 };
 
-export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps) {
+function toSelectableScope(scope: PracticeScope): PracticeScope {
+  if (scope.kind === "custom") {
+    return defaultPracticeScope;
+  }
+
+  return scope;
+}
+
+export function ModeSelectScreen({
+  onBack,
+  initialPracticeScope,
+  masterySnapshot,
+  onStartQuiz,
+}: ModeSelectScreenProps) {
   const { t, tf } = useI18n();
+  const [selectedPracticeScope, setSelectedPracticeScope] = useState<PracticeScope>(
+    () => toSelectableScope(initialPracticeScope),
+  );
 
   return (
     <section className="panel" aria-labelledby="mode-heading">
       <h2 id="mode-heading">{t("mode.heading")}</h2>
       <p>{t("mode.description")}</p>
+
+      <PracticeScopeSelector
+        selectedScope={selectedPracticeScope}
+        onSelectScope={setSelectedPracticeScope}
+      />
+
+      <MasteryPanel masterySnapshot={masterySnapshot} />
 
       <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {
@@ -27,7 +57,7 @@ export function ModeSelectScreen({ onBack, onStartQuiz }: ModeSelectScreenProps)
               <button
                 type="button"
                 className="primary-button mode-start-button"
-                onClick={() => onStartQuiz(mode)}
+                onClick={() => onStartQuiz(mode, selectedPracticeScope)}
               >
                 {tf("mode.optionLabel", { count: mode })}
               </button>

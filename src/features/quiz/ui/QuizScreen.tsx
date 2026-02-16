@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "../../../shared/i18n/useI18n";
+import { type PracticeScope } from "../domain/practiceScope";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
@@ -8,14 +9,27 @@ export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
   score: number;
+  tableStats: readonly {
+    table: number;
+    answered: number;
+    correct: number;
+  }[];
+  missedFactKeys: readonly string[];
 };
 
 type QuizScreenProps = {
   questionCount: number;
+  practiceScope: PracticeScope;
+  reviewFactKeys?: readonly string[];
   onComplete: (result: QuizSessionResult) => void;
 };
 
-export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
+export function QuizScreen({
+  questionCount,
+  practiceScope,
+  reviewFactKeys,
+  onComplete,
+}: QuizScreenProps) {
   const { tf } = useI18n();
   const {
     totalQuestions,
@@ -25,13 +39,15 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
     score,
     correctCount,
     isComplete,
+    tableStats,
+    missedFactKeys,
     incorrectAnswerReveal,
     appendDigit,
     clearInput,
     backspaceInput,
     submitAnswer,
     proceedAfterIncorrectAnswer,
-  } = useQuizSession({ questionCount });
+  } = useQuizSession({ questionCount, practiceScope, reviewFactKeys });
   const hasReportedComplete = useRef(false);
   const previousCorrectCount = useRef(correctCount);
   const [isCorrectFeedbackActive, setIsCorrectFeedbackActive] = useState(false);
@@ -69,8 +85,10 @@ export function QuizScreen({ questionCount, onComplete }: QuizScreenProps) {
       correctCount,
       totalQuestions,
       score,
+      tableStats,
+      missedFactKeys,
     });
-  }, [correctCount, isComplete, onComplete, score, totalQuestions]);
+  }, [correctCount, isComplete, missedFactKeys, onComplete, score, tableStats, totalQuestions]);
 
   const hasInput = inputValue.length > 0;
   const isOverlayVisible = incorrectAnswerReveal !== null;
