@@ -53,6 +53,7 @@ export const messageKeys = [
   "result.titleButton",
   "title.description",
   "title.highScoresButton",
+  "title.installButton",
   "title.modeSelectButton",
   "title.quickStartButton",
   "title.startButton",

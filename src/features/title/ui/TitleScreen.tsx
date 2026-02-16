@@ -1,5 +1,12 @@
+import { useEffect, useState } from "react";
 import { MasteryPanel } from "../../progress/ui/MasteryPanel";
 import { useI18n } from "../../../shared/i18n/useI18n";
+import {
+  hasInstallPrompt,
+  promptInstall,
+  startInstallPromptWatcher,
+  subscribeToInstallPrompt,
+} from "../../../shared/pwa/installManager";
 import { type QuestionCountMode } from "../../../shared/storage/highScoreStorage";
 import { type MasterySnapshot } from "../../../shared/storage/masteryStorage";
 
@@ -17,6 +24,30 @@ export function TitleScreen({
   onOpenModeSelect,
 }: TitleScreenProps) {
   const { t, tf } = useI18n();
+  const [isInstallAvailable, setIsInstallAvailable] = useState<boolean>(() => hasInstallPrompt());
+  const [isInstalling, setIsInstalling] = useState(false);
+
+  useEffect(() => {
+    startInstallPromptWatcher();
+    setIsInstallAvailable(hasInstallPrompt());
+
+    return subscribeToInstallPrompt(() => {
+      setIsInstallAvailable(hasInstallPrompt());
+    });
+  }, []);
+
+  const handleInstall = () => {
+    if (isInstalling) {
+      return;
+    }
+
+    setIsInstalling(true);
+
+    void promptInstall().finally(() => {
+      setIsInstalling(false);
+      setIsInstallAvailable(hasInstallPrompt());
+    });
+  };
 
   return (
     <section className="panel" aria-labelledby="title-heading">
@@ -34,6 +65,16 @@ export function TitleScreen({
         <button type="button" className="secondary-button" onClick={onOpenModeSelect}>
           {lastPlayedMode === null ? t("title.highScoresButton") : t("title.modeSelectButton")}
         </button>
+        {isInstallAvailable ? (
+          <button
+            type="button"
+            className="secondary-button"
+            disabled={isInstalling}
+            onClick={handleInstall}
+          >
+            {t("title.installButton")}
+          </button>
+        ) : null}
       </div>
     </section>
   );

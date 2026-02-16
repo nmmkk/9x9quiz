@@ -474,3 +474,10 @@ p {
     padding-bottom: var(--space-3);
   }
 }
+
+@media (display-mode: standalone) {
+  .app-shell {
+    padding-top: calc(var(--space-4) + env(safe-area-inset-top));
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+  }
+}
