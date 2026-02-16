@@ -3,6 +3,20 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { I18nProvider } from "./shared/i18n/I18nProvider";
 
+const registerServiceWorker = (): void => {
+  if (!import.meta.env.PROD || !("serviceWorker" in navigator)) {
+    return;
+  }
+
+  window.addEventListener("load", () => {
+    void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`, {
+      scope: import.meta.env.BASE_URL,
+    });
+  });
+};
+
+registerServiceWorker();
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nProvider>
