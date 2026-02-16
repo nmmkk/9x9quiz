@@ -120,7 +120,7 @@ function App() {
           correctCount={latestResult.correctCount}
           totalQuestions={latestResult.totalQuestions}
           score={latestResult.score}
-          hasMissedFacts={latestResult.missedFactKeys.length > 0}
+          missedFactCount={latestResult.missedFactKeys.length}
           onStartMissedFactReview={() => startMissedFactReview(latestResult.missedFactKeys)}
           onPlayAgain={() => startQuiz(latestResult.mode)}
           onBackToTitle={() => setScreen(screenIds.title)}

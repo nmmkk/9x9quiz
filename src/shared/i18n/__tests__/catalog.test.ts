@@ -58,4 +58,16 @@ describe("catalog", () => {
 
     expect(formatMessage(template, { count: 3 })).toBe("3 items ({unknown})");
   });
+
+  it("formats missed fact review button labels with the provided count", () => {
+    const expectedByLocale = {
+      "ja-JP": "まちがえた2もんを ふくしゅう",
+      en: "Review 2 Missed Facts",
+    } as const;
+
+    for (const locale of locales) {
+      const template = getMessage(locale, "result.missedFactReviewButton");
+      expect(formatMessage(template, { count: 2 })).toBe(expectedByLocale[locale]);
+    }
+  });
 });

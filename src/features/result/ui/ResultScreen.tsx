@@ -25,7 +25,7 @@ type ResultScreenProps = {
   correctCount: number;
   totalQuestions: number;
   score: number;
-  hasMissedFacts: boolean;
+  missedFactCount: number;
   onStartMissedFactReview: () => void;
   onPlayAgain: () => void;
   onBackToTitle: () => void;
@@ -36,7 +36,7 @@ export function ResultScreen({
   correctCount,
   totalQuestions,
   score,
-  hasMissedFacts,
+  missedFactCount,
   onStartMissedFactReview,
   onPlayAgain,
   onBackToTitle,
@@ -62,9 +62,9 @@ export function ResultScreen({
       </p>
 
       <div className="button-row">
-        {hasMissedFacts ? (
+        {missedFactCount > 0 ? (
           <button type="button" className="primary-button" onClick={onStartMissedFactReview}>
-            {t("result.missedFactReviewButton")}
+            {tf("result.missedFactReviewButton", { count: missedFactCount })}
           </button>
         ) : null}
         <button type="button" className="primary-button" onClick={onPlayAgain}>
