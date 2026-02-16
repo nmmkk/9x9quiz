@@ -7,7 +7,14 @@ type ServiceWorkerFetchEvent = Event & {
   respondWith: (response: Promise<Response> | Response) => void;
 };
 
-const APP_SHELL_CACHE = "app-shell-v1";
+type ServiceWorkerMessageEvent = Event & {
+  data?: unknown;
+};
+
+const APP_SHELL_CACHE_PREFIX = "app-shell";
+const APP_SHELL_CACHE_VERSION = "v2";
+const APP_SHELL_CACHE = `${APP_SHELL_CACHE_PREFIX}-${APP_SHELL_CACHE_VERSION}`;
+const SKIP_WAITING_MESSAGE_TYPE = "SKIP_WAITING";
 
 const sw = self as typeof self & {
   registration?: { scope?: string };
@@ -37,11 +44,17 @@ self.addEventListener("install", (rawEvent) => {
   const event = rawEvent as ServiceWorkerExtendableEvent;
 
   event.waitUntil(
-    caches
-      .open(APP_SHELL_CACHE)
-      .then((cache) => cache.addAll(Array.from(precacheUrls)))
-      .then(() => sw.skipWaiting?.()),
+    caches.open(APP_SHELL_CACHE).then((cache) => cache.addAll(Array.from(precacheUrls))),
   );
+});
+
+self.addEventListener("message", (rawEvent) => {
+  const event = rawEvent as ServiceWorkerMessageEvent;
+  const message = event.data as { type?: string } | undefined;
+
+  if (message?.type === SKIP_WAITING_MESSAGE_TYPE) {
+    void sw.skipWaiting?.();
+  }
 });
 
 self.addEventListener("activate", (rawEvent) => {
@@ -55,7 +68,8 @@ self.addEventListener("activate", (rawEvent) => {
           cacheNames
             .filter(
               (cacheName) =>
-                cacheName.startsWith("app-shell-") && cacheName !== APP_SHELL_CACHE,
+                cacheName.startsWith(`${APP_SHELL_CACHE_PREFIX}-`) &&
+                cacheName !== APP_SHELL_CACHE,
             )
             .map((cacheName) => caches.delete(cacheName)),
         ),

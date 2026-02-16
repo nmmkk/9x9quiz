@@ -7,6 +7,8 @@ export const fallbackLocale: Locale = "en";
 
 export const messageKeys = [
   "app.title",
+  "app.updateNotice",
+  "app.updateButton",
   "mode.backToTitleButton",
   "mode.description",
   "mode.heading",

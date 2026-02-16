@@ -10,6 +10,8 @@ import {
 
 const jaJPCatalog = {
   "app.title": "くくクイズ",
+  "app.updateNotice": "あたらしいバージョンがあります。",
+  "app.updateButton": "こうしんする",
   "mode.backToTitleButton": "タイトルへ",
   "mode.description": "もんだいすうをえらぶと、すぐにはじめられるよ。",
   "mode.heading": "もんだいすうをえらぼう",
@@ -61,6 +63,8 @@ const jaJPCatalog = {
 
 const enCatalog = {
   "app.title": "Kuku Quiz",
+  "app.updateNotice": "A new version is ready.",
+  "app.updateButton": "Update now",
   "mode.backToTitleButton": "Back to Title",
   "mode.description": "Pick a mode to start immediately. High scores are shown when available.",
   "mode.heading": "Choose Question Count",
