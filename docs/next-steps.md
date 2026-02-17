@@ -2,8 +2,9 @@
 
 ## Immediate
 
-1. Implement `M5-04` to execute offline/PWA QA pass and sync status docs.
-2. During M5 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
+1. Complete pending manual verification for `M5-04` (desktop online/offline transition and desktop/mobile install flow), then set `M5-04` to `Completed`.
+2. After `M5-04` completion, mark milestone `M5` as `Completed` and start `M6-01`.
+3. During M6 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 
