@@ -2,9 +2,9 @@
 
 ## Immediate
 
-1. Complete pending manual verification for `M5-04` (desktop online/offline transition and desktop/mobile install flow), then set `M5-04` to `Completed`.
+1. Complete pending manual install-flow verification for `M5-04` on supported desktop/mobile browsers, then set `M5-04` to `Completed`.
 2. After `M5-04` completion, mark milestone `M5` as `Completed` and start `M6-01`.
-3. During M6 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
+3. During M6 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン), `N-10` (段ごとの正解率カードから段別問題へ直行), and `N-11` (成績リセット機能) from `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 
