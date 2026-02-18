@@ -11,9 +11,12 @@ type ServiceWorkerMessageEvent = Event & {
   data?: unknown;
 };
 
+type InjectedManifestEntry = {
+  url: string;
+  revision?: string | null;
+};
+
 const APP_SHELL_CACHE_PREFIX = "app-shell";
-const APP_SHELL_CACHE_VERSION = "v2";
-const APP_SHELL_CACHE = `${APP_SHELL_CACHE_PREFIX}-${APP_SHELL_CACHE_VERSION}`;
 const SKIP_WAITING_MESSAGE_TYPE = "SKIP_WAITING";
 
 const sw = self as typeof self & {
@@ -32,12 +35,38 @@ const APP_SHELL_URLS: [string, string] = [
 ];
 
 // @ts-expect-error __WB_MANIFEST is injected by vite-plugin-pwa at build time.
-const injectedManifest = self.__WB_MANIFEST as Array<{ url: string }> | undefined;
+const injectedManifest = self.__WB_MANIFEST as InjectedManifestEntry[] | undefined;
+
+const resolvedPrecacheEntries = (injectedManifest ?? []).map((entry) => ({
+  path: new URL(entry.url, self.location.origin).pathname,
+  revision: entry.revision ?? "",
+}));
+
+const createCacheVersion = (): string => {
+  const versionSeed = [
+    ...APP_SHELL_URLS.map((path) => `${path}@shell`),
+    ...resolvedPrecacheEntries
+      .map((entry) => `${entry.path}@${entry.revision}`)
+      .sort((left, right) => left.localeCompare(right)),
+  ].join("|");
+
+  let hash = 2166136261;
+
+  for (let index = 0; index < versionSeed.length; index += 1) {
+    hash ^= versionSeed.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return `v${(hash >>> 0).toString(16)}`;
+};
+
+const APP_SHELL_CACHE_VERSION = createCacheVersion();
+const APP_SHELL_CACHE = `${APP_SHELL_CACHE_PREFIX}-${APP_SHELL_CACHE_VERSION}`;
 
 const precacheUrls = new Set<string>(APP_SHELL_URLS);
 
-for (const entry of injectedManifest ?? []) {
-  precacheUrls.add(new URL(entry.url, self.location.origin).pathname);
+for (const entry of resolvedPrecacheEntries) {
+  precacheUrls.add(entry.path);
 }
 
 self.addEventListener("install", (rawEvent) => {
