@@ -175,4 +175,4 @@ docs/roadmap/implementation/build-order.md
 ## M5-04 Progress Notes
 
 * Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa-rerun.md`
-* Current blocker for completion: mobile page-load issue found during manual verification (PC passes; mobile fails to load page)
+* Current blocker for completion: confirm mobile page-load recovery after service worker fallback hardening (PC passes; prior mobile check failed to load)
