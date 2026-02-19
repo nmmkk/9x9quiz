@@ -15,7 +15,7 @@
 13. M5-02 (Completed)
 14. M5-03 (Completed)
 15. M5-04 (Completed)
-16. M6-01 (Planned)
+16. M6-01 (Completed)
 17. M6-02 (Planned)
 18. M6-03 (Planned)
 19. M6-04 (Planned)

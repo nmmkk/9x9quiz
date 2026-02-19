@@ -1,6 +1,6 @@
 # 9x9quiz Web MVP V1 Design Specification
 
-Last updated: 2026-02-16
+Last updated: 2026-02-18
 
 ## 1) Product Intent
 
@@ -280,3 +280,12 @@ type SessionState = {
 * Fallback behavior:
   * If no service worker support exists, the app continues as a normal online web app.
   * If update activation does not complete in the current session, the current app version remains usable and no automatic reload loop is triggered.
+
+## 13) Native Packaging Direction (M6-01)
+
+* Selected wrapper strategy: Capacitor for iOS/Android pilot packaging.
+* Principle: keep one web-codebase-first architecture and avoid native-side quiz logic duplication.
+* Ownership split:
+  * Web app owns quiz flow, scoring, localization, and localStorage data behavior.
+  * Native shell owns project scaffolding, build/signing setup, and platform integration points.
+* Detailed rationale, trade-offs, and rollout sequence are maintained in `docs/reference/native-strategy.md`.
