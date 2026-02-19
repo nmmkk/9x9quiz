@@ -7,7 +7,7 @@
 | M5-01 | Add service worker app-shell caching for offline-after-first-load | Completed | M4-06 | `npm run test`, `npm run build`, `npm run dev` |
 | M5-02 | Add update strategy and cache version management | Completed | M5-01 | `npm run test`, `npm run build`, `npm run dev` |
 | M5-03 | Add installable PWA metadata and install UX baseline | Completed | M5-01, M5-02 | `npm run build`, `npm run dev` |
-| M5-04 | Execute offline/PWA QA pass and sync status docs | Partial | M5-01, M5-02, M5-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
+| M5-04 | Execute offline/PWA QA pass and sync status docs | Completed | M5-01, M5-02, M5-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
 ## Scope
 
@@ -171,3 +171,8 @@ docs/roadmap/implementation/build-order.md
 * `npm run test`
 * `npm run build`
 * `npm run dev`
+
+## M5-04 Progress Notes
+
+* Latest automated/manual validation evidence: `docs/qa/reports/2026-02-18-m05-qa-rerun-2.md`
+* Completion note: user-confirmed mobile re-check passed for page load and install flow, closing M5 scope.

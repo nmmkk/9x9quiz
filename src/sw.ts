@@ -115,6 +115,14 @@ const isSameOriginGetRequest = (request: Request): boolean => {
   return new URL(request.url).origin === self.location.origin;
 };
 
+const matchAppShellFallback = async (cache: Cache): Promise<Response> => {
+  return (
+    (await cache.match(APP_SHELL_URLS[0])) ??
+    (await cache.match(APP_SHELL_URLS[1])) ??
+    Response.error()
+  );
+};
+
 self.addEventListener("fetch", (rawEvent) => {
   const event = rawEvent as ServiceWorkerFetchEvent;
   const { request } = event;
@@ -125,21 +133,28 @@ self.addEventListener("fetch", (rawEvent) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request).catch(async () => {
-        const cache = await caches.open(APP_SHELL_CACHE);
+      fetch(request)
+        .then(async (networkResponse) => {
+          if (networkResponse.ok) {
+            return networkResponse;
+          }
 
-        return (
-          (await cache.match(APP_SHELL_URLS[0])) ??
-          (await cache.match(APP_SHELL_URLS[1])) ??
-          Response.error()
-        );
-      }),
+          const cache = await caches.open(APP_SHELL_CACHE);
+          return matchAppShellFallback(cache);
+        })
+        .catch(async () => {
+          const cache = await caches.open(APP_SHELL_CACHE);
+
+          return matchAppShellFallback(cache);
+        }),
     );
     return;
   }
 
   event.respondWith(
-    caches.match(request).then(async (cachedResponse) => {
+    caches.open(APP_SHELL_CACHE).then(async (cache) => {
+      const cachedResponse = await cache.match(request);
+
       if (cachedResponse) {
         return cachedResponse;
       }
