@@ -171,3 +171,8 @@ docs/roadmap/implementation/build-order.md
 * `npm run test`
 * `npm run build`
 * `npm run dev`
+
+## M5-04 Progress Notes
+
+* Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa.md`
+* Current blocker for completion: manual install-flow verification on supported desktop/mobile browsers
