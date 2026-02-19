@@ -123,16 +123,6 @@ const matchAppShellFallback = async (cache: Cache): Promise<Response> => {
   );
 };
 
-const matchWithoutSearch = async (cache: Cache, request: Request): Promise<Response | undefined> => {
-  const requestUrl = new URL(request.url);
-
-  if (!requestUrl.search) {
-    return undefined;
-  }
-
-  return cache.match(request, { ignoreSearch: true }) ?? undefined;
-};
-
 self.addEventListener("fetch", (rawEvent) => {
   const event = rawEvent as ServiceWorkerFetchEvent;
   const { request } = event;
@@ -163,7 +153,7 @@ self.addEventListener("fetch", (rawEvent) => {
 
   event.respondWith(
     caches.open(APP_SHELL_CACHE).then(async (cache) => {
-      const cachedResponse = (await cache.match(request)) ?? (await matchWithoutSearch(cache, request));
+      const cachedResponse = await cache.match(request);
 
       if (cachedResponse) {
         return cachedResponse;
