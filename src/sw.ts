@@ -18,6 +18,7 @@ type InjectedManifestEntry = {
 
 const APP_SHELL_CACHE_PREFIX = "app-shell";
 const SKIP_WAITING_MESSAGE_TYPE = "SKIP_WAITING";
+const NAVIGATION_NETWORK_TIMEOUT_MS = 4000;
 
 const sw = self as typeof self & {
   registration?: { scope?: string };
@@ -133,6 +134,19 @@ const matchWithoutSearch = async (cache: Cache, request: Request): Promise<Respo
   return cache.match(request, { ignoreSearch: true }) ?? undefined;
 };
 
+const fetchNavigationWithTimeout = async (request: Request): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+  }, NAVIGATION_NETWORK_TIMEOUT_MS);
+
+  try {
+    return await fetch(request, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
+
 self.addEventListener("fetch", (rawEvent) => {
   const event = rawEvent as ServiceWorkerFetchEvent;
   const { request } = event;
@@ -143,7 +157,7 @@ self.addEventListener("fetch", (rawEvent) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
+      fetchNavigationWithTimeout(request)
         .then(async (networkResponse) => {
           if (networkResponse.ok) {
             return networkResponse;
