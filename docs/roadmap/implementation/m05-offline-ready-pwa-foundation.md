@@ -174,5 +174,5 @@ docs/roadmap/implementation/build-order.md
 
 ## M5-04 Progress Notes
 
-* Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa-rerun.md`
+* Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa-rerun-2.md`
 * Current blocker for completion: confirm mobile page-load recovery after service-worker fallback hardening (non-OK fallback + navigation-timeout fallback) with manual device verification
