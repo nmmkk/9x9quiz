@@ -174,5 +174,5 @@ docs/roadmap/implementation/build-order.md
 
 ## M5-04 Progress Notes
 
-* Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa.md`
+* Latest automated validation evidence: `docs/qa/reports/2026-02-18-m05-qa-rerun.md`
 * Current blocker for completion: manual install-flow verification on supported desktop/mobile browsers
