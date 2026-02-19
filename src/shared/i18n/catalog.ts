@@ -10,6 +10,8 @@ import {
 
 const jaJPCatalog = {
   "app.title": "くくクイズ",
+  "app.updateNotice": "あたらしいバージョンがあります。",
+  "app.updateButton": "こうしんする",
   "mode.backToTitleButton": "タイトルへ",
   "mode.description": "もんだいすうをえらぶと、すぐにはじめられるよ。",
   "mode.heading": "もんだいすうをえらぼう",
@@ -54,6 +56,7 @@ const jaJPCatalog = {
   "result.titleButton": "タイトルへ",
   "title.description": "九九をみじかいクイズで、くりかえしれんしゅうしよう。",
   "title.highScoresButton": "さいこうとくてん",
+  "title.installButton": "ホームに追加",
   "title.modeSelectButton": "もんだいすうをえらぶ",
   "title.quickStartButton": "{count}もんで すぐにはじめる",
   "title.startButton": "はじめる",
@@ -61,6 +64,8 @@ const jaJPCatalog = {
 
 const enCatalog = {
   "app.title": "Kuku Quiz",
+  "app.updateNotice": "A new version is ready.",
+  "app.updateButton": "Update now",
   "mode.backToTitleButton": "Back to Title",
   "mode.description": "Pick a mode to start immediately. High scores are shown when available.",
   "mode.heading": "Choose Question Count",
@@ -105,6 +110,7 @@ const enCatalog = {
   "result.titleButton": "Title",
   "title.description": "Practice multiplication facts with short, focused quiz rounds.",
   "title.highScoresButton": "Best Score",
+  "title.installButton": "Install App",
   "title.modeSelectButton": "Choose Mode",
   "title.quickStartButton": "Quick Start ({count} Questions)",
   "title.startButton": "Start",

@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ModeSelectScreen } from "./features/mode/ui/ModeSelectScreen";
 import { TitleScreen } from "./features/title/ui/TitleScreen";
 import { defaultPracticeScope, type PracticeScope } from "./features/quiz/domain/practiceScope";
 import { QuizScreen, type QuizSessionResult } from "./features/quiz/ui/QuizScreen";
 import { ResultScreen } from "./features/result/ui/ResultScreen";
+import { useI18n } from "./shared/i18n/useI18n";
 import { initialScreen, screenIds, type ScreenId } from "./shared/navigation/screenState";
+import {
+  applyAppUpdate,
+  hasPendingAppUpdate,
+  subscribeToAppUpdate,
+} from "./shared/pwa/updateManager";
 import { type QuestionCountMode } from "./shared/storage/highScoreStorage";
 import {
   readLastPlayedMode,
@@ -23,6 +29,7 @@ type ResultSnapshot = QuizSessionResult & {
 };
 
 function App() {
+  const { t } = useI18n();
   const [screen, setScreen] = useState<ScreenId>(initialScreen);
   const [questionCount, setQuestionCount] = useState<QuestionCountMode>(10);
   const [lastPlayedMode, setLastPlayedMode] = useState<QuestionCountMode | null>(() =>
@@ -34,6 +41,13 @@ function App() {
   const [masterySnapshot, setMasterySnapshot] = useState(() => readMasterySnapshot());
   const [reviewFactKeys, setReviewFactKeys] = useState<readonly string[] | null>(null);
   const [latestResult, setLatestResult] = useState<ResultSnapshot | null>(null);
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState<boolean>(() => hasPendingAppUpdate());
+
+  useEffect(() => {
+    return subscribeToAppUpdate(() => {
+      setIsUpdateAvailable(hasPendingAppUpdate());
+    });
+  }, []);
 
   const openModeSelect = () => {
     setScreen(screenIds.modeSelect);
@@ -86,58 +100,64 @@ function App() {
     setScreen(screenIds.result);
   };
 
+  const renderAppShell = (content: ReactNode) => (
+    <main className="app-shell">
+      {isUpdateAvailable ? (
+        <section className="update-notice" role="status" aria-live="polite">
+          <p>{t("app.updateNotice")}</p>
+          <button type="button" className="primary-button" onClick={applyAppUpdate}>
+            {t("app.updateButton")}
+          </button>
+        </section>
+      ) : null}
+      {content}
+    </main>
+  );
+
   if (screen === screenIds.title) {
-    return (
-      <main className="app-shell">
-        <TitleScreen
-          lastPlayedMode={lastPlayedMode}
-          masterySnapshot={masterySnapshot}
-          onStart={startFromTitle}
-          onOpenModeSelect={openModeSelect}
-        />
-      </main>
+    return renderAppShell(
+      <TitleScreen
+        lastPlayedMode={lastPlayedMode}
+        masterySnapshot={masterySnapshot}
+        onStart={startFromTitle}
+        onOpenModeSelect={openModeSelect}
+      />,
     );
   }
 
   if (screen === screenIds.modeSelect) {
-    return (
-      <main className="app-shell">
-        <ModeSelectScreen
-          onBack={() => setScreen(screenIds.title)}
-          initialPracticeScope={practiceScope}
-          masterySnapshot={masterySnapshot}
-          onStartQuiz={startQuiz}
-        />
-      </main>
+    return renderAppShell(
+      <ModeSelectScreen
+        onBack={() => setScreen(screenIds.title)}
+        initialPracticeScope={practiceScope}
+        masterySnapshot={masterySnapshot}
+        onStartQuiz={startQuiz}
+      />,
     );
   }
 
   if (screen === screenIds.result && latestResult) {
-    return (
-      <main className="app-shell">
-        <ResultScreen
-          mode={latestResult.mode}
-          correctCount={latestResult.correctCount}
-          totalQuestions={latestResult.totalQuestions}
-          score={latestResult.score}
-          missedFactCount={latestResult.missedFactKeys.length}
-          onStartMissedFactReview={() => startMissedFactReview(latestResult.missedFactKeys)}
-          onPlayAgain={() => startQuiz(latestResult.mode)}
-          onBackToTitle={() => setScreen(screenIds.title)}
-        />
-      </main>
+    return renderAppShell(
+      <ResultScreen
+        mode={latestResult.mode}
+        correctCount={latestResult.correctCount}
+        totalQuestions={latestResult.totalQuestions}
+        score={latestResult.score}
+        missedFactCount={latestResult.missedFactKeys.length}
+        onStartMissedFactReview={() => startMissedFactReview(latestResult.missedFactKeys)}
+        onPlayAgain={() => startQuiz(latestResult.mode)}
+        onBackToTitle={() => setScreen(screenIds.title)}
+      />,
     );
   }
 
-  return (
-    <main className="app-shell">
-      <QuizScreen
-        questionCount={reviewFactKeys ? MINI_REVIEW_QUESTION_COUNT : questionCount}
-        practiceScope={practiceScope}
-        reviewFactKeys={reviewFactKeys ?? undefined}
-        onComplete={finishQuiz}
-      />
-    </main>
+  return renderAppShell(
+    <QuizScreen
+      questionCount={reviewFactKeys ? MINI_REVIEW_QUESTION_COUNT : questionCount}
+      practiceScope={practiceScope}
+      reviewFactKeys={reviewFactKeys ?? undefined}
+      onComplete={finishQuiz}
+    />,
   );
 }
 

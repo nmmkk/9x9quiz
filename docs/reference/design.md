@@ -1,6 +1,6 @@
 # 9x9quiz Web MVP V1 Design Specification
 
-Last updated: 2026-02-14
+Last updated: 2026-02-16
 
 ## 1) Product Intent
 
@@ -269,3 +269,14 @@ type SessionState = {
 * English UI rollout.
 * PWA/offline support.
 * Native app wrapper pilot for iOS/Android distribution.
+
+## 12) PWA Update Strategy (M5-02)
+
+* Service worker caches use an explicit versioned key format: `app-shell-<version>`.
+* During `activate`, old `app-shell-*` caches are removed except for the current version.
+* A newly installed worker does not force immediate takeover when an old controller is active.
+* The app shows a lightweight update notice when a waiting worker is detected.
+* When the user accepts the update, the app sends `SKIP_WAITING`, waits for `controllerchange`, then reloads once.
+* Fallback behavior:
+  * If no service worker support exists, the app continues as a normal online web app.
+  * If update activation does not complete in the current session, the current app version remains usable and no automatic reload loop is triggered.

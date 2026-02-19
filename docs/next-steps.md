@@ -2,11 +2,9 @@
 
 ## Immediate
 
-1. Implement `M5-01` to add service worker app-shell caching for offline-after-first-load.
-2. Implement `M5-02` to add update strategy and cache version management.
-3. Implement `M5-03` to add installable PWA metadata and install UX baseline.
-4. Implement `M5-04` to execute offline/PWA QA pass and sync status docs.
-5. During M5 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン) from `docs/roadmap/improvement-ideas.md`.
+1. Complete pending manual install-flow verification for `M5-04` on supported desktop/mobile browsers, then set `M5-04` to `Completed`.
+2. After `M5-04` completion, mark milestone `M5` as `Completed` and start `M6-01`.
+3. During M6 planning/refinement, evaluate `N-09` (正解進捗の可視化ゲージ/アイコン), `N-10` (段ごとの正解率カードから段別問題へ直行), and `N-11` (成績リセット機能) from `docs/roadmap/improvement-ideas.md`.
 
 ## Documentation Follow-Through
 
