@@ -167,3 +167,4 @@ docs/roadmap/implementation/build-order.md
 * Selected wrapper: Capacitor.
 * Architecture decision and trade-offs: `docs/reference/native-strategy.md`.
 * Design spec sync: `docs/reference/design.md` section "Native Packaging Direction (M6-01)".
+* Priority update (2026-02-20): `M6-02` onward is deferred until M7 web release CI/CD is operational.
