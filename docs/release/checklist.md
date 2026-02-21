@@ -13,8 +13,8 @@
 * [x] CI workflow exists at `.github/workflows/ci.yml`.
 * [x] CI runs `npm run test` and `npm run build`.
 * [x] Local validation passes for test and build commands.
-* [ ] Branch protection required-check enforcement is enabled in GitHub settings.
-* [x] Fallback merge policy is documented when branch protection API is unavailable.
+* [x] Branch protection required-check enforcement is enabled in GitHub settings (`CI / test-build` on `main`).
+* [x] Fallback merge policy is documented for repositories where branch protection API is unavailable.
 
 ## Product Scope
 

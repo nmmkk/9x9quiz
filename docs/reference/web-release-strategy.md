@@ -67,22 +67,36 @@ gh api repos/<owner>/<repo>/branches/main/protection
 If protection is not configured yet, apply a minimal required-check policy:
 
 ```bash
-gh api \
-  --method PUT \
-  repos/<owner>/<repo>/branches/main/protection \
-  -f required_status_checks.strict=true \
-  -F required_status_checks.contexts[]='CI / test-build' \
-  -f enforce_admins=false \
-  -f required_pull_request_reviews=null \
-  -f restrictions=null
+gh api --method PUT repos/<owner>/<repo>/branches/main/protection --input branch-protection.json
+```
+
+Example `branch-protection.json` payload:
+
+```json
+{
+  "required_status_checks": {
+    "strict": true,
+    "contexts": ["CI / test-build"]
+  },
+  "enforce_admins": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null,
+  "required_linear_history": false,
+  "allow_force_pushes": false,
+  "allow_deletions": false,
+  "block_creations": false,
+  "required_conversation_resolution": false,
+  "lock_branch": false,
+  "allow_fork_syncing": false
+}
 ```
 
 Repository-specific note for `nmmkk/9x9quiz`:
 
-* Current response is `403` for branch protection API (`Upgrade to GitHub Pro or make this repository public`).
-* Until plan/visibility changes, enforce merge gate operationally:
-  * Do not merge PR unless `CI / test-build` is green.
-  * Keep squash/merge action owner responsible for final CI check confirmation.
+* Branch protection is enabled on `main` with required check `CI / test-build` (`strict: true`).
+* Validation evidence is tracked in:
+  * `docs/qa/reports/2026-02-20-m07-02-ci-baseline.md`
+  * `docs/qa/reports/2026-02-20-m07-02-closeout.md`
 
 ## 7) Reusable GitHub Pages Deployment Runbook
 
