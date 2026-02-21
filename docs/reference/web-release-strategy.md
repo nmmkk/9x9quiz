@@ -1,4 +1,4 @@
-# Web Release Strategy (M7-01)
+# Web Release Strategy (M7)
 
 Last updated: 2026-02-20
 
@@ -45,8 +45,61 @@ Last updated: 2026-02-20
 | Netlify/Vercel | Good developer UX, but introduces separate SaaS ownership and secret rotation surface. | Team requires preview URLs and advanced deploy insights. |
 | S3 + CDN | Flexible and scalable, but highest setup and ops burden for current team size and cadence. | Traffic/security requirements outgrow Pages defaults. |
 
-## 6) Follow-up for M7-02 and M7-03
+## 6) CI Policy and Branch Protection (M7-02)
 
-* Add CI workflow and required status checks (`M7-02`).
+* CI workflow file: `.github/workflows/ci.yml`.
+* CI triggers:
+  * `pull_request` (all branches).
+  * `push` to `main`.
+* CI jobs:
+  * `test-build` job executes `npm ci`, `npm run test`, and `npm run build`.
+* Required branch protection check for `main`:
+  * `CI / test-build`
+
+## 7) Reusable GitHub Pages Deployment Runbook
+
+This section is a reusable handbook so the same release setup can be repeated in other repositories.
+
+### A) One-time repository setup
+
+1. Create and protect `main` branch.
+2. Add CI workflow (`.github/workflows/ci.yml`) and confirm at least one green run.
+3. In GitHub repository settings:
+   * Enable Pages with source = GitHub Actions.
+   * Enable branch protection for `main` and require status check `CI / test-build`.
+4. Confirm `GITHUB_TOKEN` workflow permissions are not broader than required.
+
+### B) App build prerequisites
+
+1. Ensure static build command is deterministic (`npm run build`).
+2. For Vite project-page hosting (`/<repo>/`), set `base` in `vite.config.ts` before first production deploy.
+3. Confirm production artifacts are created under `dist/`.
+
+### C) Standard deployment workflow shape (for M7-03 implementation)
+
+1. Trigger: workflow run on successful `push` to `main` (or workflow_run chained from CI).
+2. Build job:
+   * checkout
+   * setup Node + cache
+   * `npm ci`
+   * `npm run build`
+   * upload `dist/` as Pages artifact
+3. Deploy job:
+   * permissions: `pages: write`, `id-token: write`, `contents: read`
+   * deploy artifact to Pages environment
+4. Post-deploy:
+   * open canonical URL
+   * run smoke checks (load app, solve a few questions, verify assets load without console errors)
+
+### D) Repeatable checklist for future projects
+
+1. Decide canonical URL and document it first.
+2. Add CI and make it required before any deploy automation.
+3. Add CD workflow with least-privilege permissions only.
+4. Keep rollback guidance in release docs before launch.
+5. Record one QA report after first production publish.
+
+## 8) Remaining Follow-up
+
 * Add GitHub Pages deployment workflow and publish URL verification steps (`M7-03`).
-* Confirm Vite base-path behavior for project-page hosting before enabling production deploy.
+* Add rollback runbook and release guardrails (`M7-04`).

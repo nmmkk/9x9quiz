@@ -5,7 +5,7 @@
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
 | M7-01 | Decide deployment target and release policy | Completed | M5-04 | policy review, `npm run build` |
-| M7-02 | Add GitHub Actions CI (test + build) | Planned | M7-01 | PR CI pass, branch protection dry-run |
+| M7-02 | Add GitHub Actions CI (test + build) | Partial | M7-01 | PR CI pass, branch protection dry-run |
 | M7-03 | Add CD pipeline for web deployment | Planned | M7-01, M7-02 | deploy workflow run, live URL smoke check |
 | M7-04 | Strengthen release quality gates and rollback runbook | Planned | M7-02, M7-03 | checklist review, failed deploy simulation |
 | M7-05 | Execute launch QA pass and sync status docs | Planned | M7-01, M7-02, M7-03, M7-04 | `docs/qa/reports/`, status docs sync |
