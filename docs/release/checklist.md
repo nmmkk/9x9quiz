@@ -16,6 +16,14 @@
 * [x] Branch protection required-check enforcement is enabled in GitHub settings (`CI / test-build` on `main`).
 * [x] Fallback merge policy is documented for repositories where branch protection API is unavailable.
 
+## Deploy Gate Baseline (M7-03)
+
+* [x] Deploy workflow exists at `.github/workflows/deploy.yml`.
+* [x] Deploy workflow publishes `dist/` via GitHub Pages actions.
+* [x] Vite build base path is set for project-page hosting (`/9x9quiz/`).
+* [ ] One deploy run from `main` succeeded.
+* [ ] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.

@@ -3,8 +3,10 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 const APP_SHELL_CACHE_BUDGET_BYTES = 2 * 1024 * 1024;
+const GITHUB_PAGES_BASE_PATH = "/9x9quiz/";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: command === "build" ? GITHUB_PAGES_BASE_PATH : "/",
   plugins: [
     react(),
     VitePWA({
@@ -18,4 +20,4 @@ export default defineConfig({
       },
     }),
   ],
-});
+}));

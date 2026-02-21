@@ -144,5 +144,22 @@ This section is a reusable handbook so the same release setup can be repeated in
 
 ## 8) Remaining Follow-up
 
-* Add GitHub Pages deployment workflow and publish URL verification steps (`M7-03`).
+## 8) Deployment Workflow (M7-03)
+
+* Workflow file: `.github/workflows/deploy.yml`
+* Trigger: `push` to `main`
+* Build/deploy flow:
+  * `build-pages` job runs `npm ci` and `npm run build`
+  * `dist/` is uploaded with `actions/upload-pages-artifact`
+  * `deploy-pages` job publishes with `actions/deploy-pages`
+* Required permissions:
+  * workflow-level: `contents: read`
+  * deploy job: `pages: write`, `id-token: write`, `contents: read`
+* Vite base-path policy for project page hosting:
+  * `vite.config.ts` uses `/9x9quiz/` during build and `/` during dev
+
+## 9) Remaining Follow-up
+
+* Execute one deployment run from `main` and capture run URL (`M7-03` closeout evidence).
+* Perform live URL smoke verification on `https://nmmkk.github.io/9x9quiz/` and add QA report.
 * Add rollback runbook and release guardrails (`M7-04`).
