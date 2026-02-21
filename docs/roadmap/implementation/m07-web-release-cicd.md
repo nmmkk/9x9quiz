@@ -100,6 +100,11 @@ docs/reference/web-release-strategy.md
 * `npm run build`
 * `gh api repos/<owner>/<repo>/branches/main/protection`
 
+**Current Evidence (2026-02-20)**
+
+* `docs/qa/reports/2026-02-20-m07-02-ci-baseline.md`
+* Branch protection API dry-run result for `nmmkk/9x9quiz`: HTTP 403 (plan/visibility limitation)
+
 ## M7-03 - Add CD pipeline for web deployment
 
 **Objective**
