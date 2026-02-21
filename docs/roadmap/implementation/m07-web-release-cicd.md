@@ -145,11 +145,12 @@ README.md
 **Current Evidence (2026-02-20)**
 
 * `.github/workflows/deploy.yml` added (GitHub Pages deploy pipeline)
-* `.github/workflows/deploy.yml` supports `workflow_dispatch` for preflight deploy validation
+* `.github/workflows/deploy.yml` now deploys automatically only after successful `CI` on `main` (`workflow_run`)
+* `.github/workflows/deploy.yml` manual deploy (`workflow_dispatch`) is restricted to `main`
 * `vite.config.ts` updated for project-page base path (`/9x9quiz/` on build)
 * `README.md` includes canonical URL `https://nmmkk.github.io/9x9quiz/`
 * `docs/qa/reports/2026-02-20-m07-03-deploy-preflight.md`
-* Pending for closeout: first `workflow_dispatch` run, first deploy workflow run from `main`, and live URL smoke verification
+* Pending for closeout: first `workflow_dispatch` run on `main`, first CI-success-triggered deploy workflow run on `main`, and live URL smoke verification
 
 ## M7-04 - Strengthen release quality gates and rollback runbook
 

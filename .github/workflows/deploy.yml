@@ -2,7 +2,11 @@ name: Deploy Pages
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
     branches:
       - main
 
@@ -14,14 +18,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate-dispatch-ref:
+    name: validate-dispatch-ref
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enforce main-only manual deploy
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.ref }}" != "refs/heads/main" ]; then
+            echo "Manual deploy is allowed only for refs/heads/main"
+            exit 1
+          fi
+
   build:
     name: build-pages
+    needs: validate-dispatch-ref
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

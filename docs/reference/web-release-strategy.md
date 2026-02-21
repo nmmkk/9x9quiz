@@ -142,12 +142,12 @@ This section is a reusable handbook so the same release setup can be repeated in
 5. Record one QA report after first production publish.
 6. Verify branch protection API is available before relying on required checks.
 
-## 8) Remaining Follow-up
-
 ## 8) Deployment Workflow (M7-03)
 
 * Workflow file: `.github/workflows/deploy.yml`
-* Trigger: `push` to `main`
+* Trigger:
+  * automatic: `workflow_run` after `CI` succeeds on `main`
+  * manual rerun: `workflow_dispatch` (allowed only for `main`)
 * Build/deploy flow:
   * `build-pages` job runs `npm ci` and `npm run build`
   * `dist/` is uploaded with `actions/upload-pages-artifact`
@@ -160,22 +160,22 @@ This section is a reusable handbook so the same release setup can be repeated in
 
 ### Preflight validation commands
 
-Use these commands after pushing branch updates:
+Use these commands for a manual rerun on `main`:
 
 ```bash
-gh workflow run deploy.yml --ref <branch>
+gh workflow run deploy.yml --ref main
 gh run list --workflow deploy.yml --limit 5
 gh run view <run-id> --log
 ```
 
 For M7 closeout, run and record both:
 
-1. one manual `workflow_dispatch` deploy run (smoke evidence)
-2. one automatic deploy run triggered from `main`
+1. one manual `workflow_dispatch` deploy run on `main` (rerun evidence)
+2. one automatic deploy run triggered by successful CI on `main`
 
 ## 9) Remaining Follow-up
 
-* Execute one `workflow_dispatch` deployment run and capture run URL (`M7-03` preflight evidence).
-* Execute one deployment run from `main` and capture run URL (`M7-03` closeout evidence).
+* Execute one `workflow_dispatch` deployment run on `main` and capture run URL (`M7-03` preflight evidence).
+* Execute one CI-success-triggered deployment run on `main` and capture run URL (`M7-03` closeout evidence).
 * Perform live URL smoke verification on `https://nmmkk.github.io/9x9quiz/` and add QA report.
 * Add rollback runbook and release guardrails (`M7-04`).
