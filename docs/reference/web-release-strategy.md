@@ -158,8 +158,24 @@ This section is a reusable handbook so the same release setup can be repeated in
 * Vite base-path policy for project page hosting:
   * `vite.config.ts` uses `/9x9quiz/` during build and `/` during dev
 
+### Preflight validation commands
+
+Use these commands after pushing branch updates:
+
+```bash
+gh workflow run deploy.yml --ref <branch>
+gh run list --workflow deploy.yml --limit 5
+gh run view <run-id> --log
+```
+
+For M7 closeout, run and record both:
+
+1. one manual `workflow_dispatch` deploy run (smoke evidence)
+2. one automatic deploy run triggered from `main`
+
 ## 9) Remaining Follow-up
 
+* Execute one `workflow_dispatch` deployment run and capture run URL (`M7-03` preflight evidence).
 * Execute one deployment run from `main` and capture run URL (`M7-03` closeout evidence).
 * Perform live URL smoke verification on `https://nmmkk.github.io/9x9quiz/` and add QA report.
 * Add rollback runbook and release guardrails (`M7-04`).

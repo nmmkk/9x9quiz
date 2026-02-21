@@ -21,6 +21,8 @@
 * [x] Deploy workflow exists at `.github/workflows/deploy.yml`.
 * [x] Deploy workflow publishes `dist/` via GitHub Pages actions.
 * [x] Vite build base path is set for project-page hosting (`/9x9quiz/`).
+* [x] Deploy workflow supports `workflow_dispatch` for preflight validation.
+* [ ] One `workflow_dispatch` deploy run succeeded.
 * [ ] One deploy run from `main` succeeded.
 * [ ] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
 
