@@ -8,6 +8,14 @@
 * [x] Required GitHub Actions permissions are documented.
 * [ ] PR preview policy remains optional and is tracked for later milestones.
 
+## CI Gate Baseline (M7-02)
+
+* [x] CI workflow exists at `.github/workflows/ci.yml`.
+* [x] CI runs `npm run test` and `npm run build`.
+* [x] Local validation passes for test and build commands.
+* [ ] Branch protection required-check enforcement is enabled in GitHub settings.
+* [x] Fallback merge policy is documented when branch protection API is unavailable.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.

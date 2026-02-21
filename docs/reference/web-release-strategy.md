@@ -56,6 +56,34 @@ Last updated: 2026-02-20
 * Required branch protection check for `main`:
   * `CI / test-build`
 
+### Branch protection dry-run procedure
+
+Use these commands for repositories where branch protection is available:
+
+```bash
+gh api repos/<owner>/<repo>/branches/main/protection
+```
+
+If protection is not configured yet, apply a minimal required-check policy:
+
+```bash
+gh api \
+  --method PUT \
+  repos/<owner>/<repo>/branches/main/protection \
+  -f required_status_checks.strict=true \
+  -F required_status_checks.contexts[]='CI / test-build' \
+  -f enforce_admins=false \
+  -f required_pull_request_reviews=null \
+  -f restrictions=null
+```
+
+Repository-specific note for `nmmkk/9x9quiz`:
+
+* Current response is `403` for branch protection API (`Upgrade to GitHub Pro or make this repository public`).
+* Until plan/visibility changes, enforce merge gate operationally:
+  * Do not merge PR unless `CI / test-build` is green.
+  * Keep squash/merge action owner responsible for final CI check confirmation.
+
 ## 7) Reusable GitHub Pages Deployment Runbook
 
 This section is a reusable handbook so the same release setup can be repeated in other repositories.
@@ -98,6 +126,7 @@ This section is a reusable handbook so the same release setup can be repeated in
 3. Add CD workflow with least-privilege permissions only.
 4. Keep rollback guidance in release docs before launch.
 5. Record one QA report after first production publish.
+6. Verify branch protection API is available before relying on required checks.
 
 ## 8) Remaining Follow-up
 

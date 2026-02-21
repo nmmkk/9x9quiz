@@ -98,6 +98,7 @@ docs/reference/web-release-strategy.md
 
 * `npm run test`
 * `npm run build`
+* `gh api repos/<owner>/<repo>/branches/main/protection`
 
 ## M7-03 - Add CD pipeline for web deployment
 
