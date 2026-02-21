@@ -1,5 +1,13 @@
 # Release Checklist (Web MVP V1)
 
+## Web Release Policy Baseline (M7-01)
+
+* [x] Deployment target is decided and documented (`docs/reference/web-release-strategy.md`).
+* [x] Canonical production URL strategy is documented.
+* [x] Release trigger policy (`main` + CI gate) is documented.
+* [x] Required GitHub Actions permissions are documented.
+* [ ] PR preview policy remains optional and is tracked for later milestones.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
