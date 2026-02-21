@@ -148,6 +148,9 @@ This section is a reusable handbook so the same release setup can be repeated in
 * Trigger:
   * automatic: `workflow_run` after `CI` succeeds on `main`
   * manual rerun: `workflow_dispatch` (allowed only for `main`)
+* Safety guards:
+  * manual rerun verifies successful `test-build` check exists for current `main` SHA
+  * automatic deploy refuses stale rerun SHA and only deploys current `main` tip
 * Build/deploy flow:
   * `build-pages` job runs `npm ci` and `npm run build`
   * `dist/` is uploaded with `actions/upload-pages-artifact`
