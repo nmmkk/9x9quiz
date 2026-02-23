@@ -7,7 +7,7 @@
 | M7-01 | Decide deployment target and release policy | Completed | M5-04 | policy review, `npm run build` |
 | M7-02 | Add GitHub Actions CI (test + build) | Completed | M7-01 | PR CI pass, branch protection dry-run |
 | M7-03 | Add CD pipeline for web deployment | Completed | M7-01, M7-02 | deploy workflow run, live URL smoke check |
-| M7-04 | Strengthen release quality gates and rollback runbook | Planned | M7-02, M7-03 | checklist review, failed deploy simulation |
+| M7-04 | Strengthen release quality gates and rollback runbook | Completed | M7-02, M7-03 | checklist review, failed deploy simulation |
 | M7-05 | Execute launch QA pass and sync status docs | Planned | M7-01, M7-02, M7-03, M7-04 | `docs/qa/reports/`, status docs sync |
 
 ## Scope
@@ -186,6 +186,12 @@ docs/reference/web-release-strategy.md
 **Validation**
 
 * Checklist dry run
+
+**Current Evidence (2026-02-23)**
+
+* `docs/release/checklist.md` updated with release safety gates and monitoring points
+* `docs/reference/web-release-strategy.md` updated with rollback runbook and first responder scope
+* `docs/qa/reports/2026-02-23-m07-04-checklist-dry-run.md`
 
 ## M7-05 - Execute launch QA pass and sync status docs
 

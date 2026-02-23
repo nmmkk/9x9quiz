@@ -1,6 +1,6 @@
 # Web Release Strategy (M7)
 
-Last updated: 2026-02-20
+Last updated: 2026-02-23
 
 ## 1) Decision
 
@@ -179,4 +179,42 @@ For M7 closeout, run and record both:
 ## 9) Remaining Follow-up
 
 * Optional: execute one `workflow_dispatch` deployment rerun on `main` and capture run URL.
-* Add rollback runbook and release guardrails (`M7-04`).
+* Execute launch QA pass and final docs synchronization (`M7-05`).
+
+## 10) Rollback Runbook and Quality Guardrails (M7-04)
+
+### First responder scope
+
+* First responder:
+  * Maintainer who merged release PR or triggered manual deploy rerun.
+* Escalation owner:
+  * Repository owner (`nmmkk`) if incident exceeds first responder scope.
+
+### Rollback trigger conditions
+
+Start rollback when one or more conditions are true after a deploy:
+
+* App does not load at `https://nmmkk.github.io/9x9quiz/`.
+* Core quiz flow is broken (start/answer/result).
+* Blocking runtime error is visible in browser console.
+* Deploy workflow concludes `failure` and retry does not recover.
+
+### Rollback execution steps
+
+1. Identify last known-good commit on `main`.
+2. Revert the broken commit(s) on a hotfix branch.
+3. Open and merge rollback PR to `main` (CI must pass).
+4. Confirm `Deploy Pages` runs successfully for rollback commit.
+5. Re-run smoke checks on published URL.
+
+### Post-rollback verification
+
+* URL load and quiz smoke pass on desktop/mobile.
+* No blocking console errors on startup and first quiz session.
+* Current-state and QA report docs are updated with incident/rollback evidence.
+
+### Release guardrails
+
+* Keep `CI / test-build` required on `main`.
+* Deploy only through guarded workflow (`workflow_run` success or main-only manual rerun).
+* Record CI run ID and deploy run ID for every production release.

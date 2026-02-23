@@ -28,6 +28,20 @@
 * [x] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
 * [ ] Optional: one `workflow_dispatch` rerun on `main` succeeded.
 
+## Release Safety Gate (M7-04)
+
+* [x] Release record includes CI run ID and deploy run ID.
+* [x] Pre-merge required check `CI / test-build` remains enabled on `main`.
+* [x] Post-deploy smoke checks are explicitly listed and executed:
+  * [x] App URL opens successfully.
+  * [x] One short quiz flow (start => answer => result) works.
+  * [x] Browser console has no blocking runtime errors.
+* [x] Monitoring points after deploy are explicitly listed:
+  * [x] Re-check deploy run conclusion after 10-15 minutes.
+  * [x] Confirm no immediate user-reported outage signal.
+* [x] Rollback trigger conditions and step-by-step procedure are documented in `docs/reference/web-release-strategy.md`.
+* [x] First responder and escalation owner scope are documented.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
