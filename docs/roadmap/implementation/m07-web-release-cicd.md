@@ -8,7 +8,7 @@
 | M7-02 | Add GitHub Actions CI (test + build) | Completed | M7-01 | PR CI pass, branch protection dry-run |
 | M7-03 | Add CD pipeline for web deployment | Completed | M7-01, M7-02 | deploy workflow run, live URL smoke check |
 | M7-04 | Strengthen release quality gates and rollback runbook | Completed | M7-02, M7-03 | checklist review, failed deploy simulation |
-| M7-05 | Execute launch QA pass and sync status docs | Partial | M7-01, M7-02, M7-03, M7-04 | `docs/qa/reports/`, status docs sync |
+| M7-05 | Execute launch QA pass and sync status docs | Completed | M7-01, M7-02, M7-03, M7-04 | `docs/qa/reports/`, status docs sync |
 
 ## Scope
 
@@ -238,4 +238,4 @@ docs/roadmap/implementation/build-order.md
 
 * `docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`
 * CI run `22296144653` and Deploy Pages run `22296154268` are successful for released `main`
-* Published URL `https://nmmkk.github.io/9x9quiz/` is reachable; manual mobile smoke evidence is pending
+* Published URL `https://nmmkk.github.io/9x9quiz/` is reachable; manual mobile smoke verification confirmed

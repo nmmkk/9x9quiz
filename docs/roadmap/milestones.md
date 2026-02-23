@@ -8,4 +8,4 @@
 | M4 | Adaptive practice depth | Completed | `docs/roadmap/implementation/m04-adaptive-practice-depth.md` |
 | M5 | Offline-ready PWA foundation | Completed | `docs/roadmap/implementation/m05-offline-ready-pwa-foundation.md` |
 | M6 | Native packaging pilot (de-prioritized) | Partial | `docs/roadmap/implementation/m06-native-packaging-pilot.md` |
-| M7 | Web release CI/CD | Partial | `docs/roadmap/implementation/m07-web-release-cicd.md` |
+| M7 | Web release CI/CD | Completed | `docs/roadmap/implementation/m07-web-release-cicd.md` |

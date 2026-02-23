@@ -20,7 +20,7 @@
 18. M7-02 (Completed)
 19. M7-03 (Completed)
 20. M7-04 (Completed)
-21. M7-05 (Partial, Highest Priority)
+21. M7-05 (Completed)
 22. M6-02 (Planned, Deferred)
 23. M6-03 (Planned, Deferred)
 24. M6-04 (Planned, Deferred)

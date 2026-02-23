@@ -47,7 +47,7 @@
 * [x] Production CI/deploy run evidence is recorded (`22296144653`, `22296154268`).
 * [x] Published URL reachability is confirmed (`https://nmmkk.github.io/9x9quiz/`).
 * [x] Manual launch verification report is recorded (`docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`).
-* [ ] Manual mobile smoke verification on published URL is recorded.
+* [x] Manual mobile smoke verification on published URL is recorded.
 
 ## Product Scope
 
