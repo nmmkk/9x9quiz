@@ -24,9 +24,9 @@
 * [x] Deploy workflow runs automatically only after `CI` succeeds on `main`.
 * [x] Deploy workflow supports `workflow_dispatch` rerun on `main` only.
 * [x] Deploy workflow validates successful CI check for target SHA and blocks stale rerun SHA deploys.
-* [ ] One `workflow_dispatch` deploy run on `main` succeeded.
-* [ ] One CI-success-triggered deploy run on `main` succeeded.
-* [ ] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+* [x] One CI-success-triggered deploy run on `main` succeeded.
+* [x] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+* [ ] Optional: one `workflow_dispatch` rerun on `main` succeeded.
 
 ## Product Scope
 

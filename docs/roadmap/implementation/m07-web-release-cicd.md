@@ -6,7 +6,7 @@
 | --- | --- | --- | --- | --- |
 | M7-01 | Decide deployment target and release policy | Completed | M5-04 | policy review, `npm run build` |
 | M7-02 | Add GitHub Actions CI (test + build) | Completed | M7-01 | PR CI pass, branch protection dry-run |
-| M7-03 | Add CD pipeline for web deployment | Partial | M7-01, M7-02 | deploy workflow run, live URL smoke check |
+| M7-03 | Add CD pipeline for web deployment | Completed | M7-01, M7-02 | deploy workflow run, live URL smoke check |
 | M7-04 | Strengthen release quality gates and rollback runbook | Planned | M7-02, M7-03 | checklist review, failed deploy simulation |
 | M7-05 | Execute launch QA pass and sync status docs | Planned | M7-01, M7-02, M7-03, M7-04 | `docs/qa/reports/`, status docs sync |
 
@@ -151,7 +151,7 @@ README.md
 * `vite.config.ts` updated for project-page base path (`/9x9quiz/` on build)
 * `README.md` includes canonical URL `https://nmmkk.github.io/9x9quiz/`
 * `docs/qa/reports/2026-02-20-m07-03-deploy-preflight.md`
-* Pending for closeout: first `workflow_dispatch` run on `main`, first CI-success-triggered deploy workflow run on `main`, and live URL smoke verification
+* `docs/qa/reports/2026-02-23-m07-03-closeout.md`
 
 ## M7-04 - Strengthen release quality gates and rollback runbook
 

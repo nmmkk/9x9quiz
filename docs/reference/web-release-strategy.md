@@ -178,7 +178,5 @@ For M7 closeout, run and record both:
 
 ## 9) Remaining Follow-up
 
-* Execute one `workflow_dispatch` deployment run on `main` and capture run URL (`M7-03` preflight evidence).
-* Execute one CI-success-triggered deployment run on `main` and capture run URL (`M7-03` closeout evidence).
-* Perform live URL smoke verification on `https://nmmkk.github.io/9x9quiz/` and add QA report.
+* Optional: execute one `workflow_dispatch` deployment rerun on `main` and capture run URL.
 * Add rollback runbook and release guardrails (`M7-04`).
