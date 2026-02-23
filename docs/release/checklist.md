@@ -24,9 +24,30 @@
 * [x] Deploy workflow runs automatically only after `CI` succeeds on `main`.
 * [x] Deploy workflow supports `workflow_dispatch` rerun on `main` only.
 * [x] Deploy workflow validates successful CI check for target SHA and blocks stale rerun SHA deploys.
-* [ ] One `workflow_dispatch` deploy run on `main` succeeded.
-* [ ] One CI-success-triggered deploy run on `main` succeeded.
-* [ ] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+* [x] One CI-success-triggered deploy run on `main` succeeded.
+* [x] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+* [ ] Optional: one `workflow_dispatch` rerun on `main` succeeded.
+
+## Release Safety Gate (M7-04)
+
+* [x] Release record includes CI run ID and deploy run ID.
+* [x] Pre-merge required check `CI / test-build` remains enabled on `main`.
+* [x] Post-deploy smoke checks are explicitly listed and executed:
+  * [x] App URL opens successfully.
+  * [x] One short quiz flow (start => answer => result) works.
+  * [x] Browser console has no blocking runtime errors.
+* [x] Monitoring points after deploy are explicitly listed:
+  * [x] Re-check deploy run conclusion after 10-15 minutes.
+  * [x] Confirm no immediate user-reported outage signal.
+* [x] Rollback trigger conditions and step-by-step procedure are documented in `docs/reference/web-release-strategy.md`.
+* [x] First responder and escalation owner scope are documented.
+
+## Launch QA Gate (M7-05)
+
+* [x] Production CI/deploy run evidence is recorded (`22296144653`, `22296154268`).
+* [x] Published URL reachability is confirmed (`https://nmmkk.github.io/9x9quiz/`).
+* [x] Manual launch verification report is recorded (`docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`).
+* [x] Manual mobile smoke verification on published URL is recorded.
 
 ## Product Scope
 
