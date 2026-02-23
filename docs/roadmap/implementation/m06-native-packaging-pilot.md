@@ -4,7 +4,7 @@
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
-| M6-01 | Choose native wrapper approach and document architecture | Planned | M5-04 | `npm run build`, architecture review notes |
+| M6-01 | Choose native wrapper approach and document architecture | Completed | M5-04 | `npm run build`, architecture review notes |
 | M6-02 | Scaffold native wrapper projects and build pipeline | Planned | M6-01 | wrapper build commands, `npm run build` |
 | M6-03 | Integrate app runtime with native shell behavior baseline | Planned | M6-02 | wrapper run commands, manual smoke checks |
 | M6-04 | Execute native pilot QA pass and sync status docs | Planned | M6-01, M6-02, M6-03 | `docs/qa/reports/`, status docs sync |
@@ -161,3 +161,10 @@ docs/roadmap/implementation/build-order.md
 **Validation**
 
 * Platform smoke verification records
+
+## M6-01 Progress Notes
+
+* Selected wrapper: Capacitor.
+* Architecture decision and trade-offs: `docs/reference/native-strategy.md`.
+* Design spec sync: `docs/reference/design.md` section "Native Packaging Direction (M6-01)".
+* Priority update (2026-02-20): `M6-02` onward is deferred until M7 web release CI/CD is operational.

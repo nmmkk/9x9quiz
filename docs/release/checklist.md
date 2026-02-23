@@ -1,5 +1,33 @@
 # Release Checklist (Web MVP V1)
 
+## Web Release Policy Baseline (M7-01)
+
+* [x] Deployment target is decided and documented (`docs/reference/web-release-strategy.md`).
+* [x] Canonical production URL strategy is documented.
+* [x] Release trigger policy (`main` + CI gate) is documented.
+* [x] Required GitHub Actions permissions are documented.
+* [ ] PR preview policy remains optional and is tracked for later milestones.
+
+## CI Gate Baseline (M7-02)
+
+* [x] CI workflow exists at `.github/workflows/ci.yml`.
+* [x] CI runs `npm run test` and `npm run build`.
+* [x] Local validation passes for test and build commands.
+* [x] Branch protection required-check enforcement is enabled in GitHub settings (`CI / test-build` on `main`).
+* [x] Fallback merge policy is documented for repositories where branch protection API is unavailable.
+
+## Deploy Gate Baseline (M7-03)
+
+* [x] Deploy workflow exists at `.github/workflows/deploy.yml`.
+* [x] Deploy workflow publishes `dist/` via GitHub Pages actions.
+* [x] Vite build base path is set for project-page hosting (`/9x9quiz/`).
+* [x] Deploy workflow runs automatically only after `CI` succeeds on `main`.
+* [x] Deploy workflow supports `workflow_dispatch` rerun on `main` only.
+* [x] Deploy workflow validates successful CI check for target SHA and blocks stale rerun SHA deploys.
+* [ ] One `workflow_dispatch` deploy run on `main` succeeded.
+* [ ] One CI-success-triggered deploy run on `main` succeeded.
+* [ ] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.

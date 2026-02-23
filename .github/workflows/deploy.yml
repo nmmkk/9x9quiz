@@ -1,0 +1,110 @@
+name: Deploy Pages
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+  checks: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    name: preflight
+    runs-on: ubuntu-latest
+    outputs:
+      deploy_sha: ${{ steps.resolve.outputs.deploy_sha }}
+
+    steps:
+      - name: Resolve target SHA and enforce policy
+        id: resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          MAIN_SHA="$(gh api repos/${{ github.repository }}/git/ref/heads/main --jq '.object.sha')"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+              echo "Manual deploy is allowed only for refs/heads/main"
+              exit 1
+            fi
+            DEPLOY_SHA="$MAIN_SHA"
+          else
+            DEPLOY_SHA="${{ github.event.workflow_run.head_sha }}"
+            if [ "$DEPLOY_SHA" != "$MAIN_SHA" ]; then
+              echo "Refusing deploy for stale CI run sha: $DEPLOY_SHA (current main: $MAIN_SHA)"
+              exit 1
+            fi
+          fi
+
+          CHECKS_JSON="$(gh api repos/${{ github.repository }}/commits/$DEPLOY_SHA/check-runs)"
+          HAS_GREEN_TEST_BUILD="$(printf '%s' "$CHECKS_JSON" | jq -r '[.check_runs[] | select(.name == "test-build" and .conclusion == "success")] | length > 0')"
+
+          if [ "$HAS_GREEN_TEST_BUILD" != "true" ]; then
+            echo "Missing successful CI test-build check for $DEPLOY_SHA"
+            exit 1
+          fi
+
+          echo "deploy_sha=$DEPLOY_SHA" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: build-pages
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.preflight.outputs.deploy_sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    name: deploy-pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
