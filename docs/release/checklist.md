@@ -42,6 +42,13 @@
 * [x] Rollback trigger conditions and step-by-step procedure are documented in `docs/reference/web-release-strategy.md`.
 * [x] First responder and escalation owner scope are documented.
 
+## Launch QA Gate (M7-05)
+
+* [x] Production CI/deploy run evidence is recorded (`22296144653`, `22296154268`).
+* [x] Published URL reachability is confirmed (`https://nmmkk.github.io/9x9quiz/`).
+* [x] Manual launch verification report is recorded (`docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`).
+* [ ] Manual mobile smoke verification on published URL is recorded.
+
 ## Product Scope
 
 * [x] Title, mode select, quiz, incorrect feedback, and result screens are implemented.
