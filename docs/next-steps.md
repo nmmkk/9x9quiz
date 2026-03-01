@@ -2,8 +2,8 @@
 
 ## Immediate
 
-1. Kick off `M8-04` and capture QA evidence for progress indicator, direct-jump flow, and protected reset flow.
-2. Sync milestone/status docs after `M8-04` validation closes.
+1. Complete `M8-04` manual desktop/mobile smoke verification on published URL for progress indicator, direct-jump flow, and protected reset flow.
+2. After manual smoke pass, update `M8-04` to `Completed` and close milestone `M8` status docs.
 3. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
 4. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
 

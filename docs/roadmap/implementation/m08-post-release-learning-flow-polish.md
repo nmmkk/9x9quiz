@@ -7,7 +7,7 @@
 | M8-01 | Add session progress gauge/icon feedback during quiz | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-02 | Add direct jump from table performance cards to focused practice | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-03 | Add protected local progress reset flow | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
-| M8-04 | Execute M8 QA pass and sync status docs | Planned | M8-01, M8-02, M8-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
+| M8-04 | Execute M8 QA pass and sync status docs | Partial | M8-01, M8-02, M8-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
 ## Scope
 
@@ -57,6 +57,13 @@ src/shared/i18n/catalog.ts
 * `npm run test`
 * `npm run build`
 * `npm run dev`
+
+## M8-04 Progress Notes
+
+* Recorded QA/status synchronization evidence in `docs/qa/reports/2026-02-28-m08-04-qa.md`.
+* Validation commands passed in this run: `npm run test` (16 files / 63 tests), `npm run build` (injectManifest precache 8 entries / 250.38 KiB), and `npm run dev -- --host 127.0.0.1 --port 4304 --strictPort` (booted).
+* Published URL and deployment baseline were re-checked via `gh run list` evidence and URL fetch.
+* Manual desktop/mobile smoke verification for M8 scope on published URL remains pending; ticket is kept `Partial` until those checks are recorded.
 
 ## M8-03 Progress Notes
 
