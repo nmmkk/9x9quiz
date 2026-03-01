@@ -11,13 +11,22 @@ import {
   hasPendingAppUpdate,
   subscribeToAppUpdate,
 } from "./shared/pwa/updateManager";
-import { type QuestionCountMode } from "./shared/storage/highScoreStorage";
+import { clearHighScores, type QuestionCountMode } from "./shared/storage/highScoreStorage";
 import {
+  clearLastPlayedMode,
   readLastPlayedMode,
   writeLastPlayedMode,
 } from "./shared/storage/lastPlayedModeStorage";
-import { applyMasterySessionStats, readMasterySnapshot } from "./shared/storage/masteryStorage";
-import { readPracticeScope, writePracticeScope } from "./shared/storage/practiceScopeStorage";
+import {
+  applyMasterySessionStats,
+  clearMasterySnapshot,
+  readMasterySnapshot,
+} from "./shared/storage/masteryStorage";
+import {
+  clearPracticeScope,
+  readPracticeScope,
+  writePracticeScope,
+} from "./shared/storage/practiceScopeStorage";
 import "./styles/reset.css";
 import "./styles/theme.css";
 import "./styles/app.css";
@@ -84,6 +93,19 @@ function App() {
     openModeSelect();
   };
 
+  const resetProgress = () => {
+    clearHighScores();
+    clearMasterySnapshot();
+    clearPracticeScope();
+    clearLastPlayedMode();
+
+    setLastPlayedMode(null);
+    setPracticeScope(defaultPracticeScope);
+    setMasterySnapshot(readMasterySnapshot());
+    setReviewFactKeys(null);
+    setLatestResult(null);
+  };
+
   const finishQuiz = (result: QuizSessionResult) => {
     setMasterySnapshot(applyMasterySessionStats(result.tableStats));
 
@@ -132,6 +154,7 @@ function App() {
         initialPracticeScope={practiceScope}
         masterySnapshot={masterySnapshot}
         onStartQuiz={startQuiz}
+        onResetProgress={resetProgress}
       />,
     );
   }

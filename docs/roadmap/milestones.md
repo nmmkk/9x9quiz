@@ -9,3 +9,4 @@
 | M5 | Offline-ready PWA foundation | Completed | `docs/roadmap/implementation/m05-offline-ready-pwa-foundation.md` |
 | M6 | Native packaging pilot (de-prioritized) | Partial | `docs/roadmap/implementation/m06-native-packaging-pilot.md` |
 | M7 | Web release CI/CD | Completed | `docs/roadmap/implementation/m07-web-release-cicd.md` |
+| M8 | Post-release learning flow polish | Partial | `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md` |

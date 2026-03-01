@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { MasteryPanel } from "../../progress/ui/MasteryPanel";
-import { defaultPracticeScope, type PracticeScope } from "../../quiz/domain/practiceScope";
+import {
+  createSingleTablePracticeScope,
+  defaultPracticeScope,
+  type PracticeScope,
+} from "../../quiz/domain/practiceScope";
 import {
   questionCountModes,
   readHighScore,
@@ -15,6 +19,7 @@ type ModeSelectScreenProps = {
   initialPracticeScope: PracticeScope;
   masterySnapshot: MasterySnapshot;
   onStartQuiz: (mode: QuestionCountMode, scope: PracticeScope) => void;
+  onResetProgress: () => void;
 };
 
 function toSelectableScope(scope: PracticeScope): PracticeScope {
@@ -30,11 +35,26 @@ export function ModeSelectScreen({
   initialPracticeScope,
   masterySnapshot,
   onStartQuiz,
+  onResetProgress,
 }: ModeSelectScreenProps) {
   const { t, tf } = useI18n();
   const [selectedPracticeScope, setSelectedPracticeScope] = useState<PracticeScope>(
     () => toSelectableScope(initialPracticeScope),
   );
+  const directStartMode: QuestionCountMode = questionCountModes[0] ?? 10;
+
+  const handleStartTablePractice = (table: number) => {
+    onStartQuiz(directStartMode, createSingleTablePracticeScope(table));
+  };
+
+  const handleResetProgress = () => {
+    const shouldReset = globalThis.confirm(t("mode.resetProgressConfirm"));
+    if (!shouldReset) {
+      return;
+    }
+
+    onResetProgress();
+  };
 
   return (
     <section className="panel" aria-labelledby="mode-heading">
@@ -46,7 +66,10 @@ export function ModeSelectScreen({
         onSelectScope={setSelectedPracticeScope}
       />
 
-      <MasteryPanel masterySnapshot={masterySnapshot} />
+      <MasteryPanel
+        masterySnapshot={masterySnapshot}
+        onStartTablePractice={handleStartTablePractice}
+      />
 
       <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {
@@ -76,6 +99,13 @@ export function ModeSelectScreen({
 
       <button type="button" className="secondary-button" onClick={onBack}>
         {t("mode.backToTitleButton")}
+      </button>
+      <button
+        type="button"
+        className="secondary-button mode-reset-progress-button"
+        onClick={handleResetProgress}
+      >
+        {t("mode.resetProgressButton")}
       </button>
     </section>
   );
