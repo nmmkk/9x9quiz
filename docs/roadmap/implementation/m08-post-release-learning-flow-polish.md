@@ -6,7 +6,7 @@
 | --- | --- | --- | --- | --- |
 | M8-01 | Add session progress gauge/icon feedback during quiz | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-02 | Add direct jump from table performance cards to focused practice | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
-| M8-03 | Add protected local progress reset flow | Planned | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
+| M8-03 | Add protected local progress reset flow | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-04 | Execute M8 QA pass and sync status docs | Planned | M8-01, M8-02, M8-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
 ## Scope
@@ -57,6 +57,15 @@ src/shared/i18n/catalog.ts
 * `npm run test`
 * `npm run build`
 * `npm run dev`
+
+## M8-03 Progress Notes
+
+* Added guarded reset entry on mode screen in `src/features/mode/ui/ModeSelectScreen.tsx` using confirmation copy before execution.
+* Wired reset action through `src/App.tsx` so reset applies immediately without reload and keeps app flow playable.
+* Added storage clear helpers for progress-related records in `src/shared/storage/highScoreStorage.ts`, `src/shared/storage/masteryStorage.ts`, `src/shared/storage/practiceScopeStorage.ts`, and `src/shared/storage/lastPlayedModeStorage.ts`.
+* Added localized reset button/confirmation copy in `src/shared/i18n/types.ts` and `src/shared/i18n/catalog.ts`.
+* Added focused regression coverage for clear behaviors in storage tests under `src/shared/storage/__tests__/`.
+* Validation evidence (2026-02-28): `npm run test` (pass, 16 files / 63 tests), `npm run build` (pass, injectManifest precache 8 entries / 250.38 KiB), `npm run dev -- --host 127.0.0.1 --port 4303 --strictPort` (booted).
 
 ## M8-02 Progress Notes
 

@@ -60,3 +60,14 @@ export function updateHighScore(mode: QuestionCountMode, score: number): HighSco
     isNewHighScore: false,
   };
 }
+
+export function clearHighScores(): void {
+  const storage = getLocalStorage();
+  if (!storage) {
+    return;
+  }
+
+  for (const mode of questionCountModes) {
+    storage.removeItem(getHighScoreStorageKey(mode));
+  }
+}

@@ -16,6 +16,8 @@ export const messageKeys = [
   "mode.listAriaLabel",
   "mode.noRecord",
   "mode.optionLabel",
+  "mode.resetProgressButton",
+  "mode.resetProgressConfirm",
   "mode.scopeAriaLabel",
   "mode.scopeDescription",
   "mode.scopeHeading",

@@ -244,6 +244,10 @@ p {
   font-weight: 700;
 }
 
+.mode-reset-progress-button {
+  margin-top: var(--space-2);
+}
+
 .quiz-panel {
   position: relative;
 }

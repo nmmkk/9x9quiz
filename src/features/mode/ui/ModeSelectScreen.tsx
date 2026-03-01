@@ -19,6 +19,7 @@ type ModeSelectScreenProps = {
   initialPracticeScope: PracticeScope;
   masterySnapshot: MasterySnapshot;
   onStartQuiz: (mode: QuestionCountMode, scope: PracticeScope) => void;
+  onResetProgress: () => void;
 };
 
 function toSelectableScope(scope: PracticeScope): PracticeScope {
@@ -34,6 +35,7 @@ export function ModeSelectScreen({
   initialPracticeScope,
   masterySnapshot,
   onStartQuiz,
+  onResetProgress,
 }: ModeSelectScreenProps) {
   const { t, tf } = useI18n();
   const [selectedPracticeScope, setSelectedPracticeScope] = useState<PracticeScope>(
@@ -43,6 +45,15 @@ export function ModeSelectScreen({
 
   const handleStartTablePractice = (table: number) => {
     onStartQuiz(directStartMode, createSingleTablePracticeScope(table));
+  };
+
+  const handleResetProgress = () => {
+    const shouldReset = globalThis.confirm(t("mode.resetProgressConfirm"));
+    if (!shouldReset) {
+      return;
+    }
+
+    onResetProgress();
   };
 
   return (
@@ -88,6 +99,13 @@ export function ModeSelectScreen({
 
       <button type="button" className="secondary-button" onClick={onBack}>
         {t("mode.backToTitleButton")}
+      </button>
+      <button
+        type="button"
+        className="secondary-button mode-reset-progress-button"
+        onClick={handleResetProgress}
+      >
+        {t("mode.resetProgressButton")}
       </button>
     </section>
   );

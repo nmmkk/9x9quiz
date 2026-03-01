@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { readLastPlayedMode, writeLastPlayedMode } from "../lastPlayedModeStorage";
+import {
+  clearLastPlayedMode,
+  readLastPlayedMode,
+  writeLastPlayedMode,
+} from "../lastPlayedModeStorage";
 
 class MemoryStorage implements Storage {
   private data = new Map<string, string>();
@@ -54,6 +58,13 @@ describe("lastPlayedModeStorage", () => {
     expect(readLastPlayedMode()).toBeNull();
 
     globalThis.localStorage.setItem("9x9quiz.v1.lastPlayedMode", "10.5");
+    expect(readLastPlayedMode()).toBeNull();
+  });
+
+  it("clears last played mode", () => {
+    writeLastPlayedMode(20);
+    clearLastPlayedMode();
+
     expect(readLastPlayedMode()).toBeNull();
   });
 });

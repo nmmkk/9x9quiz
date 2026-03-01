@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { applyMasterySessionStats, readMasterySnapshot } from "../masteryStorage";
+import {
+  applyMasterySessionStats,
+  clearMasterySnapshot,
+  readMasterySnapshot,
+} from "../masteryStorage";
 
 class MemoryStorage implements Storage {
   private data = new Map<string, string>();
@@ -84,6 +88,15 @@ describe("masteryStorage", () => {
 
   it("returns empty defaults for malformed json", () => {
     globalThis.localStorage.setItem("9x9quiz.v1.masteryByTable", "{");
+
+    const snapshot = readMasterySnapshot();
+
+    expect(snapshot.every((stat) => stat.answered === 0 && stat.correct === 0)).toBe(true);
+  });
+
+  it("clears persisted mastery snapshot", () => {
+    applyMasterySessionStats([{ table: 3, answered: 4, correct: 2 }]);
+    clearMasterySnapshot();
 
     const snapshot = readMasterySnapshot();
 

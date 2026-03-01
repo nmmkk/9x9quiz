@@ -23,7 +23,7 @@
 21. M7-05 (Completed)
 22. M8-01 (Completed)
 23. M8-02 (Completed)
-24. M8-03 (Planned)
+24. M8-03 (Completed)
 25. M8-04 (Planned)
 26. M6-02 (Planned, Deferred)
 27. M6-03 (Planned, Deferred)

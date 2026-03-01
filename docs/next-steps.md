@@ -2,10 +2,10 @@
 
 ## Immediate
 
-1. Kick off `M8-03` (protected progress reset) from `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`.
-2. Close `M8-04` with QA evidence and status-doc synchronization once `M8-03` is complete.
-4. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
-5. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
+1. Kick off `M8-04` and capture QA evidence for progress indicator, direct-jump flow, and protected reset flow.
+2. Sync milestone/status docs after `M8-04` validation closes.
+3. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
+4. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
 
 ## Documentation Follow-Through
 
