@@ -5,7 +5,7 @@
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
 | M8-01 | Add session progress gauge/icon feedback during quiz | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
-| M8-02 | Add direct jump from table performance cards to focused practice | Planned | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
+| M8-02 | Add direct jump from table performance cards to focused practice | Completed | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-03 | Add protected local progress reset flow | Planned | M4-06, M7-05 | `npm run test`, `npm run build`, `npm run dev` |
 | M8-04 | Execute M8 QA pass and sync status docs | Planned | M8-01, M8-02, M8-03 | `npm run test`, `npm run build`, `npm run dev`, `docs/qa/reports/` |
 
@@ -57,6 +57,15 @@ src/shared/i18n/catalog.ts
 * `npm run test`
 * `npm run build`
 * `npm run dev`
+
+## M8-02 Progress Notes
+
+* Added one-tap table-focused start action on mastery cards by extending `src/features/progress/ui/MasteryPanel.tsx` with optional direct-practice callback wiring.
+* Wired direct-jump flow in `src/features/mode/ui/ModeSelectScreen.tsx`: card tap starts quiz with 10-question mode and selected table scope (`custom`) via `createSingleTablePracticeScope`.
+* Added `createSingleTablePracticeScope` helper in `src/features/quiz/domain/practiceScope.ts` to keep scope construction normalized and reusable.
+* Added localized button copy in `src/shared/i18n/types.ts` and `src/shared/i18n/catalog.ts`, and card-button styling in `src/styles/app.css`.
+* Added focused rendering coverage in `src/features/progress/ui/__tests__/MasteryPanel.test.tsx`.
+* Validation evidence (2026-02-28): `npm run test` (pass, 16 files / 59 tests), `npm run build` (pass, injectManifest precache 8 entries / 249.50 KiB), `npm run dev -- --host 127.0.0.1 --port 4302 --strictPort` (booted).
 
 ## M8-01 Progress Notes
 

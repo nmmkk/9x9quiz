@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { MasteryPanel } from "../../progress/ui/MasteryPanel";
-import { defaultPracticeScope, type PracticeScope } from "../../quiz/domain/practiceScope";
+import {
+  createSingleTablePracticeScope,
+  defaultPracticeScope,
+  type PracticeScope,
+} from "../../quiz/domain/practiceScope";
 import {
   questionCountModes,
   readHighScore,
@@ -35,6 +39,11 @@ export function ModeSelectScreen({
   const [selectedPracticeScope, setSelectedPracticeScope] = useState<PracticeScope>(
     () => toSelectableScope(initialPracticeScope),
   );
+  const directStartMode: QuestionCountMode = questionCountModes[0] ?? 10;
+
+  const handleStartTablePractice = (table: number) => {
+    onStartQuiz(directStartMode, createSingleTablePracticeScope(table));
+  };
 
   return (
     <section className="panel" aria-labelledby="mode-heading">
@@ -46,7 +55,10 @@ export function ModeSelectScreen({
         onSelectScope={setSelectedPracticeScope}
       />
 
-      <MasteryPanel masterySnapshot={masterySnapshot} />
+      <MasteryPanel
+        masterySnapshot={masterySnapshot}
+        onStartTablePractice={handleStartTablePractice}
+      />
 
       <div className="mode-grid" role="list" aria-label={t("mode.listAriaLabel")}>
         {questionCountModes.map((mode) => {

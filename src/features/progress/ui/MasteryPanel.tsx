@@ -3,6 +3,7 @@ import { type MasterySnapshot } from "../../../shared/storage/masteryStorage";
 
 type MasteryPanelProps = {
   masterySnapshot: MasterySnapshot;
+  onStartTablePractice?: (table: number) => void;
 };
 
 function getMasteryClassName(answered: number, accuracyPercent: number | null): string {
@@ -21,7 +22,7 @@ function getMasteryClassName(answered: number, accuracyPercent: number | null): 
   return "mastery-card mastery-card--practice";
 }
 
-export function MasteryPanel({ masterySnapshot }: MasteryPanelProps) {
+export function MasteryPanel({ masterySnapshot, onStartTablePractice }: MasteryPanelProps) {
   const { t, tf } = useI18n();
 
   return (
@@ -55,6 +56,15 @@ export function MasteryPanel({ masterySnapshot }: MasteryPanelProps) {
                     })}
               </p>
               <p className="mastery-rate">{accuracyPercent === null ? "-" : `${accuracyPercent}%`}</p>
+              {onStartTablePractice ? (
+                <button
+                  type="button"
+                  className="secondary-button mastery-practice-button"
+                  onClick={() => onStartTablePractice(stat.table)}
+                >
+                  {tf("progress.masteryPracticeButton", { table: stat.table })}
+                </button>
+              ) : null}
             </div>
           );
         })}

@@ -26,6 +26,7 @@ export const messageKeys = [
   "progress.masteryDescription",
   "progress.masteryHeading",
   "progress.masteryNoAttempts",
+  "progress.masteryPracticeButton",
   "progress.masteryTableLabel",
   "progress.masteryValueLabel",
   "quiz.backspaceButton",
