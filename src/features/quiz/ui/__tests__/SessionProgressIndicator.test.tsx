@@ -27,10 +27,6 @@ function renderIndicator(locale: Locale, answeredQuestions: number, totalQuestio
   );
 }
 
-function countMatches(text: string, pattern: RegExp): number {
-  return text.match(pattern)?.length ?? 0;
-}
-
 describe("SessionProgressIndicator", () => {
   it("shows localized label and progress width in Japanese", () => {
     const markup = renderIndicator("ja-JP", 2, 5);
@@ -39,10 +35,10 @@ describe("SessionProgressIndicator", () => {
     expect(markup).toContain("width:40%");
   });
 
-  it("activates progress icons based on answered ratio", () => {
+  it("shows progress label without duplicate icon row", () => {
     const markup = renderIndicator("en", 3, 5);
 
     expect(markup).toContain("Progress: 3/5");
-    expect(countMatches(markup, /quiz-progress-icon is-active/g)).toBe(3);
+    expect(markup).not.toContain("quiz-progress-icon");
   });
 });

@@ -1,12 +1,9 @@
-import { useMemo } from "react";
 import { useI18n } from "../../../shared/i18n/useI18n";
 
 type SessionProgressIndicatorProps = {
   answeredQuestions: number;
   totalQuestions: number;
 };
-
-const iconCount = 5;
 
 function clampProgressValue(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -21,13 +18,6 @@ export function SessionProgressIndicator({
   const safeAnsweredQuestions = clampProgressValue(answeredQuestions, 0, safeTotalQuestions);
   const progressRatio = safeAnsweredQuestions / safeTotalQuestions;
   const progressPercent = Math.round(progressRatio * 100);
-  const activeIconCount = useMemo(() => {
-    if (safeAnsweredQuestions === 0) {
-      return 0;
-    }
-
-    return clampProgressValue(Math.ceil(progressRatio * iconCount), 1, iconCount);
-  }, [progressRatio, safeAnsweredQuestions]);
 
   return (
     <div className="quiz-progress-group">
@@ -49,14 +39,6 @@ export function SessionProgressIndicator({
         })}
       >
         <span className="quiz-progress-fill" style={{ width: `${progressPercent}%` }} />
-      </div>
-      <div className="quiz-progress-icons" aria-hidden="true">
-        {Array.from({ length: iconCount }, (_, index) => (
-          <span
-            key={index}
-            className={`quiz-progress-icon${index < activeIconCount ? " is-active" : ""}`}
-          />
-        ))}
       </div>
     </div>
   );
