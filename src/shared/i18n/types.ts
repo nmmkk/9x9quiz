@@ -36,6 +36,8 @@ export const messageKeys = [
   "quiz.incorrect.nextButton",
   "quiz.incorrect.title",
   "quiz.numberPadAriaLabel",
+  "quiz.progressAriaLabel",
+  "quiz.progressLabel",
   "quiz.scoreLabel",
   "quiz.submitButton",
   "result.correctLabel",

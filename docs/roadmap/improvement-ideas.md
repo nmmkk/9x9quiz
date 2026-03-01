@@ -1,10 +1,10 @@
 # Improvement Ideas Backlog
 
-Last updated: 2026-02-23
+Last updated: 2026-02-28
 
 ## Current Position
 
-* Milestone status: `M1`-`M5` Completed, `M6` Partial (strategy decision only), `M7` Completed.
+* Milestone status: `M1`-`M5` Completed, `M6` Partial (strategy decision only), `M7` Completed, `M8` Partial (`M8-01` completed).
 * Web release CI/CD is now operational on production URL, so the next idea intake should be managed as either:
   * next milestone candidates (when order and scope are fixed), or
   * backlog candidates (when timing/scope is still undecided).
@@ -30,9 +30,9 @@ Last updated: 2026-02-23
 
 | Backlog ID | Idea | Importance | Priority | Status | Notes |
 | --- | --- | --- | --- | --- | --- |
-| B-01 | 正解進捗の可視化ゲージ/アイコン | Medium-High | Medium-High | Backlog | 正解の積み上がりを視覚化し、残り量と達成感を同時に伝える。画面上部横ゲージまたは右端縦ゲージを候補にする。 |
-| B-02 | 段ごとの正解率カードから段別問題へ直行 | High | Medium-High | Backlog | 習熟カードから練習開始までの遷移を短縮し、反復導線を強化する。 |
-| B-03 | 成績リセット機能 | Medium | Medium | Backlog | 端末共有時の再スタート要求に対応。誤操作防止のUIが前提。 |
+| B-01 | 正解進捗の可視化ゲージ/アイコン | Medium-High | Medium-High | Completed in M8 (`M8-01`) | 正解の積み上がりを視覚化し、残り量と達成感を同時に伝える。画面上部横ゲージまたは右端縦ゲージを候補にする。 |
+| B-02 | 段ごとの正解率カードから段別問題へ直行 | High | Medium-High | Planned in M8 (`M8-02`) | 習熟カードから練習開始までの遷移を短縮し、反復導線を強化する。 |
+| B-03 | 成績リセット機能 | Medium | Medium | Planned in M8 (`M8-03`) | 端末共有時の再スタート要求に対応。誤操作防止のUIが前提。 |
 | B-04 | 言語トグルの導入 | Medium | Low | Backlog | 将来拡張には有効だが、現時点の主対象 (日本の小2) への直接効果は限定的。 |
 | B-05 | Timed / Challenge モード | Medium | Low | Backlog | 早期導入は焦りによる離脱リスクがあるため後段が安全。 |
 

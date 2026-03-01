@@ -4,6 +4,7 @@ import { type PracticeScope } from "../domain/practiceScope";
 import { useQuizSession } from "../state/useQuizSession";
 import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
+import { SessionProgressIndicator } from "./SessionProgressIndicator";
 
 export type QuizSessionResult = {
   correctCount: number;
@@ -33,6 +34,7 @@ export function QuizScreen({
   const { tf } = useI18n();
   const {
     totalQuestions,
+    answeredQuestions,
     currentQuestionNumber,
     currentFact,
     inputValue,
@@ -107,6 +109,10 @@ export function QuizScreen({
 
       <div className="quiz-header">
         <p>{tf("quiz.scoreLabel", { score })}</p>
+        <SessionProgressIndicator
+          answeredQuestions={answeredQuestions}
+          totalQuestions={totalQuestions}
+        />
       </div>
 
       <p className="quiz-expression">

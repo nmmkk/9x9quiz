@@ -2,9 +2,11 @@
 
 ## Immediate
 
-1. Evaluate `N-09` (正解進捗の可視化ゲージ/アイコン), `N-10` (段ごとの正解率カードから段別問題へ直行), and `N-11` (成績リセット機能) as post-release quality uplift candidates.
-2. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
-3. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
+1. Kick off `M8-02` (table card -> focused practice direct jump) from `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`.
+2. Continue with `M8-03` (protected progress reset) after `M8-02` merges.
+3. Close `M8-04` with QA evidence and status-doc synchronization once `M8-02`-`M8-03` are complete.
+4. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
+5. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
 
 ## Documentation Follow-Through
 
