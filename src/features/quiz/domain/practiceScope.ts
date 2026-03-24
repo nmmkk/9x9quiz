@@ -19,6 +19,10 @@ export type PracticeScope =
 
 export const defaultPracticeScope: PracticeScope = { kind: "all" };
 
+export function createSingleTablePracticeScope(table: number): PracticeScope {
+  return normalizePracticeScope({ kind: "custom", tables: [table] });
+}
+
 function normalizeCustomTables(tables: readonly number[]): number[] {
   const uniqueTables = new Set<number>();
 

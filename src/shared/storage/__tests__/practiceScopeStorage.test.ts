@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { readPracticeScope, writePracticeScope } from "../practiceScopeStorage";
+import {
+  clearPracticeScope,
+  readPracticeScope,
+  writePracticeScope,
+} from "../practiceScopeStorage";
 
 class MemoryStorage implements Storage {
   private data = new Map<string, string>();
@@ -54,6 +58,13 @@ describe("practiceScopeStorage", () => {
     expect(readPracticeScope()).toBeNull();
 
     globalThis.localStorage.setItem("9x9quiz.v1.practiceScope", JSON.stringify({ kind: "unknown" }));
+    expect(readPracticeScope()).toBeNull();
+  });
+
+  it("clears stored practice scope", () => {
+    writePracticeScope({ kind: "lowerRange" });
+    clearPracticeScope();
+
     expect(readPracticeScope()).toBeNull();
   });
 });

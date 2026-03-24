@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { readHighScore, updateHighScore } from "../highScoreStorage";
+import { clearHighScores, readHighScore, updateHighScore } from "../highScoreStorage";
 
 class MemoryStorage implements Storage {
   private data = new Map<string, string>();
@@ -71,5 +71,15 @@ describe("highScoreStorage", () => {
 
     expect(readHighScore(10)).toBe(60);
     expect(readHighScore(20)).toBe(140);
+  });
+
+  it("clears all persisted high scores", () => {
+    updateHighScore(10, 60);
+    updateHighScore(20, 140);
+
+    clearHighScores();
+
+    expect(readHighScore(10)).toBeNull();
+    expect(readHighScore(20)).toBeNull();
   });
 });
