@@ -40,3 +40,8 @@ export function writePracticeScope(scope: PracticeScope): void {
 
   storage.setItem(practiceScopeStorageKey, JSON.stringify(normalizePracticeScope(scope)));
 }
+
+export function clearPracticeScope(): void {
+  const storage = getLocalStorage();
+  storage?.removeItem(practiceScopeStorageKey);
+}

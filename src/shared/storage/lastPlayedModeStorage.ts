@@ -37,3 +37,8 @@ export function writeLastPlayedMode(mode: QuestionCountMode): void {
   const storage = getLocalStorage();
   storage?.setItem(lastPlayedModeStorageKey, String(mode));
 }
+
+export function clearLastPlayedMode(): void {
+  const storage = getLocalStorage();
+  storage?.removeItem(lastPlayedModeStorageKey);
+}

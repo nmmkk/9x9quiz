@@ -161,3 +161,8 @@ export function applyMasterySessionStats(sessionStats: readonly MasterySessionSt
   storage?.setItem(masteryStorageKey, JSON.stringify(nextSnapshot));
   return nextSnapshot;
 }
+
+export function clearMasterySnapshot(): void {
+  const storage = getLocalStorage();
+  storage?.removeItem(masteryStorageKey);
+}

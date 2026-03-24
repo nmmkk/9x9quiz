@@ -3,7 +3,7 @@
 ## 1) Purpose
 
 * This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
-* Current active target: M7 web release CI/CD aligned with `docs/reference/core-value.md`.
+* Current active target: M8 post-release learning flow polish aligned with `docs/reference/core-value.md`.
 
 ## 2) Milestone Files
 
@@ -14,6 +14,7 @@
 * `docs/roadmap/implementation/m05-offline-ready-pwa-foundation.md`
 * `docs/roadmap/implementation/m06-native-packaging-pilot.md`
 * `docs/roadmap/implementation/m07-web-release-cicd.md`
+* `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`
 
 ## 3) Supporting Plans
 
