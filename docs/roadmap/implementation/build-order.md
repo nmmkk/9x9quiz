@@ -1,30 +1,13 @@
 # Recommended Build Order
 
-1. M3-01 (Completed)
-2. M3-02 (Completed)
-3. M3-03 (Completed)
-4. M3-04 (Completed)
-5. M3-05 (Completed)
-6. M4-01 (Completed)
-7. M4-02 (Completed)
-8. M4-03 (Completed)
-9. M4-04 (Completed)
-10. M4-05 (Completed)
-11. M4-06 (Completed)
-12. M5-01 (Completed)
-13. M5-02 (Completed)
-14. M5-03 (Completed)
-15. M5-04 (Completed)
-16. M6-01 (Completed)
-17. M7-01 (Completed)
-18. M7-02 (Completed)
-19. M7-03 (Completed)
-20. M7-04 (Completed)
-21. M7-05 (Completed)
-22. M8-01 (Completed)
-23. M8-02 (Completed)
-24. M8-03 (Completed)
-25. M8-04 (Partial)
-26. M6-02 (Planned, Deferred)
-27. M6-03 (Planned, Deferred)
-28. M6-04 (Planned, Deferred)
+1. M8-01 (Completed)
+2. M8-02 (Completed) depends on M8-01
+3. M8-03 (Completed) depends on M8-01, M8-02
+4. M8-04 (Partial) depends on M8-01, M8-02, M8-03
+5. M9-01 (Completed)
+6. M9-02 (Completed) depends on M9-01
+7. M9-03 (Completed) depends on M9-01, M9-02
+8. M9-04 (Partial) depends on M9-02, M9-03
+9. M6-02 (Planned, Deferred) depends on M6-01
+10. M6-03 (Planned, Deferred) depends on M6-01, M6-02
+11. M6-04 (Planned, Deferred) depends on M6-01, M6-02, M6-03

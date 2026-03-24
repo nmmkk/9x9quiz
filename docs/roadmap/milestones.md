@@ -10,3 +10,4 @@
 | M6 | Native packaging pilot (de-prioritized) | Partial | `docs/roadmap/implementation/m06-native-packaging-pilot.md` |
 | M7 | Web release CI/CD | Completed | `docs/roadmap/implementation/m07-web-release-cicd.md` |
 | M8 | Post-release learning flow polish | Partial | `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md` |
+| M9 | Release provenance visibility | Partial | `docs/roadmap/implementation/m09-release-provenance-visibility.md` |
