@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MasteryPanel } from "../../progress/ui/MasteryPanel";
+import { getBuildInfo } from "../../../shared/buildInfo";
 import { useI18n } from "../../../shared/i18n/useI18n";
 import {
   hasInstallPrompt,
@@ -24,6 +25,7 @@ export function TitleScreen({
   onOpenModeSelect,
 }: TitleScreenProps) {
   const { t, tf } = useI18n();
+  const buildInfo = getBuildInfo();
   const [isInstallAvailable, setIsInstallAvailable] = useState<boolean>(() => hasInstallPrompt());
   const [isInstalling, setIsInstalling] = useState(false);
 
@@ -50,7 +52,7 @@ export function TitleScreen({
   };
 
   return (
-    <section className="panel" aria-labelledby="title-heading">
+    <section className="panel title-panel" aria-labelledby="title-heading">
       <h1 id="title-heading">{t("app.title")}</h1>
       <p>{t("title.description")}</p>
 
@@ -76,6 +78,21 @@ export function TitleScreen({
           </button>
         ) : null}
       </div>
+
+      <footer className="title-provenance">
+        {buildInfo.commitUrl ? (
+          <a
+            className="title-provenance-link"
+            href={buildInfo.commitUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {buildInfo.displayText}
+          </a>
+        ) : (
+          <span className="title-provenance-text">{buildInfo.displayText}</span>
+        )}
+      </footer>
     </section>
   );
 }
