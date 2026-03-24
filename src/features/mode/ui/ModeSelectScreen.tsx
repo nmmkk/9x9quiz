@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MasteryPanel } from "../../progress/ui/MasteryPanel";
 import {
   createSingleTablePracticeScope,
@@ -42,6 +42,10 @@ export function ModeSelectScreen({
     () => toSelectableScope(initialPracticeScope),
   );
   const directStartMode: QuestionCountMode = questionCountModes[0] ?? 10;
+
+  useEffect(() => {
+    setSelectedPracticeScope(toSelectableScope(initialPracticeScope));
+  }, [initialPracticeScope]);
 
   const handleStartTablePractice = (table: number) => {
     onStartQuiz(directStartMode, createSingleTablePracticeScope(table));
