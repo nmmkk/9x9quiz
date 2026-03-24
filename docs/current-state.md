@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-02-23
+Last updated: 2026-03-23
 
 ## Milestone Status
 
@@ -13,6 +13,8 @@ Last updated: 2026-02-23
 | M5 | Completed | `M5-01` through `M5-04` completed in `docs/roadmap/implementation/m05-offline-ready-pwa-foundation.md`; `npm run test` (pass, 14 files / 55 tests); `npm run build` (pass, injectManifest precache 8 entries / 246.91 KiB); `npm run dev -- --host 127.0.0.1 --port 4260 --strictPort` (booted); `docs/qa/reports/2026-02-18-m05-qa-rerun.md`; `docs/qa/reports/2026-02-18-m05-qa-rerun-2.md`; user-confirmed manual offline and install verification on PC/iOS/mobile | Offline app-shell caching, deterministic update notice flow, install affordance, and final mobile re-check are complete; M5 is closed and ready for M6 kickoff. |
 | M6 | Partial | `M6-01` completed in `docs/roadmap/implementation/m06-native-packaging-pilot.md`; `npm run build` (pass) | Wrapper approach decision is documented and aligned: Capacitor selected. `M6-02` onward is intentionally deferred while web release CI/CD is prioritized. |
 | M7 | Completed | `M7-01` through `M7-05` completed in `docs/roadmap/implementation/m07-web-release-cicd.md`; `.github/workflows/deploy.yml` runs after successful `CI` on `main`, restricts manual dispatch to `main`, validates green `test-build`, and rejects stale rerun SHA; `docs/qa/reports/2026-02-23-m07-03-closeout.md`; `docs/qa/reports/2026-02-23-m07-04-checklist-dry-run.md`; `docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`; CI run `22296144653` (success); Deploy Pages run `22296154268` (success); published URL `https://nmmkk.github.io/9x9quiz/` verified reachable; user-confirmed mobile smoke verification | Web release CI/CD milestone is complete end-to-end with production deployment, launch QA evidence, and rollback guardrails in place. |
+| M8 | Completed | Historical milestone restored after numbering correction; `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`; user-confirmed it was already merged to `main`. | M8 is reserved for the completed post-release learning flow polish workstream, so new milestone planning continues at M9. |
+| M9 | Partial | `M9-01` completed in `docs/roadmap/implementation/m09-release-provenance-visibility.md`; `docs/reference/design.md` and `docs/reference/web-release-strategy.md` now define the release provenance footer contract, exact-SHA metadata requirements, and local fallback/link-disable rules; `npm run build` (pass) | The release provenance contract is locked, including `v<version> (<short-sha>)` footer copy and build-time injection rules. Implementation work continues with metadata wiring (`M9-02`) and title-screen rendering (`M9-03`). |
 
 ## Current Canonical Sources
 

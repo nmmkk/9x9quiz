@@ -1,6 +1,6 @@
 # Web Release Strategy (M7)
 
-Last updated: 2026-02-23
+Last updated: 2026-03-23
 
 ## 1) Decision
 
@@ -176,12 +176,38 @@ For M7 closeout, run and record both:
 1. one manual `workflow_dispatch` deploy run on `main` (rerun evidence)
 2. one automatic deploy run triggered by successful CI on `main`
 
-## 9) Remaining Follow-up
+## 9) Release Provenance Display Strategy (M9)
+
+* Product requirement:
+  * the deployed app must show a small title-screen footer that identifies the code revision at a glance and can open the matching commit page.
+* Required metadata fields:
+  * semantic version from `package.json`
+  * full commit SHA from the exact build revision
+  * short SHA derived from the same commit
+  * repository commit URL template or fully resolved commit URL for the exact SHA
+* Optional metadata field:
+  * build timestamp for diagnostics or deeper support workflows
+* Injection policy:
+  * inject metadata at build time through Vite environment variables
+  * for GitHub Pages deploys, source commit metadata from `needs.preflight.outputs.deploy_sha`
+  * for local development or ad hoc local builds, provide deterministic fallback values without requiring manual env setup
+* Display policy:
+  * default footer string is `v<version> (<short-sha>)`
+  * keep the footer always visible on the title screen
+  * when commit URL metadata is available, render the footer as an external link to the exact commit
+  * treat build timestamp as secondary information, not required in the default footer
+  * when commit URL metadata is not available, keep the same text but do not link to a guessed destination
+* Rejected approach:
+  * do not fetch latest branch or commit data at runtime from GitHub APIs
+  * reason: the app is a PWA, so runtime repository state can drift from the cached bundle currently served to the user
+
+## 10) Remaining Follow-up
 
 * Optional: execute one `workflow_dispatch` deployment rerun on `main` and capture run URL.
 * Execute launch QA pass and final docs synchronization (`M7-05`).
+* Implement release provenance visibility (`M9-01` through `M9-04`).
 
-## 10) Rollback Runbook and Quality Guardrails (M7-04)
+## 11) Rollback Runbook and Quality Guardrails (M7-04)
 
 ### First responder scope
 

@@ -1,6 +1,6 @@
 # 9x9quiz Web MVP V1 Design Specification
 
-Last updated: 2026-02-18
+Last updated: 2026-03-23
 
 ## 1) Product Intent
 
@@ -130,6 +130,7 @@ Last updated: 2026-02-18
   * Game title logo area.
   * `Start` button.
   * `High Score` button (or inline panel link).
+  * Small footer link showing the deployed build provenance (`version + short SHA`) on the title screen at all times.
 
 ```text
 [Title]
@@ -139,8 +140,29 @@ Last updated: 2026-02-18
 |                                      |
 |           [ Start Game ]             |
 |           [ High Scores ]            |
+|       [v0.1.0 (abc1234)]             |
 +--------------------------------------+
 ```
+
+### 8.1.a Release Provenance Footer
+
+* Purpose: let a parent, tester, or developer identify the deployed code revision at a glance and jump directly to the matching source commit without opening devtools.
+* Placement and behavior:
+  * Show as a low-emphasis footer link at the bottom of the title screen panel.
+  * Keep it visible in both mobile portrait and desktop layouts without scrolling.
+  * Do not compete with primary play actions; use secondary text treatment.
+  * Open the commit details in a new browser tab/window when activated.
+* Content rules:
+  * Always show app version from build metadata.
+  * Always show short commit SHA from the exact deployed bundle.
+  * Link target should resolve to the canonical GitHub commit URL for the full SHA used in the build.
+  * Build timestamp may be available for diagnostics, but it is secondary and should not be required in the default footer string.
+  * If commit metadata is unavailable in local development, show a deterministic fallback such as `dev` rather than hiding the footer.
+* Data integrity rule:
+  * The displayed SHA must be injected at build time from the same revision used to build the artifact, not fetched at runtime from the latest branch head.
+  * This avoids drift between cached PWA assets and repository state.
+* Interaction rule:
+  * If a valid commit URL cannot be constructed in local development or other non-release contexts, render the same footer text in a disabled or non-link presentation rather than pointing to an incorrect destination.
 
 ### 8.2 Mode Select Screen
 
