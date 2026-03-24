@@ -2,6 +2,10 @@
   "name": "9x9quiz",
   "private": true,
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmmkk/9x9quiz.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +18,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.0",

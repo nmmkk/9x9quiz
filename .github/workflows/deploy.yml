@@ -84,6 +84,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_COMMIT_SHA: ${{ needs.preflight.outputs.deploy_sha }}
+          VITE_COMMIT_URL: ${{ format('https://github.com/{0}/commit/{1}', github.repository, needs.preflight.outputs.deploy_sha) }}
         run: npm run build
 
       - name: Upload artifact

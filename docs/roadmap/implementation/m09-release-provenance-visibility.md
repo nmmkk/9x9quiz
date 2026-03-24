@@ -5,7 +5,7 @@
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
 | M9-01 | Define release provenance contract and title-screen link UX | Completed | M7-05 | doc review, `npm run build` |
-| M9-02 | Inject build metadata and commit URL into local and deploy builds | Planned | M9-01 | `npm run build`, workflow diff review |
+| M9-02 | Inject build metadata and commit URL into local and deploy builds | Completed | M9-01 | `npm run test`, `npm run build`, workflow diff review |
 | M9-03 | Render title-screen provenance footer link | Planned | M9-01, M9-02 | `npm run test`, `npm run build`, responsive UI check |
 | M9-04 | Verify deployed provenance and sync status docs | Planned | M9-02, M9-03 | published URL smoke check, `docs/qa/reports/` |
 

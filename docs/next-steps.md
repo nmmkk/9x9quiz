@@ -3,8 +3,8 @@
 ## Immediate
 
 1. Evaluate `N-09` (正解進捗の可視化ゲージ/アイコン), `N-10` (段ごとの正解率カードから段別問題へ直行), and `N-11` (成績リセット機能) as post-release quality uplift candidates.
-2. Start `M9-02` to inject version/SHA metadata and canonical commit URLs into both local and deploy builds using the exact build revision.
-3. Execute `M9-03` next so the title screen renders the provenance footer and opens the matching commit page when metadata is present.
+2. Start `M9-03` to render the title-screen provenance footer using the injected version/SHA metadata and exact commit URL.
+3. Execute `M9-04` next so the published app is smoke-checked and the final M9 status evidence is recorded under `docs/qa/reports/`.
 4. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option and postpone `M6-02` onward until product priorities require native packaging.
 5. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
 
