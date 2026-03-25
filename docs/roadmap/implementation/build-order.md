@@ -7,7 +7,7 @@
 5. M9-01 (Completed)
 6. M9-02 (Completed) depends on M9-01
 7. M9-03 (Completed) depends on M9-01, M9-02
-8. M9-04 (Partial) depends on M9-02, M9-03
+8. M9-04 (Completed) depends on M9-02, M9-03
 9. M6-02 (Planned, Deferred) depends on M6-01
 10. M6-03 (Planned, Deferred) depends on M6-01, M6-02
 11. M6-04 (Planned, Deferred) depends on M6-01, M6-02, M6-03
