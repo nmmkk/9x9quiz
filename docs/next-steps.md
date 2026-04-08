@@ -2,10 +2,13 @@
 
 ## Immediate
 
-1. Evaluate `N-09` (正解進捗の可視化ゲージ/アイコン), `N-10` (段ごとの正解率カードから段別問題へ直行), and `N-11` (成績リセット機能) as post-release quality uplift candidates.
-2. Evaluate whether to resume deferred native packaging work from `M6-02` or promote a new backlog item into the next milestone.
+1. Execute `M10-05` after merge by verifying the deployed monochrome redesign on the published URL and recording evidence under `docs/qa/reports/`.
+2. After `M10-05`, decide whether to resume deferred native packaging work from `M6-02` or promote a new backlog item from `docs/roadmap/improvement-ideas.md`.
 3. Keep `M6-01` architecture decision (`docs/reference/native-strategy.md`) as a deferred option until product priorities require native packaging.
-4. Optional: run one `workflow_dispatch` deploy rerun on `main` and record run URL as additional operational evidence.
+
+## Active Milestone
+
+1. `M10` (`docs/roadmap/implementation/m10-ollama-inspired-design-refresh.md`) is in closeout: implementation and local validation are complete, while deployed smoke verification remains open as `M10-05`.
 
 ## Documentation Follow-Through
 

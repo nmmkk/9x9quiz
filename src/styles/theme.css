@@ -1,20 +1,22 @@
 :root {
-  --font-body: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Segoe UI", sans-serif;
-  --font-display: "Courier New", "Consolas", monospace;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Yu Gothic UI", sans-serif;
+  --font-display: "SF Pro Rounded", "Arial Rounded MT Bold", "Hiragino Maru Gothic ProN", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
-  --color-text: #16253e;
-  --color-border-strong: #1b2a41;
-  --color-border-soft: #7f8fa3;
-  --color-surface-top: #fffdf2;
-  --color-surface-base: #f8f1d1;
-  --color-secondary: #d9e5f2;
-  --color-accent: #1f8f5f;
-  --color-accent-dark: #0f5f40;
-  --color-feedback-glow: rgba(31, 143, 95, 0.45);
-  --color-feedback-spark: rgba(255, 183, 3, 0.4);
-  --color-focus: #ffb703;
-  --color-page-top: #20355f;
-  --color-page-bottom: #101a34;
+  --color-page: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #fafafa;
+  --color-surface-strong: #e5e5e5;
+  --color-border: #e5e5e5;
+  --color-border-strong: #d4d4d4;
+  --color-text: #000000;
+  --color-text-strong: #262626;
+  --color-text-body: #404040;
+  --color-text-muted: #737373;
+  --color-text-subtle: #a3a3a3;
+  --color-focus: rgba(59, 130, 246, 0.5);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -22,99 +24,75 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 88px;
 
-  --border-width-medium: 3px;
-  --border-width-strong: 4px;
-  --radius-panel: 6px;
-  --radius-button: 4px;
-
-  --shadow-card: 6px 6px 0 #1b2a41;
-  --shadow-button: 3px 3px 0 #1b2a41;
+  --border-width: 1px;
+  --radius-container: 12px;
+  --radius-pill: 9999px;
 }
 
 body {
   color: var(--color-text);
   font-family: var(--font-body);
-  background-color: var(--color-page-bottom);
-  background-image:
-    linear-gradient(180deg, var(--color-page-top), var(--color-page-bottom)),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.05) 0,
-      rgba(255, 255, 255, 0.05) 2px,
-      transparent 2px,
-      transparent 16px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.04) 0,
-      rgba(255, 255, 255, 0.04) 2px,
-      transparent 2px,
-      transparent 16px
-    );
+  background: var(--color-page);
 }
 
 button {
   min-width: 44px;
   min-height: 44px;
-  border: var(--border-width-medium) solid var(--color-border-strong);
-  border-radius: var(--radius-button);
-  background: var(--color-surface-top);
-  color: var(--color-text);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  padding: 10px 12px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-body);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 10px 24px;
   cursor: pointer;
-  box-shadow: var(--shadow-button);
-  transition:
-    transform 80ms steps(2, end),
-    box-shadow 80ms steps(2, end),
-    background-color 80ms steps(2, end);
 }
 
 button:hover:not(:disabled) {
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--color-border-strong);
-}
-
-button:active:not(:disabled) {
-  transform: translate(2px, 2px);
-  box-shadow: 0 0 0 var(--color-border-strong);
+  border-color: var(--color-border-strong);
 }
 
 button:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--color-focus);
 }
 
 button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
-  box-shadow: none;
 }
 
 .primary-button {
-  background: var(--color-accent);
-  border-color: var(--color-accent-dark);
-  color: #f7fff9;
-}
-
-.primary-button:hover:not(:disabled) {
-  background: #25a06c;
+  background: var(--color-surface-strong);
+  border-color: var(--color-surface-strong);
+  color: var(--color-text-strong);
 }
 
 .secondary-button {
-  background: var(--color-secondary);
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-body);
 }
 
-.secondary-button:hover:not(:disabled) {
-  background: #e6eef8;
+.cta-button {
+  background: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-surface);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  button {
-    transition: none;
-  }
+a {
+  color: var(--color-text);
+  text-underline-offset: 0.18em;
+}
+
+a:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--color-focus);
+  border-radius: 4px;
 }

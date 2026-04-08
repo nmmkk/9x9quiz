@@ -3,7 +3,7 @@
 ## 1) Purpose
 
 * This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
-* Current active target: backlog prioritization / next milestone selection aligned with `docs/reference/core-value.md`.
+* Current active target: M10 redesign closeout and next milestone selection aligned with `docs/reference/core-value.md`.
 
 ## 2) Milestone Files
 
@@ -16,6 +16,7 @@
 * `docs/roadmap/implementation/m07-web-release-cicd.md`
 * `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`
 * `docs/roadmap/implementation/m09-release-provenance-visibility.md`
+* `docs/roadmap/implementation/m10-ollama-inspired-design-refresh.md`
 
 ## 3) Supporting Plans
 

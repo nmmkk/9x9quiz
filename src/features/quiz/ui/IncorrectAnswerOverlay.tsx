@@ -19,7 +19,7 @@ export function IncorrectAnswerOverlay({
         <h3 id="incorrect-title">{t("quiz.incorrect.title")}</h3>
         <p>{tf("quiz.incorrect.enteredLabel", { answer: submittedAnswer })}</p>
         <p>{tf("quiz.incorrect.correctAnswerLabel", { answer: correctAnswer })}</p>
-        <button type="button" className="primary-button" onClick={onNext}>
+        <button type="button" className="cta-button" onClick={onNext}>
           {t("quiz.incorrect.nextButton")}
         </button>
       </section>

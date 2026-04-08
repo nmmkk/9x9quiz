@@ -52,14 +52,27 @@ export function TitleScreen({
   };
 
   return (
-    <section className="panel title-panel" aria-labelledby="title-heading">
-      <h1 id="title-heading">{t("app.title")}</h1>
-      <p>{t("title.description")}</p>
+    <section className="panel panel--title title-panel" aria-labelledby="title-heading">
+      <header className="title-header">
+        <p className="eyebrow">1 x 1 .. 9 x 9</p>
+        <div className="title-mark" aria-hidden="true">
+          <div className="title-mark-grid">
+            <span>9</span>
+            <span>x</span>
+            <span>9</span>
+          </div>
+          <p className="title-command">
+            <code>practice 1..9 x 1..9</code>
+          </p>
+        </div>
+        <h1 id="title-heading">{t("app.title")}</h1>
+        <p className="title-description">{t("title.description")}</p>
+      </header>
 
       <MasteryPanel masterySnapshot={masterySnapshot} />
 
-      <div className="button-row">
-        <button type="button" className="primary-button" onClick={onStart}>
+      <div className="button-row title-actions">
+        <button type="button" className="cta-button" onClick={onStart}>
           {lastPlayedMode === null
             ? t("title.startButton")
             : tf("title.quickStartButton", { count: lastPlayedMode })}

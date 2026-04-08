@@ -62,7 +62,7 @@ export function NumericPad({
 
       <button
         type="button"
-        className="primary-button submit-button"
+        className="cta-button submit-button"
         disabled={disabled || submitDisabled}
         onClick={onSubmit}
       >

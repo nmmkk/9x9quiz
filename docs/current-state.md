@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-03-24
+Last updated: 2026-04-07
 
 ## Milestone Status
 
@@ -15,6 +15,7 @@ Last updated: 2026-03-24
 | M7 | Completed | `M7-01` through `M7-05` completed in `docs/roadmap/implementation/m07-web-release-cicd.md`; `.github/workflows/deploy.yml` runs after successful `CI` on `main`, restricts manual dispatch to `main`, validates green `test-build`, and rejects stale rerun SHA; `docs/qa/reports/2026-02-23-m07-03-closeout.md`; `docs/qa/reports/2026-02-23-m07-04-checklist-dry-run.md`; `docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`; CI run `22296144653` (success); Deploy Pages run `22296154268` (success); published URL `https://nmmkk.github.io/9x9quiz/` verified reachable; user-confirmed mobile smoke verification | Web release CI/CD milestone is complete end-to-end with production deployment, launch QA evidence, and rollback guardrails in place. |
 | M8 | Completed | `M8-01` through `M8-04` completed in `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md`; `docs/qa/reports/2026-02-28-m08-04-qa.md`; `npm run test` (pass, 18 files / 67 tests); `npm run build` (pass); published URL verified after successful Pages deploy run `24118420257` for `main` SHA `54e8b88`; user-confirmed desktop and mobile verification for progress indicator, direct jump, and protected reset flow | Post-release learning flow polish is complete end-to-end: progress visibility, mastery-card quick actions, and guarded reset flow are shipped and verified on the live site across desktop and mobile. |
 | M9 | Completed | `M9-01` through `M9-04` completed in `docs/roadmap/implementation/m09-release-provenance-visibility.md`; `docs/qa/reports/2026-03-23-m09-qa.md`; `npm run test` (pass, 18 files / 67 tests); `npm run build` (pass); published URL `https://nmmkk.github.io/9x9quiz/` verified after successful Pages deploy run `23493536548` for `main` SHA `aec82a6`; user-confirmed desktop and mobile footer verification | Release provenance visibility is complete end-to-end: exact build metadata is injected into artifacts, the title screen shows `version + short SHA`, and the live deployed footer is verified on desktop and mobile. |
+| M10 | Partial | `M10-01` through `M10-04` completed in `docs/roadmap/implementation/m10-ollama-inspired-design-refresh.md`; `docs/qa/reports/2026-04-07-m10-qa.md`; `npm run test` (pass, 18 files / 67 tests); `npm run build` (pass); `npm run dev -- --host 127.0.0.1 --port 4174 --strictPort` (booted) | The monochrome redesign is implemented and locally validated. `M10-05` remains open for post-merge published smoke verification before the milestone can be closed. |
 
 ## Current Canonical Sources
 
