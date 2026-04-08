@@ -61,7 +61,7 @@ export function ModeSelectScreen({
   };
 
   return (
-    <section className="panel" aria-labelledby="mode-heading">
+    <section className="panel panel--wide mode-panel" aria-labelledby="mode-heading">
       <h2 id="mode-heading">{t("mode.heading")}</h2>
       <p>{t("mode.description")}</p>
 
@@ -83,7 +83,7 @@ export function ModeSelectScreen({
             <div key={mode} className="mode-card" role="listitem">
               <button
                 type="button"
-                className="primary-button mode-start-button"
+                className="cta-button mode-start-button"
                 onClick={() => onStartQuiz(mode, selectedPracticeScope)}
               >
                 {tf("mode.optionLabel", { count: mode })}
@@ -101,16 +101,18 @@ export function ModeSelectScreen({
         })}
       </div>
 
-      <button type="button" className="secondary-button" onClick={onBack}>
-        {t("mode.backToTitleButton")}
-      </button>
-      <button
-        type="button"
-        className="secondary-button mode-reset-progress-button"
-        onClick={handleResetProgress}
-      >
-        {t("mode.resetProgressButton")}
-      </button>
+      <div className="button-row mode-action-row">
+        <button type="button" className="secondary-button" onClick={onBack}>
+          {t("mode.backToTitleButton")}
+        </button>
+        <button
+          type="button"
+          className="secondary-button mode-reset-progress-button"
+          onClick={handleResetProgress}
+        >
+          {t("mode.resetProgressButton")}
+        </button>
+      </div>
     </section>
   );
 }

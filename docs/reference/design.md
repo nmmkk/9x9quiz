@@ -1,12 +1,12 @@
 # 9x9quiz Web MVP V1 Design Specification
 
-Last updated: 2026-03-23
+Last updated: 2026-04-07
 
 ## 1) Product Intent
 
 * Build a browser quiz app that helps grade-2 students in Japan memorize multiplication tables (kuku).
 * Keep V1 simple and reliable with fixed-length sessions, clear scoring, and immediate correction feedback.
-* Add game-like 8-bit visual flavor, while avoiding advanced game mechanics in V1.
+* Use an Ollama-inspired monochrome UI system: pure white canvas, grayscale-only surfaces, pill-shaped controls, and soft rounded display typography.
 * Keep feature decisions aligned with `docs/reference/core-value.md`.
 
 ## 2) Users and Context
@@ -108,12 +108,15 @@ Last updated: 2026-03-23
 
 ### Visual Direction
 
-* Theme: NES/SNES-inspired pixel-art game UI.
+* Theme: Ollama-inspired radical minimalism adapted for a child-friendly multiplication practice app.
 * Requirements:
-  * Pixel-like typography and blocky UI components.
-  * Bright, high-contrast palette that remains readable.
-  * Clear focus/pressed states for all interactive controls.
-  * Simple transition motion (no heavy animation dependency).
+  * Pure white page background with grayscale-only surfaces and text.
+  * No gradients and no shadows anywhere in the interface.
+  * Rounded display typography for major headings, with standard system sans-serif for body copy.
+  * Binary radius system only: 12px for containers and 9999px for interactive controls.
+  * Primary CTAs may use black pills, while secondary actions stay white or light-gray pills.
+  * Focus treatment may use a blue accessibility ring, but normal interaction stays grayscale.
+  * Keep layouts short, sparse, and centered so whitespace remains part of the design.
 
 ### Responsive Behavior
 
@@ -127,7 +130,7 @@ Last updated: 2026-03-23
 
 * Purpose: enter app and branch to play/high score view.
 * Required elements:
-  * Game title logo area.
+  * Minimal monochrome title mark or badge area.
   * `Start` button.
   * `High Score` button (or inline panel link).
   * Small footer link showing the deployed build provenance (`version + short SHA`) on the title screen at all times.
@@ -136,7 +139,7 @@ Last updated: 2026-03-23
 [Title]
 +--------------------------------------+
 |              くくクイズ               |
-|         pixel logo / mascot          |
+|        minimal mark / badge          |
 |                                      |
 |           [ Start Game ]             |
 |           [ High Scores ]            |

@@ -98,7 +98,7 @@ export function QuizScreen({
 
   return (
     <section
-      className={`panel quiz-panel${isCorrectFeedbackActive ? " quiz-panel--correct-feedback" : ""}`}
+      className={`panel panel--narrow quiz-panel${isCorrectFeedbackActive ? " quiz-panel--correct-feedback" : ""}`}
       aria-labelledby="quiz-heading"
     >
       <div

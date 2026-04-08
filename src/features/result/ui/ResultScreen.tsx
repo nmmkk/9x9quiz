@@ -50,7 +50,7 @@ export function ResultScreen({
   );
 
   return (
-    <section className="panel result-panel result-panel--entry" aria-labelledby="result-heading">
+    <section className="panel panel--narrow result-panel" aria-labelledby="result-heading">
       <h2 id="result-heading">{t("result.eyebrow")}</h2>
 
       <p>{tf("result.correctLabel", { correct: correctCount, total: totalQuestions })}</p>
@@ -67,7 +67,7 @@ export function ResultScreen({
             {tf("result.missedFactReviewButton", { count: missedFactCount })}
           </button>
         ) : null}
-        <button type="button" className="primary-button" onClick={onPlayAgain}>
+        <button type="button" className="cta-button" onClick={onPlayAgain}>
           {t("result.playAgainButton")}
         </button>
         <button type="button" className="secondary-button" onClick={onBackToTitle}>

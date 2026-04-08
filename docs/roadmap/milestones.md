@@ -11,3 +11,4 @@
 | M7 | Web release CI/CD | Completed | `docs/roadmap/implementation/m07-web-release-cicd.md` |
 | M8 | Post-release learning flow polish | Completed | `docs/roadmap/implementation/m08-post-release-learning-flow-polish.md` |
 | M9 | Release provenance visibility | Completed | `docs/roadmap/implementation/m09-release-provenance-visibility.md` |
+| M10 | Ollama-inspired monochrome design refresh | Partial | `docs/roadmap/implementation/m10-ollama-inspired-design-refresh.md` |
