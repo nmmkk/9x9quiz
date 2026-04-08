@@ -7,7 +7,7 @@
 | M9-01 | Define release provenance contract and title-screen link UX | Completed | M7-05 | doc review, `npm run build` |
 | M9-02 | Inject build metadata and commit URL into local and deploy builds | Completed | M9-01 | `npm run test`, `npm run build`, workflow diff review |
 | M9-03 | Render title-screen provenance footer link | Completed | M9-01, M9-02 | `npm run test`, `npm run build`, `npx vite --host 127.0.0.1 --port 4173 --strictPort` |
-| M9-04 | Verify deployed provenance and sync status docs | Partial | M9-02, M9-03 | `npm run test`, `npm run build`, published URL smoke check, `docs/qa/reports/2026-03-23-m09-qa.md` |
+| M9-04 | Verify deployed provenance and sync status docs | Completed | M9-02, M9-03 | `npm run test`, `npm run build`, published URL smoke check, `docs/qa/reports/2026-03-23-m09-qa.md` |
 
 ## Scope
 
