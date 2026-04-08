@@ -3,7 +3,7 @@
 ## 1) Purpose
 
 * This roadmap defines implementation tickets for milestone delivery of 9x9quiz.
-* Current active target: M8 post-release learning flow polish closeout aligned with `docs/reference/core-value.md`.
+* Current active target: backlog prioritization / next milestone selection aligned with `docs/reference/core-value.md`.
 
 ## 2) Milestone Files
 
