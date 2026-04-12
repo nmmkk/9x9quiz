@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveQuizKeyboardAction } from "../QuizScreen";
+import { resolveQuizKeyboardAction, shouldHandleQuizKeyboardAction } from "../QuizScreen";
 
 describe("resolveQuizKeyboardAction", () => {
   it("maps digit keys to digit actions", () => {
@@ -17,6 +17,54 @@ describe("resolveQuizKeyboardAction", () => {
     expect(resolveQuizKeyboardAction(createKeyboardEvent("a"))).toBeNull();
     expect(resolveQuizKeyboardAction(createKeyboardEvent("5", { ctrlKey: true }))).toBeNull();
     expect(resolveQuizKeyboardAction(createKeyboardEvent("8", { metaKey: true }))).toBeNull();
+  });
+});
+
+describe("shouldHandleQuizKeyboardAction", () => {
+  it("skips submit handling when the incorrect-answer overlay is visible", () => {
+    expect(
+      shouldHandleQuizKeyboardAction("submit", {
+        hasInput: true,
+        isComplete: false,
+        isOverlayVisible: true,
+      }),
+    ).toBe(false);
+  });
+
+  it("handles submit only when the quiz can actually submit an answer", () => {
+    expect(
+      shouldHandleQuizKeyboardAction("submit", {
+        hasInput: true,
+        isComplete: false,
+        isOverlayVisible: false,
+      }),
+    ).toBe(true);
+
+    expect(
+      shouldHandleQuizKeyboardAction("submit", {
+        hasInput: false,
+        isComplete: false,
+        isOverlayVisible: false,
+      }),
+    ).toBe(false);
+  });
+
+  it("only handles digit and edit keys during active question entry", () => {
+    expect(
+      shouldHandleQuizKeyboardAction({ digit: "5" }, {
+        hasInput: false,
+        isComplete: false,
+        isOverlayVisible: false,
+      }),
+    ).toBe(true);
+
+    expect(
+      shouldHandleQuizKeyboardAction("backspace", {
+        hasInput: false,
+        isComplete: false,
+        isOverlayVisible: false,
+      }),
+    ).toBe(false);
   });
 });
 

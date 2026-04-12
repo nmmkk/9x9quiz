@@ -32,6 +32,25 @@ export function resolveQuizKeyboardAction(event: Pick<KeyboardEvent, "key" | "al
   return null;
 }
 
+export function shouldHandleQuizKeyboardAction(
+  action: QuizKeyboardAction,
+  options: {
+    isComplete: boolean;
+    isOverlayVisible: boolean;
+    hasInput: boolean;
+  },
+): boolean {
+  if (typeof action !== "string") {
+    return !options.isComplete && !options.isOverlayVisible;
+  }
+
+  if (action === "submit") {
+    return options.hasInput && !options.isComplete && !options.isOverlayVisible;
+  }
+
+  return !options.isComplete && !options.isOverlayVisible && options.hasInput;
+}
+
 export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
@@ -140,6 +159,10 @@ export function QuizScreen({
     const onKeyDown = (event: KeyboardEvent) => {
       const action = resolveQuizKeyboardAction(event);
       if (action === null) {
+        return;
+      }
+
+      if (!shouldHandleQuizKeyboardAction(action, { hasInput, isComplete, isOverlayVisible })) {
         return;
       }
 
