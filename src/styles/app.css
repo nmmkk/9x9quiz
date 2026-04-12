@@ -368,6 +368,7 @@ html:lang(ja-JP) .title-provenance-text {
   border: var(--border-width-medium) solid var(--color-border-strong);
   border-radius: var(--radius-button);
   background: #f7fbff;
+  transition: background-color 120ms ease-out, box-shadow 120ms ease-out, border-color 120ms ease-out;
 }
 
 .numeric-pad {
@@ -469,6 +470,16 @@ html:lang(ja-JP) .title-provenance-text {
     animation: result-panel-entry 260ms ease-out;
   }
 
+  .answer-slot--keyboard-feedback-a,
+  .answer-slot--keyboard-feedback-b {
+    animation: answer-slot-keyboard-feedback 150ms ease-out;
+  }
+
+  .answer-slot--submit-feedback-a,
+  .answer-slot--submit-feedback-b {
+    animation: answer-slot-submit-feedback 170ms ease-out;
+  }
+
   @keyframes quiz-correct-feedback {
     0% {
       box-shadow: var(--shadow-card);
@@ -511,6 +522,48 @@ html:lang(ja-JP) .title-provenance-text {
       transform: translateY(0);
     }
   }
+
+  @keyframes answer-slot-keyboard-feedback {
+    0% {
+      background: #f7fbff;
+      box-shadow: none;
+      transform: scale(1);
+    }
+
+    45% {
+      background: #fff4bf;
+      border-color: #b68a2f;
+      box-shadow: 0 0 0 3px rgba(255, 220, 110, 0.35);
+      transform: scale(1.03);
+    }
+
+    100% {
+      background: #f7fbff;
+      box-shadow: none;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes answer-slot-submit-feedback {
+    0% {
+      background: #f7fbff;
+      box-shadow: none;
+      transform: scale(1);
+    }
+
+    45% {
+      background: #dff8e6;
+      border-color: #3f8d57;
+      box-shadow: 0 0 0 3px rgba(111, 191, 130, 0.3);
+      transform: scale(1.04);
+    }
+
+    100% {
+      background: #f7fbff;
+      box-shadow: none;
+      transform: scale(1);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -520,6 +573,20 @@ html:lang(ja-JP) .title-provenance-text {
 
   .correct-feedback-burst {
     display: none;
+  }
+
+  .answer-slot--keyboard-feedback-a,
+  .answer-slot--keyboard-feedback-b {
+    background: #fff4bf;
+    border-color: #b68a2f;
+    box-shadow: 0 0 0 3px rgba(255, 220, 110, 0.35);
+  }
+
+  .answer-slot--submit-feedback-a,
+  .answer-slot--submit-feedback-b {
+    background: #dff8e6;
+    border-color: #3f8d57;
+    box-shadow: 0 0 0 3px rgba(111, 191, 130, 0.3);
   }
 }
 

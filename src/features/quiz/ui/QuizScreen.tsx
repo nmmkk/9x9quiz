@@ -6,6 +6,32 @@ import { IncorrectAnswerOverlay } from "./IncorrectAnswerOverlay";
 import { NumericPad } from "./NumericPad";
 import { SessionProgressIndicator } from "./SessionProgressIndicator";
 
+type QuizKeyboardAction = "backspace" | "clear" | "submit" | { digit: string };
+
+export function resolveQuizKeyboardAction(event: Pick<KeyboardEvent, "key" | "altKey" | "ctrlKey" | "metaKey">): QuizKeyboardAction | null {
+  if (event.altKey || event.ctrlKey || event.metaKey) {
+    return null;
+  }
+
+  if (/^\d$/.test(event.key)) {
+    return { digit: event.key };
+  }
+
+  if (event.key === "Backspace") {
+    return "backspace";
+  }
+
+  if (event.key === "Delete") {
+    return "clear";
+  }
+
+  if (event.key === "Enter") {
+    return "submit";
+  }
+
+  return null;
+}
+
 export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
@@ -53,6 +79,8 @@ export function QuizScreen({
   const hasReportedComplete = useRef(false);
   const previousCorrectCount = useRef(correctCount);
   const [isCorrectFeedbackActive, setIsCorrectFeedbackActive] = useState(false);
+  const [keyboardInputFeedbackCount, setKeyboardInputFeedbackCount] = useState(0);
+  const [keyboardSubmitFeedbackCount, setKeyboardSubmitFeedbackCount] = useState(0);
 
   useEffect(() => {
     const hasNewCorrectAnswer = correctCount > previousCorrectCount.current;
@@ -95,6 +123,57 @@ export function QuizScreen({
   const hasInput = inputValue.length > 0;
   const isOverlayVisible = incorrectAnswerReveal !== null;
   const answerDisplay = hasInput ? inputValue : "__";
+  const keyboardFeedbackClassName =
+    keyboardInputFeedbackCount === 0
+      ? ""
+      : keyboardInputFeedbackCount % 2 === 0
+        ? "answer-slot--keyboard-feedback-a"
+        : "answer-slot--keyboard-feedback-b";
+  const keyboardSubmitFeedbackClassName =
+    keyboardSubmitFeedbackCount === 0
+      ? ""
+      : keyboardSubmitFeedbackCount % 2 === 0
+        ? "answer-slot--submit-feedback-a"
+        : "answer-slot--submit-feedback-b";
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const action = resolveQuizKeyboardAction(event);
+      if (action === null) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (typeof action === "string") {
+        if (action === "backspace") {
+          backspaceInput();
+          return;
+        }
+
+        if (action === "clear") {
+          clearInput();
+          return;
+        }
+
+        if (hasInput && !isComplete && !isOverlayVisible) {
+          setKeyboardSubmitFeedbackCount((currentValue) => currentValue + 1);
+        }
+
+        submitAnswer();
+        return;
+      }
+
+      setKeyboardInputFeedbackCount((currentValue) => currentValue + 1);
+      appendDigit(action.digit);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [appendDigit, backspaceInput, clearInput, hasInput, isComplete, isOverlayVisible, submitAnswer]);
 
   return (
     <section
@@ -116,7 +195,10 @@ export function QuizScreen({
       </div>
 
       <p className="quiz-expression">
-        {currentFact.left} x {currentFact.right} = <span className="answer-slot">{answerDisplay}</span>
+        {currentFact.left} x {currentFact.right} ={" "}
+        <span className={`answer-slot ${keyboardFeedbackClassName} ${keyboardSubmitFeedbackClassName}`.trim()}>
+          {answerDisplay}
+        </span>
       </p>
 
       <NumericPad
