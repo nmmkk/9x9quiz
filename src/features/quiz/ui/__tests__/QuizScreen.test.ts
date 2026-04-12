@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { resolveQuizKeyboardAction, shouldHandleQuizKeyboardAction } from "../QuizScreen";
+import {
+  resolveQuizKeyboardAction,
+  shouldHandleQuizKeyboardAction,
+  shouldIgnoreQuizKeyboardEvent,
+} from "../QuizScreen";
 
 describe("resolveQuizKeyboardAction", () => {
   it("maps digit keys to digit actions", () => {
@@ -63,6 +67,42 @@ describe("shouldHandleQuizKeyboardAction", () => {
         hasInput: false,
         isComplete: false,
         isOverlayVisible: false,
+      }),
+    ).toBe(false);
+  });
+});
+
+describe("shouldIgnoreQuizKeyboardEvent", () => {
+  it("ignores already-handled events", () => {
+    expect(
+      shouldIgnoreQuizKeyboardEvent({
+        defaultPrevented: true,
+        target: null,
+      }),
+    ).toBe(true);
+  });
+
+  it("ignores keyboard shortcuts when focus is on interactive controls", () => {
+    expect(
+      shouldIgnoreQuizKeyboardEvent({
+        defaultPrevented: false,
+        target: { tagName: "BUTTON" },
+      }),
+    ).toBe(true);
+
+    expect(
+      shouldIgnoreQuizKeyboardEvent({
+        defaultPrevented: false,
+        target: { tagName: "INPUT" },
+      }),
+    ).toBe(true);
+  });
+
+  it("allows quiz shortcuts from non-interactive elements", () => {
+    expect(
+      shouldIgnoreQuizKeyboardEvent({
+        defaultPrevented: false,
+        target: { tagName: "DIV" },
       }),
     ).toBe(false);
   });

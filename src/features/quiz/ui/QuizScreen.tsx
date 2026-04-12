@@ -51,6 +51,35 @@ export function shouldHandleQuizKeyboardAction(
   return !options.isComplete && !options.isOverlayVisible && options.hasInput;
 }
 
+export function shouldIgnoreQuizKeyboardEvent(
+  event: { defaultPrevented: boolean; target: unknown },
+): boolean {
+  if (event.defaultPrevented) {
+    return true;
+  }
+
+  const target = event.target;
+  if (!isKeyboardEventTargetLike(target)) {
+    return false;
+  }
+
+  if (target.isContentEditable) {
+    return true;
+  }
+
+  return ["BUTTON", "INPUT", "SELECT", "TEXTAREA", "A"].includes(target.tagName);
+}
+
+function isKeyboardEventTargetLike(
+  target: unknown,
+): target is { tagName: string; isContentEditable?: boolean } {
+  if (target === null || typeof target !== "object") {
+    return false;
+  }
+
+  return "tagName" in target && typeof target.tagName === "string";
+}
+
 export type QuizSessionResult = {
   correctCount: number;
   totalQuestions: number;
@@ -157,6 +186,10 @@ export function QuizScreen({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (shouldIgnoreQuizKeyboardEvent(event)) {
+        return;
+      }
+
       const action = resolveQuizKeyboardAction(event);
       if (action === null) {
         return;
