@@ -25,8 +25,8 @@
 * 現在: Web アプリ (PC / モバイルブラウザ)
 * 将来候補: オフライン対応、PWA、iOS / Android ネイティブ化
 
-## 公開URL (M7)
+## 公開URL
 
-* Canonical URL: `https://nmmkk.github.io/9x9quiz/`
+* Canonical URL: `https://9x9quiz.pages.dev/`
 * CI/CD 方針と運用手順は `docs/reference/web-release-strategy.md` を参照
 
