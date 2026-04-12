@@ -1,10 +1,10 @@
 # Improvement Ideas Backlog
 
-Last updated: 2026-02-28
+Last updated: 2026-03-24
 
 ## Current Position
 
-* Milestone status: `M1`-`M5` Completed, `M6` Partial (strategy decision only), `M7` Completed, `M8` Partial (`M8-01` completed).
+* Milestone status: `M1`-`M5` Completed, `M6` Partial (strategy decision only), `M7` Completed, `M8` Completed, `M9` Completed.
 * Web release CI/CD is now operational on production URL, so the next idea intake should be managed as either:
   * next milestone candidates (when order and scope are fixed), or
   * backlog candidates (when timing/scope is still undecided).
@@ -25,6 +25,8 @@ Last updated: 2026-02-28
 | M5 | Offline-ready PWA foundation | 一度ロード後のオフライン動作 / インストール可能なPWA | Completed |
 | M6 | Native packaging pilot | ネイティブアプリ化 (iOS/Android) | Partial (`M6-01` only completed; implementation deferred) |
 | M7 | Web release CI/CD | GitHub CI/CD + web app自動デプロイ | Completed |
+| M8 | Post-release learning flow polish | 正解進捗の可視化、段別カードからの直行導線、成績リセット導線を追加し、反復導線を磨く | Completed |
+| M9 | Release provenance visibility | タイトル画面フッターで `version + short SHA` を表示し、公開中コードを一目で識別可能にする | Completed |
 
 ## Backlog Candidates (Unscheduled)
 
