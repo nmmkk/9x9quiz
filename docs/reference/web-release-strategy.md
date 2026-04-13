@@ -4,14 +4,14 @@ Last updated: 2026-04-12
 
 ## 1) Decision
 
-* Deployment target: Cloudflare Pages (GitHub integration-based deployment).
-* Primary reason: keep static-site deployment automatic on `main` while using Cloudflare as the production hosting platform.
+* Deployment target: Cloudflare Pages (GitHub-integrated static deployment).
+* Primary reason: lowest operational overhead for the static Vite build while adding lightweight hosted analytics and avoiding GitHub project-page base-path constraints.
 
 ## 2) URL Strategy
 
 * Canonical production URL: `https://9x9quiz.pages.dev/`.
 * Keep one canonical URL to avoid cache and support confusion.
-* If a custom domain is introduced later, move the canonical URL to that domain and keep redirects simple.
+* If a custom domain is introduced later, keep `9x9quiz.pages.dev` reachable until the new URL is verified.
 
 ## 3) Release Policy
 
@@ -20,7 +20,7 @@ Last updated: 2026-04-12
   * Feature branches deploy only after merge to `main`.
 * Release trigger policy:
   * CI must pass (`test` and `build`) before merge.
-  * Cloudflare Pages deploys automatically after a successful push to `main`.
+  * Cloudflare Pages deploys automatically from `main` through GitHub integration.
 * Preview policy:
   * PR preview deployments are optional and out of current scope.
   * Until preview is added, reviewers validate with local `npm run dev` and CI artifacts/logs.
@@ -29,19 +29,23 @@ Last updated: 2026-04-12
 
 * Required GitHub Actions permissions for CI:
   * `contents: read`
+* Required GitHub permissions:
+  * Cloudflare Pages GitHub app must have access to repository `nmmkk/9x9quiz`.
+* Required Cloudflare account capability:
+  * Workers & Pages project creation and deploy access for the selected account.
 * Required external service setting:
   * Cloudflare Pages project must be connected to this repository.
   * Production branch must remain `main`.
 * Secrets:
-  * No repository secret is required when Cloudflare Pages uses direct GitHub integration.
-  * Keep GitHub Actions permissions least-privilege for CI-only workflows.
+  * No repository secret is required for the baseline Cloudflare Pages Git integration flow.
+  * If Cloudflare API-token based automation is introduced later, keep token scope least-privilege and document rotation ownership before enabling it.
 
 ## 5) Trade-offs Considered
 
 | Option | Why not selected now | Revisit trigger |
 | --- | --- | --- |
-| GitHub Pages | Simpler single-platform deploy, but less aligned with the current production hosting choice. | Revisit only if production hosting is moved back into GitHub. |
-| Netlify/Vercel | Good developer UX, but introduces separate SaaS ownership and secret rotation surface. | Team requires preview URLs and advanced deploy insights. |
+| GitHub Pages | Project-page base path adds deployment-specific asset constraints and there is no built-in hosted analytics view for the current needs. | Return only if a single-platform GitHub-only release flow becomes more important than analytics and hosting flexibility. |
+| Netlify/Vercel | Good developer UX, but introduces separate SaaS ownership with no advantage over Cloudflare Pages for the current static app. | Team requires provider-specific preview or edge features not covered by Cloudflare. |
 | S3 + CDN | Flexible and scalable, but highest setup and ops burden for current team size and cadence. | Traffic/security requirements outgrow Pages defaults. |
 
 ## 6) CI Policy and Branch Protection (M7-02)
@@ -106,9 +110,11 @@ This section is a reusable handbook so the same release setup can be repeated in
 1. Create and protect `main` branch.
 2. Add CI workflow (`.github/workflows/ci.yml`) and confirm at least one green run.
 3. In Cloudflare Pages:
-   * Connect the GitHub repository.
-   * Set production branch to `main`.
-4. In GitHub repository settings, require status check `CI / test-build` on `main`.
+   * connect the GitHub repository
+   * set production branch to `main`
+   * set build command to `npm run build`
+   * set build output directory to `dist`
+4. Enable branch protection for `main` and require status check `CI / test-build`.
 5. Confirm `GITHUB_TOKEN` workflow permissions are not broader than required.
 
 ### B) App build prerequisites
@@ -119,15 +125,18 @@ This section is a reusable handbook so the same release setup can be repeated in
 
 ### C) Standard deployment shape
 
-1. Trigger: push to `main` after PR merge.
+1. Trigger: Cloudflare Pages build on push to `main` after PR merge.
 2. CI gate:
-   * GitHub Actions runs `npm ci`, `npm run test`, and `npm run build`
-   * branch protection requires `CI / test-build`
+   * GitHub Actions runs `npm ci`, `npm run test`, and `npm run build`.
+   * Branch protection requires `CI / test-build`.
 3. Deploy:
-   * Cloudflare Pages detects the `main` push and builds/deploys production automatically
+   * Cloudflare clones the repository.
+   * Installs dependencies with npm.
+   * Runs `npm run build`.
+   * Publishes `dist/`.
 4. Post-deploy:
-   * open canonical URL
-   * run smoke checks (load app, solve a few questions, verify assets load without console errors)
+   * Open canonical URL.
+   * Run smoke checks (load app, solve a few questions, verify assets load without console errors).
 
 ### D) Repeatable checklist for future projects
 
@@ -138,36 +147,37 @@ This section is a reusable handbook so the same release setup can be repeated in
 5. Record one QA report after first production publish.
 6. Verify branch protection API is available before relying on required checks.
 
-## 8) Deployment Workflow (M7-03)
+## 8) Deployment Workflow (Current)
 
-* Deployment owner: Cloudflare Pages GitHub integration
+* Deployment provider: Cloudflare Pages Git integration.
 * Trigger:
-  * automatic production deploy on push to `main`
+  * automatic: push to `main`
+  * optional preview: non-production branches when enabled in Cloudflare Pages settings
 * Safety guards:
   * branch protection requires successful `CI / test-build` before merge
   * Cloudflare production branch is pinned to `main`
 * Build/deploy flow:
-  * GitHub Actions CI runs `npm ci`, `npm run test`, and `npm run build`
-  * Cloudflare Pages builds and deploys from the merged `main` revision
-* Required settings:
-  * repository branch protection keeps `CI / test-build` required on `main`
-  * Cloudflare Pages project stays connected to this repository with production branch `main`
+  * Cloudflare clones repository
+  * installs dependencies with npm
+  * runs `npm run build`
+  * publishes `dist/`
 * Vite base-path policy for root hosting:
-  * `vite.config.ts` uses `/` for build and dev
+  * `vite.config.ts` uses `/` for both dev and production builds
 
 ### Preflight validation commands
 
-Use these commands to validate the GitHub-side gate before merge:
+Use these commands before merge to `main`:
 
 ```bash
 gh run list --workflow ci.yml --limit 5
 gh run view <run-id> --log
+npm run test
+npm run build
 ```
 
-For release closeout, record both:
+After merge, confirm the latest Cloudflare Pages production deploy succeeded and the canonical URL renders without asset MIME errors.
 
-1. one successful `CI / test-build` run for the merged `main` SHA
-2. one Cloudflare production deploy for the same revision
+Historical GitHub Pages deployment evidence for M7 remains in the QA reports and milestone records.
 
 ## 9) Release Provenance Display Strategy (M9)
 
@@ -182,7 +192,7 @@ For release closeout, record both:
   * build timestamp for diagnostics or deeper support workflows
 * Injection policy:
   * inject metadata at build time through Vite environment variables
-  * for production deploys, source commit metadata from the exact revision being built
+  * for hosted production deploys, source commit metadata from the exact revision Cloudflare builds
   * for local development or ad hoc local builds, provide deterministic fallback values without requiring manual env setup
 * Display policy:
   * default footer string is `v<version> (<short-sha>)`
@@ -196,15 +206,15 @@ For release closeout, record both:
 
 ## 10) Remaining Follow-up
 
-* Execute launch QA pass and final docs synchronization (`M7-05`).
-* Implement release provenance visibility (`M9-01` through `M9-04`).
+* Add Cloudflare Web Analytics and document the minimum retained metrics after initial observations.
+* Record one Cloudflare Pages post-migration QA report after canonical production verification.
 
 ## 11) Rollback Runbook and Quality Guardrails (M7-04)
 
 ### First responder scope
 
 * First responder:
-  * Maintainer who merged release PR or triggered manual deploy rerun.
+  * Maintainer who merged the release PR.
 * Escalation owner:
   * Repository owner (`nmmkk`) if incident exceeds first responder scope.
 
@@ -222,7 +232,7 @@ Start rollback when one or more conditions are true after a deploy:
 1. Identify last known-good commit on `main`.
 2. Revert the broken commit(s) on a hotfix branch.
 3. Open and merge rollback PR to `main` (CI must pass).
-4. Confirm Cloudflare Pages deploys the rollback commit successfully.
+4. Confirm Cloudflare Pages publishes the rollback commit successfully.
 5. Re-run smoke checks on published URL.
 
 ### Post-rollback verification
