@@ -1,11 +1,13 @@
 # Milestone 9 - Release Provenance Visibility
 
+Historical note: this milestone was implemented while production deploys still used GitHub Pages. The provenance requirements still apply after the later Cloudflare Pages migration.
+
 ## Ticket Summary
 
 | Ticket | Title | Status | Depends On | QA Checklist |
 | --- | --- | --- | --- | --- |
 | M9-01 | Define release provenance contract and title-screen link UX | Completed | M7-05 | doc review, `npm run build` |
-| M9-02 | Inject build metadata and commit URL into local and deploy builds | Completed | M9-01 | `npm run test`, `npm run build`, workflow diff review |
+| M9-02 | Inject build metadata and commit URL into local and production builds | Completed | M9-01 | `npm run test`, `npm run build`, workflow diff review |
 | M9-03 | Render title-screen provenance footer link | Completed | M9-01, M9-02 | `npm run test`, `npm run build`, `npx vite --host 127.0.0.1 --port 4173 --strictPort` |
 | M9-04 | Verify deployed provenance and sync status docs | Completed | M9-02, M9-03 | `npm run test`, `npm run build`, published URL smoke check, `docs/qa/reports/2026-03-23-m09-qa.md` |
 
@@ -25,7 +27,7 @@
 | Ticket | Main Work | Estimate |
 | --- | --- | --- |
 | M9-01 | UX contract, metadata field selection, fallback rules | 0.5 day |
-| M9-02 | Vite/env wiring, deploy workflow metadata injection, commit URL plumbing, local dev fallback | 0.5-1.0 day |
+| M9-02 | Vite/env wiring, production-build metadata injection, commit URL plumbing, local dev fallback | 0.5-1.0 day |
 | M9-03 | Build-info helper, title screen footer link UI, localization/accessibility checks | 0.5-1.0 day |
 | M9-04 | Deployed smoke verification, QA evidence, status doc sync | 0.5 day |
 | Total | End-to-end M9 delivery | 2.0-3.0 days |
@@ -70,14 +72,14 @@ docs/roadmap/implementation/m09-release-provenance-visibility.md
 
 **Objective**
 
-Ensure both local builds and GitHub Pages deploys inject provenance metadata and commit URL data from the exact revision being built.
+Ensure both local builds and production deploys inject provenance metadata and commit URL data from the exact revision being built.
 
 **Deliverables**
 
 * Add build-time env plumbing for version, full SHA, short SHA, and optional build timestamp.
 * Source version from `package.json` and commit SHA from git or GitHub Actions context.
 * Inject a canonical GitHub commit URL for the exact SHA, without hard-coding a mismatched branch-head destination.
-* Update deploy/build workflow so Pages builds receive metadata for `needs.preflight.outputs.deploy_sha`.
+* Ensure production builds receive metadata for the exact deployed revision.
 * Add stable local fallback values for `npm run dev` and ad hoc `npm run build`.
 
 **File/Class Skeleton**
@@ -85,7 +87,6 @@ Ensure both local builds and GitHub Pages deploys inject provenance metadata and
 ```text
 package.json
 vite.config.ts
-.github/workflows/deploy.yml
 .github/workflows/ci.yml
 src/vite-env.d.ts
 ```

@@ -5,7 +5,6 @@ import { VitePWA } from "vite-plugin-pwa";
 import packageJson from "./package.json";
 
 const APP_SHELL_CACHE_BUDGET_BYTES = 2 * 1024 * 1024;
-const GITHUB_PAGES_BASE_PATH = "/9x9quiz/";
 
 function readGitValue(command: string): string | undefined {
   try {
@@ -57,7 +56,8 @@ export default defineConfig(({ command }) => {
   const metadata = resolveBuildMetadata();
 
   return {
-    base: command === "build" ? GITHUB_PAGES_BASE_PATH : "/",
+    // Cloudflare Pages serves the app from the site root in both preview and production.
+    base: "/",
     define: {
       "import.meta.env.VITE_APP_VERSION": JSON.stringify(metadata.version),
       "import.meta.env.VITE_COMMIT_SHA": JSON.stringify(metadata.fullSha),
