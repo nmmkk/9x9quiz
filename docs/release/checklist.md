@@ -18,15 +18,14 @@
 
 ## Deploy Gate Baseline (M7-03)
 
-* [x] Deploy workflow exists at `.github/workflows/deploy.yml`.
-* [x] Deploy workflow publishes `dist/` via GitHub Pages actions.
-* [x] Vite build base path is set for project-page hosting (`/9x9quiz/`).
-* [x] Deploy workflow runs automatically only after `CI` succeeds on `main`.
-* [x] Deploy workflow supports `workflow_dispatch` rerun on `main` only.
-* [x] Deploy workflow validates successful CI check for target SHA and blocks stale rerun SHA deploys.
-* [x] One CI-success-triggered deploy run on `main` succeeded.
-* [x] Live URL smoke verification (`https://nmmkk.github.io/9x9quiz/`) is recorded.
-* [ ] Optional: one `workflow_dispatch` rerun on `main` succeeded.
+* [x] Production hosting is configured in Cloudflare Pages for this repository.
+* [x] Cloudflare Pages production branch is `main`.
+* [x] Vite build base path is set for root hosting (`/`).
+* [x] Production deploy runs automatically after merge to `main`.
+* [x] Branch protection keeps `CI / test-build` required before merge.
+* [x] One post-merge production deploy succeeded on Cloudflare Pages.
+* [x] Live URL smoke verification (`https://9x9quiz.pages.dev/`) is recorded.
+* [ ] Optional: preview deployment policy is documented and enabled.
 
 ## Release Safety Gate (M7-04)
 
@@ -45,7 +44,7 @@
 ## Launch QA Gate (M7-05)
 
 * [x] Production CI/deploy run evidence is recorded (`22296144653`, `22296154268`).
-* [x] Published URL reachability is confirmed (`https://nmmkk.github.io/9x9quiz/`).
+* [x] Published URL reachability is confirmed (`https://9x9quiz.pages.dev/`).
 * [x] Manual launch verification report is recorded (`docs/qa/reports/2026-02-23-m07-05-launch-qa-pass.md`).
 * [x] Manual mobile smoke verification on published URL is recorded.
 

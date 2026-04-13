@@ -56,6 +56,7 @@ export default defineConfig(({ command }) => {
   const metadata = resolveBuildMetadata();
 
   return {
+    // Cloudflare Pages serves the app from the site root in both preview and production.
     base: "/",
     define: {
       "import.meta.env.VITE_APP_VERSION": JSON.stringify(metadata.version),

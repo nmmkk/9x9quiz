@@ -1,5 +1,7 @@
 # Milestone 7 - Web Release CI/CD
 
+Historical note: this milestone documents the original GitHub Pages rollout. Current production hosting has since moved to Cloudflare Pages. See `docs/reference/web-release-strategy.md` for the active deployment setup.
+
 ## Ticket Summary
 
 | Ticket | Title | Status | Depends On | QA Checklist |

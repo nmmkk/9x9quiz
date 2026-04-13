@@ -27,10 +27,15 @@ Last updated: 2026-04-12
 
 ## 4) Repository Permissions and Secrets
 
+* Required GitHub Actions permissions for CI:
+  * `contents: read`
 * Required GitHub permissions:
   * Cloudflare Pages GitHub app must have access to repository `nmmkk/9x9quiz`.
 * Required Cloudflare account capability:
   * Workers & Pages project creation and deploy access for the selected account.
+* Required external service setting:
+  * Cloudflare Pages project must be connected to this repository.
+  * Production branch must remain `main`.
 * Secrets:
   * No repository secret is required for the baseline Cloudflare Pages Git integration flow.
   * If Cloudflare API-token based automation is introduced later, keep token scope least-privilege and document rotation ownership before enabling it.
@@ -110,6 +115,7 @@ This section is a reusable handbook so the same release setup can be repeated in
    * set build command to `npm run build`
    * set build output directory to `dist`
 4. Enable branch protection for `main` and require status check `CI / test-build`.
+5. Confirm `GITHUB_TOKEN` workflow permissions are not broader than required.
 
 ### B) App build prerequisites
 
@@ -117,33 +123,39 @@ This section is a reusable handbook so the same release setup can be repeated in
 2. For Cloudflare Pages root hosting, keep `base` in `vite.config.ts` at `/`.
 3. Confirm production artifacts are created under `dist/`.
 
-### C) Standard deployment workflow shape (for M7-03 implementation)
+### C) Standard deployment shape
 
-1. Trigger: Cloudflare Pages build on push to `main`.
-2. Build stage:
-   * checkout
-   * install dependencies
-   * `npm run build`
-   * publish `dist/`
-3. Post-deploy:
-   * open canonical URL
-   * run smoke checks (load app, solve a few questions, verify assets load without console errors)
+1. Trigger: Cloudflare Pages build on push to `main` after PR merge.
+2. CI gate:
+   * GitHub Actions runs `npm ci`, `npm run test`, and `npm run build`.
+   * Branch protection requires `CI / test-build`.
+3. Deploy:
+   * Cloudflare clones the repository.
+   * Installs dependencies with npm.
+   * Runs `npm run build`.
+   * Publishes `dist/`.
+4. Post-deploy:
+   * Open canonical URL.
+   * Run smoke checks (load app, solve a few questions, verify assets load without console errors).
 
 ### D) Repeatable checklist for future projects
 
 1. Decide canonical URL and document it first.
 2. Add CI and make it required before any deploy automation.
-3. Add CD workflow with least-privilege permissions only.
+3. Connect production hosting to the repository and keep deployment ownership in one place.
 4. Keep rollback guidance in release docs before launch.
 5. Record one QA report after first production publish.
 6. Verify branch protection API is available before relying on required checks.
 
 ## 8) Deployment Workflow (Current)
 
-* Deployment provider: Cloudflare Pages Git integration
+* Deployment provider: Cloudflare Pages Git integration.
 * Trigger:
   * automatic: push to `main`
   * optional preview: non-production branches when enabled in Cloudflare Pages settings
+* Safety guards:
+  * branch protection requires successful `CI / test-build` before merge
+  * Cloudflare production branch is pinned to `main`
 * Build/deploy flow:
   * Cloudflare clones repository
   * installs dependencies with npm
@@ -157,6 +169,8 @@ This section is a reusable handbook so the same release setup can be repeated in
 Use these commands before merge to `main`:
 
 ```bash
+gh run list --workflow ci.yml --limit 5
+gh run view <run-id> --log
 npm run test
 npm run build
 ```
@@ -200,7 +214,7 @@ Historical GitHub Pages deployment evidence for M7 remains in the QA reports and
 ### First responder scope
 
 * First responder:
-  * Maintainer who merged release PR or triggered manual deploy rerun.
+  * Maintainer who merged the release PR.
 * Escalation owner:
   * Repository owner (`nmmkk`) if incident exceeds first responder scope.
 
@@ -230,5 +244,5 @@ Start rollback when one or more conditions are true after a deploy:
 ### Release guardrails
 
 * Keep `CI / test-build` required on `main`.
-* Deploy only through guarded workflow (`workflow_run` success or main-only manual rerun).
-* Record CI run ID and deploy run ID for every production release.
+* Deploy only through merge-to-`main` with `CI / test-build` still required.
+* Record the CI evidence and Cloudflare deployment evidence for every production release.
